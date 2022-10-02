@@ -1,0 +1,8 @@
+
+*.vsidx
+*.lock
+*.db-shm
+*.db-wal
+*.opendb
+*.db
+*.sqlite
