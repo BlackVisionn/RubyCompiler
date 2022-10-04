@@ -134,7 +134,7 @@ yield           { printf("Keyword: yield\n"); }
                 }
             }
 "["         { printf("Bracket: [\n"); }
-"]"         { printf("Bracket: ]\n"); }?
+"]"         { printf("Bracket: ]\n"); }
 
 \"          { 
                 string[0] = 0; 
@@ -161,8 +161,6 @@ yield           { printf("Keyword: yield\n"); }
 <STRING>\\\\              { strcat(string, "\\"); }
 <STRING>\\\"              { strcat(string, "\""); }
 <STRING>\\nnn             { strcat(string, "\nnn"); }
-<STRING>\\xnn             { strcat(string, "\xnn"); }  
-<STRING>\\unnnn           { strcat(string, "\unnnn"); }  
 <STRING>\\cx              { strcat(string, "\cx"); }  
 <STRING>\\C-x             { strcat(string, "\C-x"); }  
 <STRING>\\M-x             { strcat(string, "\M-x"); }  
@@ -170,18 +168,33 @@ yield           { printf("Keyword: yield\n"); }
 <STRING>\\M-\\cx          { strcat(string, "\M-\cx"); }  
 <STRING>\\c\\M-x          { strcat(string, "\c\M-x"); }  
 <STRING>\\c\?             { strcat(string, "\c?"); }  
-<STRING>\\C-\?            { strcat(string, "\C-?"); } 
-<STRING><<EOF>>   { printf("ERROR: expected \" \n");}
-<STRING>\"        { printf("String: %s \n", string); BEGIN(INITIAL); }
+<STRING>\\C-\?            { strcat(string, "\C-?"); }
+<STRING>\\{OCT_DIGIT}{1,3} { 
+                                sscanf(yytext + 1, "%o", &num);
+                                temp1[0] = (char) num;
+                                temp1[1] = 0;
+                                strcat(string, temp1);
+                            }
 
-#.*                     { printf("Single-line comment: %s\n", yytext + 1); }
+<STRING>\\x{HEX_DIGIT}{1,2} { 
+                                sscanf(yytext + 2, "%x", &num);
+                                temp1[0] = (char) num;
+                                temp1[1] = 0;
+                                strcat(string, temp1);
+                            }
+<STRING>\\x[^0-9A-Fa-f\n"]* { printf("ERROR: invalid hex escape \n"); } 
+<STRING><<EOF>>             { printf("ERROR: expected \" \n");}
+<STRING>\"                  { printf("String: %s \n", string); BEGIN(INITIAL); }
+
+#.*                         { printf("Single-line comment: %s\n", yytext + 1); }
 
 ^=begin                 {                                     
                             comment[0] = 0; 
                             BEGIN(ML_COMMENT);
                         }
 
-<ML_COMMENT>=end        {
+<ML_COMMENT>^=end       {
+                            strcat(comment, yytext + 5);
                             printf("Multi-line comment: %s\n", comment);
                             BEGIN(INITIAL);
                         }
@@ -200,7 +213,7 @@ yield           { printf("Keyword: yield\n"); }
                                 printf("Decimal number: %d\n", num);
                             }
 
-[1-9](_*{DIGIT}+)*_+        { printf("ERROR: invalid decimal number: %s\n", yytext); }
+[1-9](_*{DIGIT}+)*_*        { printf("ERROR: invalid decimal number: %s\n", yytext); }
 
 0[dD][1-9]{DIGIT_NUMBER}    {
                                 removeCharacterFromString(yytext+2,temp1,'_');
@@ -208,7 +221,7 @@ yield           { printf("Keyword: yield\n"); }
                                 printf("Decimal number: %d\n", num);              
                             }
 
-0_*[dD]_*[1-9](_*{DIGIT}+)*_+ { printf("ERROR: invalid decimal number with dD: %s\n", yytext); }
+0_*[dD]_*[1-9](_*{DIGIT}+)*_* { printf("ERROR: invalid decimal number with dD: %s\n", yytext); }
 
 0[oO]?{OCT_NUMBER}          {
                                 removeCharacterFromString(yytext,temp1,'_');
@@ -218,7 +231,7 @@ yield           { printf("Keyword: yield\n"); }
                                 printf("Octal number: %d\n", num);
                             }
 
-0_*[oO]?_*{OCT_DIGIT}(_*{OCT_DIGIT}+)*_+ { printf("ERROR: invalid octal number: %s\n", yytext); }
+0_*[oO]?_*{OCT_DIGIT}(_*{OCT_DIGIT}+)*_* { printf("ERROR: invalid octal number: %s\n", yytext); }
 
 0[xX]{HEX_NUMBER}           {
                                 removeCharacterFromString(yytext + 2,temp1,'_');
@@ -226,7 +239,7 @@ yield           { printf("Keyword: yield\n"); }
                                 printf("Hexadecimal number: %d\n", num);
                             }
 
-0_*[xX]_*{HEX_DIGIT}(_*{HEX_DIGIT}+)*_+ { printf("ERROR: invalid hexadecimal number: %s\n", yytext); }
+0_*[xX]_*{HEX_DIGIT}(_*{HEX_DIGIT}+)*_* { printf("ERROR: invalid hexadecimal number: %s\n", yytext); }
 
 0[bB]{BIN_NUMBER}           {
                                 removeCharacterFromString(yytext + 2,temp1,'_');
@@ -234,18 +247,17 @@ yield           { printf("Keyword: yield\n"); }
                                 printf("Binary number: %d\n", num); 
                             }
 
-0_*[bB]_*{BIN_DIGIT}(_*{BIN_DIGIT}+)*_+ { printf("ERROR: invalid binary number: %s\n", yytext); }
+0_*[bB]_*{BIN_DIGIT}(_*{BIN_DIGIT}+)*_* { printf("ERROR: invalid binary number: %s\n", yytext); }
 
 
-(0|[1-9](_?{DIGIT})*)(\.{DIGIT}+(_{DIGIT}+)*)?({EXPONENT})? {
-                                                                 removeCharacterFromString(yytext,temp1,'_');
-                                                                 real_num = atof(temp1);
-                                                                 printf("Float number: %f\n", real_num); 
+(0|[1-9](_?{DIGIT})*)(\.{1,3}{DIGIT}+(_{DIGIT}+)*)?({EXPONENT})? {
+                                                                 removeCharacterFromString(yytext,temp1,'_');                                                                 
+                                                                 printf("Float number: %s\n", temp1); 
                                                             }
 
-([1-9]*_*(\.*)_*{DIGIT}+)+(_*(\.*)_*{DIGIT}+)*_+        { printf("ERROR: invalid float number: %s\n", yytext); }
+([1-9]*(_|\.)*{DIGIT}+)+((_|\.)*{DIGIT}+)*(_|\.)*        { printf("ERROR: invalid float number: %s\n", yytext); }
 
-([1-9]*_*(\.*)_*{DIGIT}+)*[eE]+(_*(\.*)_*{DIGIT}+)*_+   { printf("ERROR: invalid float number with eE: %s\n", yytext); }
+([1-9]*(_|\.)*{DIGIT}+)*[eE]+((_|\.)*{DIGIT}+)*(_|\.)*   { printf("ERROR: invalid float number with eE: %s\n", yytext); }
 
 [a-z_]{LETTER_NUMBER_UNDERSCOPE}*           {
                                                 printf("Local variable or method name: %s\n", yytext);
@@ -261,10 +273,6 @@ yield           { printf("Keyword: yield\n"); }
 
 [A-Z]{LETTER_NUMBER_UNDERSCOPE}*            {
                                                 printf("Class name: %s\n", yytext);
-                                            }
-
-\n+                                         { 
-                                                PrintErrorMessage("unexpected \\n"); 
                                             }
 
 %% 
