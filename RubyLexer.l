@@ -160,15 +160,6 @@ yield           { printf("Keyword: yield\n"); }
 <STRING>\\s               { strcat(string, " "); }
 <STRING>\\\\              { strcat(string, "\\"); }
 <STRING>\\\"              { strcat(string, "\""); }
-<STRING>\\nnn             { strcat(string, "\nnn"); }
-<STRING>\\cx              { strcat(string, "\cx"); }  
-<STRING>\\C-x             { strcat(string, "\C-x"); }  
-<STRING>\\M-x             { strcat(string, "\M-x"); }  
-<STRING>\\M-\\C-x         { strcat(string, "\M-\C-x"); }  
-<STRING>\\M-\\cx          { strcat(string, "\M-\cx"); }  
-<STRING>\\c\\M-x          { strcat(string, "\c\M-x"); }  
-<STRING>\\c\?             { strcat(string, "\c?"); }  
-<STRING>\\C-\?            { strcat(string, "\C-?"); }
 <STRING>\\{OCT_DIGIT}{1,3} { 
                                 sscanf(yytext + 1, "%o", &num);
                                 temp1[0] = (char) num;
@@ -250,9 +241,10 @@ yield           { printf("Keyword: yield\n"); }
 0_*[bB]_*{BIN_DIGIT}(_*{BIN_DIGIT}+)*_* { printf("ERROR: invalid binary number: %s\n", yytext); }
 
 
-(0|[1-9](_?{DIGIT})*)(\.{1,3}{DIGIT}+(_{DIGIT}+)*)?({EXPONENT})? {
-                                                                 removeCharacterFromString(yytext,temp1,'_');                                                                 
-                                                                 printf("Float number: %s\n", temp1); 
+(0|[1-9](_?{DIGIT})*)(\.{DIGIT}+(_{DIGIT}+)*)?({EXPONENT})? {
+                                                                 removeCharacterFromString(yytext,temp1,'_'); 
+                                                                 num = atof(temp1);                                                                
+                                                                 printf("Float number: %f\n", num); 
                                                             }
 
 ([1-9]*(_|\.)*{DIGIT}+)+((_|\.)*{DIGIT}+)*(_|\.)*        { printf("ERROR: invalid float number: %s\n", yytext); }
