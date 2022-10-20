@@ -130,7 +130,7 @@ yield           { printf("Keyword: yield\n"); }
                     concatenation--;
                     BEGIN(STRING);
                     string[0] = 0;
-                    printf("Found сoncatenation with string\n");
+                    printf("Found concatenation with string\n");
                 }
             }
 "["         { printf("Bracket: [\n"); }
@@ -141,14 +141,15 @@ yield           { printf("Keyword: yield\n"); }
                 BEGIN(STRING);    
             }
 
-<STRING>"#{"        { 
+<STRING>\#\{          { 
                         printf("String: %s\n", string);
-                        printf("Found сoncatenation with string\n");
+                        printf("Found concatenation with string\n");
                         concatenation++;
                         BEGIN(INITIAL);
                     }            
 
-<STRING>[^\\\"\n]+        { strcat(string, yytext); }
+<STRING>[^\\\"\n#{}]+     { strcat(string, yytext); }
+<STRING>[#{}]             { strcat(string, yytext); }
 <STRING>\\n               { strcat(string, "\n"); }
 <STRING>\\a               { strcat(string, "\a"); }
 <STRING>\\b               { strcat(string, "\b"); }
@@ -243,13 +244,11 @@ yield           { printf("Keyword: yield\n"); }
 
 (0|[1-9](_?{DIGIT})*)(\.{DIGIT}+(_{DIGIT}+)*)?({EXPONENT})? {
                                                                  removeCharacterFromString(yytext,temp1,'_'); 
-                                                                 num = atof(temp1);                                                                
-                                                                 printf("Float number: %f\n", num); 
+                                                                 real_num = atof(temp1);                                                                
+                                                                 printf("Float number: %f\n", real_num); 
                                                             }
-
-([1-9]*(_|\.)*{DIGIT}+)+((_|\.)*{DIGIT}+)*(_|\.)*        { printf("ERROR: invalid float number: %s\n", yytext); }
-
-([1-9]*(_|\.)*{DIGIT}+)*[eE]+((_|\.)*{DIGIT}+)*(_|\.)*   { printf("ERROR: invalid float number with eE: %s\n", yytext); }
+([1-9]*_*(\.|\.{4,})_*{DIGIT}+)+(_*{DIGIT}*)*           { printf("ERROR: invalid float number: %s\n", yytext); }
+([1-9]+((_|\.)*{DIGIT}*)*[Ee]+((_|\.)*{DIGIT}*)*)+      { printf("ERROR: invalid float number with eE: %s\n", yytext); }
 
 [a-z_]{LETTER_NUMBER_UNDERSCOPE}*           {
                                                 printf("Local variable or method name: %s\n", yytext);
