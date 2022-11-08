@@ -12,42 +12,42 @@ extern FILE* yyin;
 
 %}
 
-%token ALIAS_KEYWORD
-%token AND_KEYWORD
-%token BEGIN_KEYWORD
-%token BREAK_KEYWORD
-%token CASE_KEYWORD
-%token CLASS_KEYWORD
-%token DEF_KEYWORD
-%token DEFINED_KEYWORD
-%token DO_KEYWORD
-%token IF_KEYWORD
-%token ELSE_KEYWORD
-%token ELSIF_KEYWORD
-%token END_KEYWORD
-%token ENSURE_KEYWORD
-%token FALSE_KEYWORD
-%token FOR_KEYWORD
-%token IN_KEYWORD
-%token MODULE_KEYWORD
-%token NEXT_KEYWORD
-%token NIL_KEYWORD
-%token NOT_KEYWORD
-%token OR_KEYWORD
-%token REDO_KEYWORD
-%token RESCUE_KEYWORD
-%token RETRY_KEYWORD
-%token RETURN_KEYWORD
-%token SELF_KEYWORD
-%token SUPER_KEYWORD
-%token THEN_KEYWORD
-%token TRUE_KEYWORD
-%token UNDEF_KEYWORD
-%token UNLESS_KEYWORD
-%token UNTIL_KEYWORD
-%token WHEN_KEYWORD
-%token WHILE_KEYWORD
-%token YIELD_KEYWORD
+%token ALIAS
+%token AND
+%token BEGIN
+%token BREAK
+%token CASE
+%token CLASS
+%token DEF
+%token DEFINED
+%token DO
+%token IF
+%token ELSE
+%token ELSIF
+%token END
+%token ENSURE
+%token FALSE
+%token FOR
+%token IN
+%token MODULE
+%token NEXT
+%token NIL
+%token NOT
+%token OR
+%token REDO
+%token RESCUE
+%token RETRY
+%token RETURN
+%token SELF
+%token SUPER
+%token THEN
+%token TRUE
+%token UNDEF
+%token UNLESS
+%token UNTIL
+%token WHEN
+%token WHILE
+%token YIELD
 
 %token ARITHMETIC_PLUS_OP
 %token ARITHMETIC_MINUS_OP
@@ -109,16 +109,16 @@ extern FILE* yyin;
 %token INTEGER_NUMBER
 %token FLOAT_NUMBER
 
-%token VAR_METHOD_NAME
+%token VAR_OR_METHOD_NAME
 %token INSTANCE_VAR_NAME
 %token CLASS_NAME
 %token CLASS_VAR_NAME
 
 %start program
 
-%left AND_KEYWORD OR_KEYWORD
-%right NOT_KEYWORD
-%nonassoc DEFINED_KEYWORD
+%left AND OR
+%right NOT
+%nonassoc DEFINED
 %right ASSIGN_OP MOD_ASSIGN_OP DIV_ASSIGN_OP SUB_ASSIGN_OP ADD_ASSIGN_OP MUL_ASSIGN_OP POW_ASSIGN_OP
 %nonassoc INCLUSIVE_RANGE_OP EXCLUSIVE_RANGE_OP
 %left LOGICAL_OR_OP
@@ -135,57 +135,71 @@ extern FILE* yyin;
 %nonassoc CLOSE_ROUND_BRACKET
 
 %%
-program: stmt_list                                      { puts("program"); }
+program: program_items_list
+    ;
 
-expr: INTEGER_NUMBER                                    { puts("integer"); }
-    | FLOAT_NUMBER                                      { puts("float"); }
-    | STRING                                            { puts("string"); }
-    | NIL_KEYWORD                                       { puts("nil"); }
-    | TRUE_KEYWORD                                      { puts("true"); }
-    | FALSE_KEYWORD                                     { puts("false"); }
-    | LOGICAL_NOT_OP expr                               { puts("LOGICAL_NOT_OP"); }
-    | BIN_ONES_COMPLEMENT_OP expr                       { puts("BIN_ONES_COMPLEMENT_OP"); }
-    | ARITHMETIC_PLUS_OP expr %prec UNARY_PLUS          { puts("unary plus"); }
-    | expr ARITHMETIC_POW_OP expr                       { puts("pow"); }
-    | ARITHMETIC_MINUS_OP expr %prec UNARY_MINUS        { puts("unary minus"); }
-    | expr ARITHMETIC_MUL_OP expr                       { puts("mul"); }
-    | expr ARITHMETIC_DIV_OP expr                       { puts("div"); }
-    | expr ARITHMETIC_MOD_OP expr                       { puts("mod"); }
-    | expr ARITHMETIC_PLUS_OP expr                      { puts("plus"); }
-    | expr ARITHMETIC_MINUS_OP expr                     { puts("minus"); }
-    | expr BIN_LEFT_SHIFT_OP expr                       { puts("left shift"); }
-    | expr BIN_RIGHT_SHIFT_OP expr                      { puts("right shift"); }
-    | expr BIN_AND_OP expr                              { puts("bin and"); }
-    | expr BIN_OR_OP expr                               { puts("bin or"); }
-    | expr BIN_XOR_OP expr                              { puts("bin xor"); }
-    | expr GREATER_OP expr                              { puts(" > "); }
-    | expr LESS_OP expr                                 { puts(" < "); }
-    | expr GREATER_OR_EQL_OP expr                       { puts(" >= "); }
-    | expr LESS_OR_EQL_OP expr                          { puts(" <= "); }
-    | expr COMB_COMPRASION_OP expr                      { puts(" COMB_COMPRASION_OP "); }
-    | expr EQL_OP expr                                  { puts(" EQL_OP "); }
-    | expr CASE_EQL_OP expr                             { puts(" CASE_EQL_OP "); }
-    | expr NOT_EQL_OP expr                              { puts("NOT_EQL_OP"); }
-    | expr LOGICAL_AND_OP expr                          { puts("LOGICAL_AND_OP"); }
-    | expr LOGICAL_OR_OP expr                           { puts("LOGICAL_OR_OP"); }
-    | expr INCLUSIVE_RANGE_OP expr                      { puts("INCLUSIVE_RANGE_OP"); }
-    | expr EXCLUSIVE_RANGE_OP expr                      { puts("EXCLUSIVE_RANGE_OP"); }
-    | expr ASSIGN_OP expr                               { puts("assign"); }
-    | expr MOD_ASSIGN_OP expr                           { puts("MOD_ASSIGN_OP"); }
-    | expr DIV_ASSIGN_OP expr                           { puts("DIV_ASSIGN_OP"); }
-    | expr SUB_ASSIGN_OP expr                           { puts("SUB_ASSIGN_OP"); }
-    | expr ADD_ASSIGN_OP expr                           { puts("SUB_ASSIGN_OP"); }
-    | expr MUL_ASSIGN_OP expr                           { puts("MUL_ASSIGN_OP"); }
-    | expr POW_ASSIGN_OP expr                           { puts("POW_ASSIGN_OP"); }
-    | DEFINED_KEYWORD expr                              { puts("DEFINED_KEYWORD"); }
-    | NOT_KEYWORD expr                                  { puts("NOT_KEYWORD"); }
-    | expr AND_KEYWORD expr                             { puts("AND_KEYWORD"); }
-    | expr OR_KEYWORD expr                              { puts("OR_KEYWORD"); }
-    | OPEN_ROUND_BRACKET expr CLOSE_ROUND_BRACKET       { puts(" expr in round brackets "); }
-	| OPEN_SQUARE_BRACKET expr CLOSE_SQUARE_BRACKET     { puts(" expr in square brackets "); }
-    | method_call_stmt                                  { puts("method call"); }
-    | VAR_METHOD_NAME                                   { puts("var"); }     
-    | INSTANCE_VAR_NAME                                 { puts("instance var"); }
+program_item : stmt
+    | def_method_stmt
+    | class_declaration
+    ;
+
+program_items_list: program_item         
+    | program_items_list program_item   
+    ;                                
+
+expr: INTEGER_NUMBER                                    
+    | FLOAT_NUMBER                                      
+    | STRING                                            
+    | NIL                                       
+    | TRUE                                      
+    | FALSE                                     
+    | LOGICAL_NOT_OP expr                               
+    | BIN_ONES_COMPLEMENT_OP expr                       
+    | ARITHMETIC_PLUS_OP expr %prec UNARY_PLUS          
+    | expr ARITHMETIC_POW_OP expr                       
+    | ARITHMETIC_MINUS_OP expr %prec UNARY_MINUS        
+    | expr ARITHMETIC_MUL_OP expr                       
+    | expr ARITHMETIC_DIV_OP expr                       
+    | expr ARITHMETIC_MOD_OP expr                       
+    | expr ARITHMETIC_PLUS_OP expr                      
+    | expr ARITHMETIC_MINUS_OP expr                     
+    | expr BIN_LEFT_SHIFT_OP expr                       
+    | expr BIN_RIGHT_SHIFT_OP expr                      
+    | expr BIN_AND_OP expr                              
+    | expr BIN_OR_OP expr                               
+    | expr BIN_XOR_OP expr                              
+    | expr GREATER_OP expr                              
+    | expr LESS_OP expr                                 
+    | expr GREATER_OR_EQL_OP expr                       
+    | expr LESS_OR_EQL_OP expr                          
+    | expr COMB_COMPRASION_OP expr                      
+    | expr EQL_OP expr                                  
+    | expr CASE_EQL_OP expr                             
+    | expr NOT_EQL_OP expr                              
+    | expr LOGICAL_AND_OP expr                          
+    | expr LOGICAL_OR_OP expr                           
+    | expr INCLUSIVE_RANGE_OP expr                      
+    | expr EXCLUSIVE_RANGE_OP expr                      
+    | expr ASSIGN_OP expr                               
+    | expr MOD_ASSIGN_OP expr                           
+    | expr DIV_ASSIGN_OP expr                           
+    | expr SUB_ASSIGN_OP expr                           
+    | expr ADD_ASSIGN_OP expr                           
+    | expr MUL_ASSIGN_OP expr                           
+    | expr POW_ASSIGN_OP expr                           
+    | DEFINED expr                              
+    | NOT expr                                  
+    | expr AND expr                             
+    | expr OR expr                              
+    | OPEN_ROUND_BRACKET expr CLOSE_ROUND_BRACKET       
+	| OPEN_SQUARE_BRACKET expr CLOSE_SQUARE_BRACKET     
+    | method_call_stmt                                  
+    | VAR_OR_METHOD_NAME                                   
+    | INSTANCE_VAR_NAME                                 
+    | expr DOT_SYMBOL VAR_OR_METHOD_NAME                   
+    | expr DOT_SYMBOL VAR_OR_METHOD_NAME OPEN_ROUND_BRACKET expr_list CLOSE_ROUND_BRACKET         
+    | SELF DOT_SYMBOL VAR_OR_METHOD_NAME           
+    | SELF DOT_SYMBOL VAR_OR_METHOD_NAME OPEN_ROUND_BRACKET expr_list CLOSE_ROUND_BRACKET  
     ;
 
 stmt_ends: SEMICOLON_SYMBOL
@@ -194,98 +208,91 @@ stmt_ends: SEMICOLON_SYMBOL
     | NEW_LINE_SYMBOL stmt_ends
     ;
 
-stmt: expr stmt_ends                    { puts("stmt"); }
-    | stmt_block                        { puts("stmt block"); }
-    | stmt_block stmt_ends              { puts("stmt block"); }
-    | if_stmt                           { puts("if stmt"); }
-    | if_stmt stmt_ends                 { puts("if stmt"); }
-    | for_stmt                          { puts("for stmt"); }
-    | for_stmt stmt_ends                { puts("for stmt"); }
-    | while_stmt                        { puts("while stmt"); }
-    | while_stmt stmt_ends              { puts("while stmt"); }   
-    | until_stmt                        { puts("until stmt"); }
-    | until_stmt stmt_ends              { puts("until stmt"); }    
-    | def_method_stmt                   { puts("def method"); }
-    | def_method_stmt stmt_ends         { puts("def method"); }
+new_lines: NEW_LINE_SYMBOL
+    | NEW_LINE_SYMBOL new_lines
     ;
 
-stmt_list_not_empty: stmt               { puts("list from one stmt"); }
-    | stmt stmt_list_not_empty          { puts("add stmt to list"); }
+stmt: expr stmt_ends                    
+    | stmt_block                        
+    | stmt_block stmt_ends              
+    | if_stmt                           
+    | if_stmt stmt_ends                 
+    | for_stmt                          
+    | for_stmt stmt_ends                
+    | while_stmt                        
+    | while_stmt stmt_ends                 
+    | until_stmt                        
+    | until_stmt stmt_ends                  
+    | def_method_stmt                   
+    | def_method_stmt stmt_ends         
+    | RETURN expr stmt_ends     
+    | RETURN stmt_ends          
     ;
 
-stmt_list:                              { puts("empty stmt list"); }
-    | stmt_list_not_empty               { puts("stmt list"); }
+stmt_list: stmt                             
+    | stmt stmt_list         
     ;
 
-stmt_block: BEGIN_KEYWORD stmt_list END_KEYWORD             { puts("begin without stmt ends"); }
-    | BEGIN_KEYWORD stmt_ends stmt_list END_KEYWORD         { puts("begin with stmt ends"); }
+stmt_block: BEGIN stmt_ends stmt_list END  
     ;
 
-if_start_stmt: IF_KEYWORD expr stmt_ends stmt_list          { puts("if without then"); }
-    | IF_KEYWORD expr THEN_KEYWORD stmt_list                { puts("if with then"); }
-    | IF_KEYWORD expr THEN_KEYWORD stmt_ends stmt_list      { puts("if with then"); }
+if_start_stmt: IF expr stmt_ends stmt_list                                  
+    | IF expr SEMICOLON_SYMBOL new_lines THEN stmt_ends stmt_list
+    | IF expr new_lines THEN stmt_ends stmt_list                    
     ;
 
-elsif_stmt: ELSIF_KEYWORD expr stmt_ends stmt_list          { puts("elsif without then");  } 
-    | ELSIF_KEYWORD expr THEN_KEYWORD stmt_list             { puts("elsif with then");  } 
-    | ELSIF_KEYWORD expr THEN_KEYWORD stmt_ends stmt_list   { puts("elsif with then");  } 
+elsif_stmt: ELSIF expr stmt_ends stmt_list                                     
+    | ELSIF expr new_lines THEN stmt_ends stmt_list                     
+    | ELSIF expr SEMICOLON_SYMBOL new_lines THEN stmt_ends stmt_list    
     ;
 
 elsif_stmt_list: elsif_stmt 
-    | elsif_stmt elsif_stmt_list 
+    | elsif_stmt_list elsif_stmt 
     ;
 
-if_stmt: if_start_stmt END_KEYWORD
-    | if_start_stmt ELSE_KEYWORD stmt_list END_KEYWORD 
-    | if_start_stmt ELSE_KEYWORD stmt_ends stmt_list END_KEYWORD 
-    | if_start_stmt elsif_stmt_list END_KEYWORD
-    | if_start_stmt elsif_stmt_list ELSE_KEYWORD stmt_list END_KEYWORD
-    | if_start_stmt elsif_stmt_list ELSE_KEYWORD stmt_ends stmt_list END_KEYWORD
+if_stmt: if_start_stmt END
+    | if_start_stmt ELSE stmt_ends stmt_list END 
+    | if_start_stmt elsif_stmt_list END
+    | if_start_stmt elsif_stmt_list ELSE stmt_ends stmt_list END
     ;
 
-for_stmt: FOR_KEYWORD VAR_METHOD_NAME IN_KEYWORD expr stmt_ends stmt_list END_KEYWORD 
-    | FOR_KEYWORD INSTANCE_VAR_NAME IN_KEYWORD expr stmt_ends stmt_list END_KEYWORD
-	| FOR_KEYWORD VAR_METHOD_NAME IN_KEYWORD expr DO_KEYWORD stmt_list END_KEYWORD
-    | FOR_KEYWORD VAR_METHOD_NAME IN_KEYWORD expr DO_KEYWORD stmt_ends stmt_list END_KEYWORD
-    | FOR_KEYWORD INSTANCE_VAR_NAME IN_KEYWORD expr DO_KEYWORD stmt_list END_KEYWORD
-    | FOR_KEYWORD INSTANCE_VAR_NAME IN_KEYWORD expr DO_KEYWORD stmt_ends stmt_list END_KEYWORD
+for_stmt: FOR VAR_OR_METHOD_NAME IN expr stmt_ends stmt_list END 
+    | FOR INSTANCE_VAR_NAME IN expr stmt_ends stmt_list END
+    | FOR VAR_OR_METHOD_NAME IN expr DO stmt_ends stmt_list END
+    | FOR INSTANCE_VAR_NAME IN expr DO stmt_ends stmt_list END
 	;
 
-while_stmt: WHILE_KEYWORD expr stmt_ends stmt_list END_KEYWORD
-	| WHILE_KEYWORD expr DO_KEYWORD stmt_list END_KEYWORD
-    | WHILE_KEYWORD expr DO_KEYWORD stmt_ends stmt_list END_KEYWORD
+while_stmt: WHILE expr stmt_ends stmt_list END
+    | WHILE expr DO stmt_ends stmt_list END
 	;
 
-
-until_stmt: UNTIL_KEYWORD expr stmt_ends stmt_list END_KEYWORD
-	| UNTIL_KEYWORD expr DO_KEYWORD stmt_list END_KEYWORD
-    | UNTIL_KEYWORD expr DO_KEYWORD stmt_ends stmt_list END_KEYWORD
+until_stmt: UNTIL expr stmt_ends stmt_list END
+    | UNTIL expr DO stmt_ends stmt_list END
 	;
 
-
-method_param: VAR_METHOD_NAME
-	| VAR_METHOD_NAME ASSIGN_OP expr
+method_param: VAR_OR_METHOD_NAME
+	| VAR_OR_METHOD_NAME ASSIGN_OP expr
 	;
 
-method_params_list: 
-	| method_params_list_not_empty
+method_params_list: method_param
+	| method_params_list COMMA_SYMBOL method_param
 	;
 
-method_params_list_not_empty: method_param
-	| method_params_list_not_empty COMMA_SYMBOL method_param
-	;
-
-def_method_stmt: DEF_KEYWORD VAR_METHOD_NAME stmt_ends stmt_list END_KEYWORD  
-    | DEF_KEYWORD VAR_METHOD_NAME OPEN_ROUND_BRACKET method_params_list CLOSE_ROUND_BRACKET stmt_list END_KEYWORD
+def_method_stmt: DEF VAR_OR_METHOD_NAME stmt_ends stmt_list END
+    | DEF VAR_OR_METHOD_NAME OPEN_ROUND_BRACKET method_params_list CLOSE_ROUND_BRACKET stmt_list END
     ;
 
-method_call_param_list: 
-	| method_call_param_list_not_empty
+expr_list: expr new_lines
+	| expr_list COMMA_SYMBOL new_lines expr new_lines
 	;
 
-method_call_param_list_not_empty: expr
-	| method_call_param_list_not_empty COMMA_SYMBOL expr
-	;
+class_declaration: CLASS_KEYWORD CLASS_NAME stmt_ends def_method_list END_KEYWORD stmt_ends
+    | CLASS_KEYWORD CLASS_NAME LESS_OP CLASS_NAME stmt_ends def_method_list END_KEYWORD stmt_ends
+    ;
+
+def_method_list: def_method_stmt
+    | def_method_list def_method_stmt
+    ;
 
 %%
 
