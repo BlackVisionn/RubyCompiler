@@ -36,114 +36,112 @@ EXPONENT [eE][+-]?[1-9]{DIGIT_NUMBER}
     int concatenation = 0;
 %}
 
-alias           { printf("Keyword: alias\n"); }
-and             { printf("Keyword: and\n"); }
-BEGIN           { printf("Keyword: BEGIN\n"); }
-begin           { printf("Keyword: begin\n"); }
-break           { printf("Keyword: break\n"); }
-case            { printf("Keyword: case\n"); }
-class           { printf("Keyword: class\n"); }
-def             { printf("Keyword: def\n"); }
-"defined?"	    { printf("Keyword: defined?\n"); }
-do              { printf("Keyword: do\n"); }
-else            { printf("Keyword: else\n"); }
-elsif           { printf("Keyword: elsif\n"); }
-END             { printf("Keyword: END\n"); }
-end             { printf("Keyword: end\n"); }
-ensure          { printf("Keyword: ensure\n"); }
-false           { printf("Keyword: false\n"); }
-for             { printf("Keyword: for\n"); }
-if              { printf("Keyword: if\n"); }
-in              { printf("Keyword: in\n"); }
-module          { printf("Keyword: module\n"); }
-next            { printf("Keyword: next\n"); }
-nil             { printf("Keyword: nil\n"); }
-not             { printf("Keyword: not\n"); }
-or              { printf("Keyword: or\n"); }
-redo            { printf("Keyword: redo\n"); }
-rescue          { printf("Keyword: rescue\n"); }
-retry           { printf("Keyword: retry\n"); }
-return          { printf("Keyword: return\n"); }
-self            { printf("Keyword: self\n"); }
-super           { printf("Keyword: super\n"); }
-then            { printf("Keyword: then\n"); }
-true            { printf("Keyword: true\n"); }
-undef           { printf("Keyword: undef\n"); }
-unless          { printf("Keyword: unless\n"); }
-until           { printf("Keyword: until\n"); }
-when            { printf("Keyword: when\n"); }
-while           { printf("Keyword: while\n"); }
-yield           { printf("Keyword: yield\n"); }
+alias           { return ALIAS; } 
+and             { return AND; }
+begin           { return BEGIN; }
+break           { return BREAK; }
+case            { return CASE; }
+class           { return CLASS; }
+def             { return DEF; }
+"defined?"	    { return DEFINED; }
+do              { return DO; }
+if              { return IF; }
+else            { return ELSE; }
+elsif           { return ELSIF; }
+end             { return END; }
+ensure          { return ENSURE; }
+false           { return FALSE; }
+for             { return FOR; }
+in              { return IN; }
+module          { return MODULE; }
+next            { return NEXT; }
+nil             { return NIL; }
+not             { return NOT; }
+or              { return OR; }
+redo            { return REDO; }
+rescue          { return RESCUE; }
+retry           { return RETRY; }
+return          { return RETURN; }
+self            { return SELF; }
+super           { return SUPER; }
+then            { return THEN; }
+true            { return TRUE; }
+undef           { return UNDEF; }
+unless          { return UNLESS; }
+until           { return UNTIL; }
+when            { return WHEN; }
+while           { return WHILE; }
+yield           { return YIELD; }
 
-"+"         { printf("Operator: +\n"); }
-"-"         { printf("Operator: -\n"); }
-"*"         { printf("Operator: *\n"); }
-"/"         { printf("Operator: /\n"); }
-"%"         { printf("Operator: %\n"); }
-"**"        { printf("Operator: **\n"); }
+"+"         { return ARITHMETIC_PLUS_OP; }
+"-"         { return ARITHMETIC_MINUS_OP; }
+"*"         { return ARITHMETIC_MUL_OP; }
+"/"         { return ARITHMETIC_DIV_OP; }
+"%"         { return ARITHMETIC_MOD_OP; }
+"**"        { return ARITHMETIC_POW_OP; }
 
-"=="        { printf("Operator: ==\n"); }
-"!="        { printf("Operator: !=\n"); }
-">"         { printf("Operator: >\n"); }
-"<"         { printf("Operator: <\n"); }
-">="        { printf("Operator: >=\n"); }
-"<="        { printf("Operator: <=\n"); }
-"<=>"       { printf("Operator: <=>\n"); }
-"==="       { printf("Operator: ===\n"); }
-"eql?"      { printf("Operator: eql?\n"); }
-"equal?"    { printf("Operator: equal?\n"); }
+"=="        { return EQL_OP; }
+"!="        { return NOT_EQL_OP; }
+">"         { return GREATER_OP; }
+"<"         { return LESS_OP; }
+">="        { return GREATER_OR_EQL_OP; }
+"<="        { return LESS_OR_EQL_OP; }
+"<=>"       { return COMB_COMPRASION_OP; }
+"==="       { return CASE_EQL_OP; }
+"eql?"      { return RECEIVER_EQL_OP; }
+"equal?"    { return OBJ_ID_EQL_OP; }
 
-"="         { printf("Operator: =\n"); }
-"+="        { printf("Operator: +=\n"); }
-"-="        { printf("Operator: -=\n"); }
-"*="        { printf("Operator: *=\n"); }
-"/="        { printf("Operator: /=\n"); }
-"%="        { printf("Operator: %=\n"); }
-"**="       { printf("Operator: **=\n"); }
+"="         { return ASSIGN_OP; }
+"+="        { return ADD_ASSIGN_OP; }
+"-="        { return SUB_ASSIGN_OP; }
+"*="        { return MUL_ASSIGN_OP; }
+"/="        { return DIV_ASSIGN_OP; }
+"%="        { return MOD_ASSIGN_OP; }
+"**="       { return POW_ASSIGN_OP; }
 
-"&"         { printf("Operator: &\n"); }
-"|"         { printf("Operator: |\n"); }
-"^"         { printf("Operator: ^\n"); }
-"~"         { printf("Operator: ~\n"); }
-"<<"        { printf("Operator: <<\n"); }
-">>"        { printf("Operator: >>\n"); }
+"&"         { return BIN_AND_OP; }
+"|"         { return BIN_OR_OP; }
+"^"         { return BIN_XOR_OP; }
+"~"         { return BIN_ONES_COMPLEMENT_OP; }
+"<<"        { return BIN_LEFT_SHIFT_OP; }
+">>"        { return BIN_RIGHT_SHIFT_OP; }
 
-"&&"        { printf("Operator: &&\n"); }
-"||"        { printf("Operator: ||\n"); }
-"!"         { printf("Operator: !\n"); }
+"&&"        { return LOGICAL_AND_OP; }
+"||"        { return LOGICAL_OR_OP; }
+"!"         { return LOGICAL_NOT_OP; }
 
-"?:"        { printf("Operator: ?:\n"); }
+".."        { return INCLUSIVE_RANGE_OP; }
+"..."       { return EXCLUSIVE_RANGE_OP; }
 
-".."        { printf("Operator: ..\n"); }
-"..."       { printf("Operator: ...\n"); }
-
-":"         { printf("Sign: :\n"); }
-"."         { printf("Sign: .\n"); }
-","         { printf("Sign: ,\n"); }
-"("         { printf("Bracket: (\n"); }
-")"         { printf("Bracket: )\n"); }
-"{"         { printf("Bracket: {\n"); }
+"?"         { return QUESTION_SYMBOL; }
+"."         { return DOT_SYMBOL; }
+","         { return COMMA_SYMBOL; }
+":"         { return COLON_SYMBOL; }
+"::"        { return DOUBLE_COLON_SYMBOL; }
+";"         { return SEMICOLON_SYMBOL; }
+\n          { return NEW_LINE_SYMBOL;  }
+"("         { return OPEN_ROUND_BRACKET; }
+")"         { return CLOSE_ROUND_BRACKET; }
+"{"         { return OPEN_CURLY_BRACKET; }
 "}"         {
                 if(concatenation == 0) {
-                    printf("Bracket: }\n");
+                    return CLOSE_CURLY_BRACKET;
                 } else {
                     concatenation--;
                     BEGIN(STRING);
                     string[0] = 0;
-                    printf("Found concatenation with string\n");
+                    return ARITHMETIC_PLUS_OP;
                 }
             }
-"["         { printf("Bracket: [\n"); }
-"]"         { printf("Bracket: ]\n"); }
+"["         { return OPEN_SQUARE_BRACKET; }
+"]"         { return CLOSE_SQUARE_BRACKET; }
 
 \"          { 
                 string[0] = 0; 
                 BEGIN(STRING);    
             }
 
-<STRING>\#\{          { 
-                        printf("String: %s\n", string);
-                        printf("Found concatenation with string\n");
+<STRING>\#\{          {                         
                         concatenation++;
                         BEGIN(INITIAL);
                     }            
@@ -176,7 +174,12 @@ yield           { printf("Keyword: yield\n"); }
                             }
 <STRING>\\x[^0-9A-Fa-f\n"]* { printf("ERROR: invalid hex escape \n"); } 
 <STRING><<EOF>>             { printf("ERROR: expected \" \n");}
-<STRING>\"                  { printf("String: %s \n", string); BEGIN(INITIAL); }
+<STRING>\" { 
+                yylval.string_un=(char *)malloc(strlen(string)+1);
+                strcpy(yylval.string_un, string);
+                BEGIN(INITIAL);
+                return STRING;
+            }
 
 #.*                         { printf("Single-line comment: %s\n", yytext + 1); }
 
@@ -201,16 +204,16 @@ yield           { printf("Keyword: yield\n"); }
 
 0|[1-9]{DIGIT_NUMBER}       { 
                                 removeCharacterFromString(yytext,temp1,'_');
-                                num = atoi(temp1);
-                                printf("Decimal number: %d\n", num);
+                                yylval.int_un = atoi(temp1);
+                                return INTEGER_NUMBER;
                             }
 
 [1-9](_*{DIGIT}+)*_*        { printf("ERROR: invalid decimal number: %s\n", yytext); }
 
 0[dD][1-9]{DIGIT_NUMBER}    {
                                 removeCharacterFromString(yytext+2,temp1,'_');
-                                num = atoi(temp1);
-                                printf("Decimal number: %d\n", num);              
+                                yylval.int_un = atoi(temp1);
+                                return INTEGER_NUMBER;              
                             }
 
 0_*[dD]_*[1-9](_*{DIGIT}+)*_* { printf("ERROR: invalid decimal number with dD: %s\n", yytext); }
@@ -219,51 +222,60 @@ yield           { printf("Keyword: yield\n"); }
                                 removeCharacterFromString(yytext,temp1,'_');
                                 removeCharacterFromString(temp1,temp2,'o');
                                 removeCharacterFromString(temp2,temp1,'O');
-                                sscanf(temp1,"%o",&num);
-                                printf("Octal number: %d\n", num);
+                                yylval.int_un = num;
+                                return INTEGER_NUMBER;
                             }
 
 0_*[oO]?_*{OCT_DIGIT}(_*{OCT_DIGIT}+)*_* { printf("ERROR: invalid octal number: %s\n", yytext); }
 
 0[xX]{HEX_NUMBER}           {
                                 removeCharacterFromString(yytext + 2,temp1,'_');
-                                sscanf(temp1,"%x",&num);
-                                printf("Hexadecimal number: %d\n", num);
+                                yylval.int_un = num;
+                                return INTEGER_NUMBER;
                             }
 
 0_*[xX]_*{HEX_DIGIT}(_*{HEX_DIGIT}+)*_* { printf("ERROR: invalid hexadecimal number: %s\n", yytext); }
 
 0[bB]{BIN_NUMBER}           {
                                 removeCharacterFromString(yytext + 2,temp1,'_');
-                                num = binstrToDec(temp1);
-                                printf("Binary number: %d\n", num); 
+                                yylval.int_un = num;
+                                return INTEGER_NUMBER; 
                             }
 
 0_*[bB]_*{BIN_DIGIT}(_*{BIN_DIGIT}+)*_* { printf("ERROR: invalid binary number: %s\n", yytext); }
 
 
 (0|[1-9](_?{DIGIT})*)(\.{DIGIT}+(_{DIGIT}+)*)?({EXPONENT})? {
-                                                                 removeCharacterFromString(yytext,temp1,'_'); 
-                                                                 real_num = atof(temp1);                                                                
-                                                                 printf("Float number: %f\n", real_num); 
+                                                                removeCharacterFromString(yytext,temp1,'_');                                                                  
+                                                                real_num = (float) atof(temp1);
+                                                                yylval.float_un = (float) real_num;
+                                                                return FLOAT_NUMBER;
                                                             }
 ([1-9]*_*(\.|\.{4,})_*{DIGIT}+)+(_*{DIGIT}*)*           { printf("ERROR: invalid float number: %s\n", yytext); }
 ([1-9]+((_|\.)*{DIGIT}*)*[Ee]+((_|\.)*{DIGIT}*)*)+      { printf("ERROR: invalid float number with eE: %s\n", yytext); }
 
 [a-z_]{LETTER_NUMBER_UNDERSCOPE}*           {
-                                                printf("Local variable or method name: %s\n", yytext);
+                                                yylval.string_un=(char *)malloc(strlen(yytext)+1);
+                                                strcpy(yylval.string_un, yytext); 
+                                                return VAR_OR_METHOD_NAME;
                                             }
 
 \@[a-z_]{LETTER_NUMBER_UNDERSCOPE}*         {
-                                                printf("Instance variable: %s\n", yytext);
+                                                yylval.string_un=(char *)malloc(strlen(yytext)+1);
+                                                strcpy(yylval.string_un, yytext); 
+                                                return INSTANCE_VAR_NAME;
                                             }
 
 \@\@[a-z_]{LETTER_NUMBER_UNDERSCOPE}*       {
-                                                printf("Class variable: %s\n", yytext);
+                                                yylval.string_un=(char *)malloc(strlen(yytext)+1);
+                                                strcpy(yylval.string_un, yytext); 
+                                                return CLASS_VAR_NAME;
                                             }
 
 [A-Z]{LETTER_NUMBER_UNDERSCOPE}*            {
-                                                printf("Class name: %s\n", yytext);
+                                                yylval.string_un=(char *)malloc(strlen(yytext)+1);
+                                                strcpy(yylval.string_un, yytext); 
+                                                return CLASS_NAME;
                                             }
 
 %% 
@@ -290,11 +302,4 @@ int binstrToDec(const char * str) {
     }
 
     return (int) r;
-}
-
-void main(int argc, char **argv ){
-	yyin = fopen(argv[1], "r" );
-
-    yylex();
-    return;
 }
