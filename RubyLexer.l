@@ -3,7 +3,9 @@
 %option yylineno
 
 %{
-	#include <stdio.h>    
+	#include <stdio.h>
+    #include "tree_nodes.h"
+    #include "parser.tab.h"    
 
     void removeCharacterFromString(const char * str, char * dest, char deleted_char);
     int binstrToDec(const char * str);
@@ -92,19 +94,6 @@ yield           { return YIELD; }
 "equal?"    { return OBJ_ID_EQL_OP; }
 
 "="         { return ASSIGN_OP; }
-"+="        { return ADD_ASSIGN_OP; }
-"-="        { return SUB_ASSIGN_OP; }
-"*="        { return MUL_ASSIGN_OP; }
-"/="        { return DIV_ASSIGN_OP; }
-"%="        { return MOD_ASSIGN_OP; }
-"**="       { return POW_ASSIGN_OP; }
-
-"&"         { return BIN_AND_OP; }
-"|"         { return BIN_OR_OP; }
-"^"         { return BIN_XOR_OP; }
-"~"         { return BIN_ONES_COMPLEMENT_OP; }
-"<<"        { return BIN_LEFT_SHIFT_OP; }
-">>"        { return BIN_RIGHT_SHIFT_OP; }
 
 "&&"        { return LOGICAL_AND_OP; }
 "||"        { return LOGICAL_OR_OP; }
