@@ -4,9 +4,7 @@
 #include "tree_nodes.h"
 #include "create_tree.c"
 #include "print_tree.h"
-
 extern int yylex(void);
-
 struct program_struct * root;
 
 %}
@@ -18,7 +16,6 @@ struct program_struct * root;
     char * var_name_un;
     char * instance_var_name_un;
     char * class_name_un;
-    char * class_var_name_un;
     struct expr_struct * expr_un;
     struct stmt_struct * stmt_un;
     struct stmt_list_struct * stmt_list_un;
@@ -60,11 +57,8 @@ struct program_struct * root;
 %type <program_item_list_un> program_items_list
 %type <program_item_list_un> program_items_list_not_empty
 
-%token ALIAS
 %token AND
 %token BEGIN
-%token BREAK
-%token CASE
 %token CLASS
 %token DEF
 %token DEFINED
@@ -73,29 +67,19 @@ struct program_struct * root;
 %token ELSE
 %token ELSIF
 %token END
-%token ENSURE
 %token FALSE
 %token FOR
 %token IN
-%token MODULE
-%token NEXT
 %token NIL
 %token NOT
 %token OR
-%token REDO
-%token RESCUE
-%token RETRY
 %token RETURN
 %token SELF
 %token SUPER
 %token THEN
 %token TRUE
-%token UNDEF
-%token UNLESS
 %token UNTIL
-%token WHEN
 %token WHILE
-%token YIELD
 
 %token ARITHMETIC_PLUS_OP
 %token ARITHMETIC_MINUS_OP
@@ -112,16 +96,8 @@ struct program_struct * root;
 %token LESS_OR_EQL_OP
 %token COMB_COMPRASION_OP
 %token CASE_EQL_OP
-%token RECEIVER_EQL_OP
-%token OBJ_ID_EQL_OP
 
 %token ASSIGN_OP
-%token ADD_ASSIGN_OP
-%token SUB_ASSIGN_OP
-%token MUL_ASSIGN_OP
-%token DIV_ASSIGN_OP
-%token MOD_ASSIGN_OP
-%token POW_ASSIGN_OP
 
 %token LOGICAL_AND_OP
 %token LOGICAL_OR_OP
@@ -132,17 +108,11 @@ struct program_struct * root;
 
 %token OPEN_ROUND_BRACKET
 %token CLOSE_ROUND_BRACKET
-%token OPEN_CURLY_BRACKET
-%token CLOSE_CURLY_BRACKET
 %token OPEN_SQUARE_BRACKET
 %token CLOSE_SQUARE_BRACKET
-%token COMMERCIAL_AT
 
-%token QUESTION_SYMBOL
 %token DOT_SYMBOL
 %token COMMA_SYMBOL
-%token COLON_SYMBOL
-%token DOUBLE_COLON_SYMBOL
 %token SEMICOLON_SYMBOL
 %token NEW_LINE_SYMBOL
 
@@ -152,7 +122,6 @@ struct program_struct * root;
 
 %token <var_name_un> VAR_OR_METHOD_NAME
 %token <instance_var_name_un> INSTANCE_VAR_NAME
-%token <class_var_name_un> CLASS_VAR_NAME
 %token <class_name_un> CLASS_NAME
 
 %start program
@@ -161,7 +130,6 @@ struct program_struct * root;
 %left AND OR
 %right NOT
 %left DEFINED
-%right ASSIGN_OP MOD_ASSIGN_OP DIV_ASSIGN_OP SUB_ASSIGN_OP ADD_ASSIGN_OP MUL_ASSIGN_OP POW_ASSIGN_OP
 %nonassoc INCLUSIVE_RANGE_OP EXCLUSIVE_RANGE_OP
 %left LOGICAL_OR_OP
 %left LOGICAL_AND_OP
@@ -198,44 +166,44 @@ expr: INTEGER_NUMBER                                                            
     | SUPER                                                                                { }
     | TRUE                                                                                 { $$=create_const_integer_expr(Boolean, 1); }
     | FALSE                                                                                { $$=create_const_integer_expr(Boolean, 0); }
-    | LOGICAL_NOT_OP expr                                                                  { $$=create_op_expr(logical_not, $2, 0); }
-    | ARITHMETIC_PLUS_OP expr %prec UNARY_PLUS                                             { $$=create_op_expr(unary_plus, $2, 0); }
-    | expr ARITHMETIC_POW_OP expr                                                          { $$=create_op_expr(pow_, $1, $3); }
-    | ARITHMETIC_MINUS_OP expr %prec UNARY_MINUS                                           { $$=create_op_expr(unary_minus, $2, 0); }
-    | expr ARITHMETIC_MUL_OP expr                                                          { $$=create_op_expr(mul, $1, $3); }
-    | expr ARITHMETIC_DIV_OP expr                                                          { $$=create_op_expr(div_, $1, $3); }
-    | expr ARITHMETIC_MOD_OP expr                                                          { $$=create_op_expr(mod, $1, $3); }
-    | expr ARITHMETIC_PLUS_OP expr                                                         { $$=create_op_expr(plus, $1, $3); }
-    | expr ARITHMETIC_MINUS_OP expr                                                        { $$=create_op_expr(minus, $1, $3); }
-    | expr GREATER_OP expr                                                                 { $$=create_op_expr(greater, $1, $3); }
-    | expr LESS_OP expr                                                                    { $$=create_op_expr(less, $1, $3); }
-    | expr GREATER_OR_EQL_OP expr                                                          { $$=create_op_expr(greater_eql, $1, $3); }
-    | expr LESS_OR_EQL_OP expr                                                             { $$=create_op_expr(less_eql, $1, $3); }
-    | expr COMB_COMPRASION_OP expr                                                         { $$=create_op_expr(comb_comprassion, $1, $3); }
-    | expr EQL_OP expr                                                                     { $$=create_op_expr(equal, $1, $3); }
-    | expr CASE_EQL_OP expr                                                                { $$=create_op_expr(case_equal, $1, $3); }
-    | expr NOT_EQL_OP expr                                                                 { $$=create_op_expr(not_equal, $1, $3); }
-    | expr LOGICAL_AND_OP expr                                                             { $$=create_op_expr(logical_and, $1, $3); }
-    | expr LOGICAL_OR_OP expr                                                              { $$=create_op_expr(logical_or, $1, $3); }
-    | expr INCLUSIVE_RANGE_OP expr                                                         { $$=create_op_expr(inclusive_range, $1, $3); }
-    | expr EXCLUSIVE_RANGE_OP expr                                                         { $$=create_op_expr(exclusive_range, $1, $3); }
-    | expr ASSIGN_OP expr                                                                  { $$=create_op_expr(assign, $1, $3); }
-    | expr UNTIL expr                                                                      { $$=create_op_expr(until_op, $1, $3); }  
-    | expr WHILE expr                                                                      { $$=create_op_expr(while_op, $1, $3); }  
-    | DEFINED expr                                                                         { $$=create_op_expr(defined, $2, 0); }
-    | NOT expr                                                                             { $$=create_op_expr(not, $2, 0); }
-    | expr AND expr                                                                        { $$=create_op_expr(and, $1, $3); }
-    | expr OR expr                                                                         { $$=create_op_expr(or, $1, $3); }
-    | OPEN_ROUND_BRACKET expr_list CLOSE_ROUND_BRACKET                                     { $$=$2; }
-	| expr OPEN_SQUARE_BRACKET expr CLOSE_SQUARE_BRACKET                                   { $$=create_op_expr(member_access, $1, $3); }
-    | OPEN_SQUARE_BRACKET new_lines_op expr_list CLOSE_SQUARE_BRACKET                      { $$=create_array_struct($3); }
-    | VAR_OR_METHOD_NAME OPEN_ROUND_BRACKET new_lines_op expr_list CLOSE_ROUND_BRACKET     { $$=create_method_call_expr($1, $4);}
+    | LOGICAL_NOT_OP new_lines_op expr                                                     { $$=create_op_expr(logical_not, $3, 0); }
+    | ARITHMETIC_PLUS_OP new_lines_op expr %prec UNARY_PLUS                                { $$=create_op_expr(unary_plus, $3, 0); }
+    | expr ARITHMETIC_POW_OP new_lines_op expr                                             { $$=create_op_expr(pow_, $1, $4); }
+    | ARITHMETIC_MINUS_OP new_lines_op expr %prec UNARY_MINUS                              { $$=create_op_expr(unary_minus, $3, 0); }
+    | expr ARITHMETIC_MUL_OP new_lines_op expr                                             { $$=create_op_expr(mul, $1, $4); }
+    | expr ARITHMETIC_DIV_OP new_lines_op expr                                             { $$=create_op_expr(div_, $1, $4); }
+    | expr ARITHMETIC_MOD_OP new_lines_op expr                                             { $$=create_op_expr(mod, $1, $4); }
+    | expr ARITHMETIC_PLUS_OP new_lines_op expr                                            { $$=create_op_expr(plus, $1, $4); }
+    | expr ARITHMETIC_MINUS_OP new_lines_op expr                                           { $$=create_op_expr(minus, $1, $4); }
+    | expr GREATER_OP new_lines_op expr                                                    { $$=create_op_expr(greater, $1, $4); }
+    | expr LESS_OP new_lines_op expr                                                       { $$=create_op_expr(less, $1, $4); }
+    | expr GREATER_OR_EQL_OP new_lines_op expr                                             { $$=create_op_expr(greater_eql, $1, $4); }
+    | expr LESS_OR_EQL_OP new_lines_op expr                                                { $$=create_op_expr(less_eql, $1, $4); }
+    | expr COMB_COMPRASION_OP new_lines_op expr                                            { $$=create_op_expr(comb_comprassion, $1, $4); }
+    | expr EQL_OP new_lines_op expr                                                        { $$=create_op_expr(equal, $1, $4); }
+    | expr CASE_EQL_OP new_lines_op expr                                                   { $$=create_op_expr(case_equal, $1, $4); }
+    | expr NOT_EQL_OP new_lines_op expr                                                    { $$=create_op_expr(not_equal, $1, $4); }
+    | expr LOGICAL_AND_OP new_lines_op expr                                                { $$=create_op_expr(logical_and, $1, $4); }
+    | expr LOGICAL_OR_OP new_lines_op expr                                                 { $$=create_op_expr(logical_or, $1, $4); }
+    | expr INCLUSIVE_RANGE_OP new_lines_op expr                                            { $$=create_op_expr(inclusive_range, $1, $4); }
+    | expr EXCLUSIVE_RANGE_OP new_lines_op expr                                            { $$=create_op_expr(exclusive_range, $1, $4); }
+    | expr ASSIGN_OP new_lines_op expr                                                     { $$=create_op_expr(assign, $1, $4); }
+    | expr UNTIL new_lines_op expr                                                         { $$=create_op_expr(until_op, $1, $4); }
+    | expr WHILE new_lines_op expr                                                         { $$=create_op_expr(while_op, $1, $4); }
+    | DEFINED new_lines_op expr                                                            { $$=create_op_expr(defined, $3, 0); }
+    | NOT new_lines_op expr                                                                { $$=create_op_expr(not, $3, 0); }
+    | expr AND new_lines_op expr                                                           { $$=create_op_expr(and, $1, $4); }
+    | expr OR new_lines_op expr                                                            { $$=create_op_expr(or, $1, $4); }
+    | OPEN_ROUND_BRACKET new_lines_op expr_list new_lines_op CLOSE_ROUND_BRACKET           { $$=$3; }
+	| expr OPEN_SQUARE_BRACKET new_lines_op expr new_lines_op CLOSE_SQUARE_BRACKET         { $$=create_op_expr(member_access, $1, $4); }
+    | OPEN_SQUARE_BRACKET new_lines_op expr_list new_lines_op CLOSE_SQUARE_BRACKET         { $$=create_array_struct($3); }
+    | VAR_OR_METHOD_NAME OPEN_ROUND_BRACKET new_lines_op expr_list new_lines_op CLOSE_ROUND_BRACKET     { $$=create_method_call_expr($1, $4);}
     | VAR_OR_METHOD_NAME                                                                   { $$=create_const_string_expr(var_or_method, $1); }     
     | INSTANCE_VAR_NAME                                                                    { $$=create_const_string_expr(instance_var, $1); }
-    | expr DOT_SYMBOL VAR_OR_METHOD_NAME                                                   { $$=create_field_call_expr($1, $3); }
-    | expr DOT_SYMBOL VAR_OR_METHOD_NAME OPEN_ROUND_BRACKET expr_list CLOSE_ROUND_BRACKET  { $$=create_object_method_call_expr($1, $3, $5); }
-    | SELF DOT_SYMBOL VAR_OR_METHOD_NAME                                                   { $$=create_self_field_call_expr($3); }
-    | SELF DOT_SYMBOL VAR_OR_METHOD_NAME OPEN_ROUND_BRACKET expr_list CLOSE_ROUND_BRACKET  { $$=create_self_method_call_expr($3, $5); }
+    | expr DOT_SYMBOL new_lines_op VAR_OR_METHOD_NAME                                                  { $$=create_field_call_expr($1, $4); }
+    | expr DOT_SYMBOL new_lines_op VAR_OR_METHOD_NAME OPEN_ROUND_BRACKET expr_list CLOSE_ROUND_BRACKET  { $$=create_object_method_call_expr($1, $4, $6); }
+    | SELF DOT_SYMBOL new_lines_op VAR_OR_METHOD_NAME                                                   { $$=create_self_field_call_expr($4); }
+    | SELF DOT_SYMBOL new_lines_op VAR_OR_METHOD_NAME OPEN_ROUND_BRACKET expr_list CLOSE_ROUND_BRACKET  { $$=create_self_method_call_expr($4, $6); }
     ;
 
 stmt_ends: SEMICOLON_SYMBOL
@@ -257,16 +225,11 @@ stmt_ends_op:
     ;
 
 stmt: expr stmt_ends            { $$=create_expr_stmt($1); }
-    | stmt_block                { $$=create_block_stmt($1); }
-    | stmt_block stmt_ends      { $$=create_block_stmt($1); }
-    | if_stmt                   { $$=$1; }
-    | if_stmt stmt_ends         { $$=$1; }
-    | for_stmt                  { $$=$1; }
-    | for_stmt stmt_ends        { $$=$1; }
-    | while_stmt                { $$=$1; }
-    | while_stmt stmt_ends      { $$=$1; }
-    | until_stmt                { $$=$1; }
-    | until_stmt stmt_ends      { $$=$1; }
+    | stmt_block stmt_ends_op   { $$=create_block_stmt($1); }
+    | if_stmt stmt_ends_op      { $$=$1; }
+    | for_stmt stmt_ends_op     { $$=$1; }
+    | while_stmt stmt_ends_op   { $$=$1; }
+    | until_stmt stmt_ends_op   { $$=$1; }
     | RETURN expr stmt_ends     { $$=create_return_stmt($2); }
     | RETURN stmt_ends          { $$=create_return_stmt(0); }
     ;
@@ -282,14 +245,14 @@ stmt_list:                                                                      
 stmt_block: BEGIN stmt_ends_op stmt_list END stmt_ends_op                                               { $$=create_stmt_block_struct($3); }
     ;
 
-if_start_stmt: IF expr stmt_ends stmt_list                                                              { $$=create_if_part_struct($2, $4); }                                
-    | IF expr SEMICOLON_SYMBOL new_lines_op THEN stmt_ends_op stmt_list                                 { $$=create_if_part_struct($2, $7); }
-    | IF expr new_lines_op THEN stmt_ends_op stmt_list                                                  { $$=create_if_part_struct($2, $6); }                  
+if_start_stmt: IF new_lines_op expr stmt_ends stmt_list                                                              { $$=create_if_part_struct($3, $5); }
+    | IF new_lines_op expr SEMICOLON_SYMBOL new_lines_op THEN stmt_ends_op stmt_list                                 { $$=create_if_part_struct($3, $8); }
+    | IF new_lines_op expr new_lines_op THEN stmt_ends_op stmt_list                                                  { $$=create_if_part_struct($3, $7); }
     ;
 
-elsif_stmt: ELSIF expr stmt_ends stmt_list                                                              { $$=create_if_part_struct($2, $4); }                                     
-    | ELSIF expr new_lines_op THEN stmt_ends_op stmt_list                                               { $$=create_if_part_struct($2, $6); }                     
-    | ELSIF expr SEMICOLON_SYMBOL new_lines_op THEN stmt_ends_op stmt_list                              { $$=create_if_part_struct($2, $7); }    
+elsif_stmt: ELSIF new_lines_op expr stmt_ends stmt_list                                                              { $$=create_if_part_struct($3, $5); }
+    | ELSIF new_lines_op expr new_lines_op THEN stmt_ends_op stmt_list                                               { $$=create_if_part_struct($3, $7); }
+    | ELSIF new_lines_op expr SEMICOLON_SYMBOL new_lines_op THEN stmt_ends_op stmt_list                              { $$=create_if_part_struct($3, $8); }
     ;
 
 elsif_stmt_list: elsif_stmt                                                                             { $$=create_elsif_stmt_list($1); } 
@@ -302,18 +265,18 @@ if_stmt: if_start_stmt END stmt_ends_op                                         
     | if_start_stmt elsif_stmt_list ELSE stmt_ends_op stmt_list END stmt_ends_op                        { $$=create_if_stmt($1, $2, $5); }
     ;
 
-for_stmt: FOR VAR_OR_METHOD_NAME IN expr stmt_ends stmt_list END stmt_ends_op                           { $$=create_for_stmt($2, $4, $6); } 
-    | FOR INSTANCE_VAR_NAME IN expr stmt_ends stmt_list END stmt_ends_op                                { $$=create_for_stmt($2, $4, $6); } 
-    | FOR VAR_OR_METHOD_NAME IN expr DO stmt_ends_op stmt_list END stmt_ends_op                         { $$=create_for_stmt($2, $4, $7); }
-    | FOR INSTANCE_VAR_NAME IN expr DO stmt_ends_op stmt_list END stmt_ends_op                          { $$=create_for_stmt($2, $4, $7); }
+for_stmt: FOR new_lines_op VAR_OR_METHOD_NAME IN new_lines_op expr stmt_ends stmt_list END stmt_ends_op                           { $$=create_for_stmt($3, $6, $8); }
+    | FOR new_lines_op INSTANCE_VAR_NAME IN new_lines_op expr stmt_ends stmt_list END stmt_ends_op                                { $$=create_for_stmt($3, $6, $8); }
+    | FOR new_lines_op VAR_OR_METHOD_NAME IN new_lines_op expr DO stmt_ends_op stmt_list END stmt_ends_op                         { $$=create_for_stmt($3, $6, $9); }
+    | FOR new_lines_op INSTANCE_VAR_NAME IN new_lines_op expr DO stmt_ends_op stmt_list END stmt_ends_op                          { $$=create_for_stmt($3, $6, $9); }
 	;
 
-while_stmt: WHILE expr stmt_ends stmt_list END stmt_ends_op                                             { $$=create_while_stmt($2, $4); }
-    | WHILE expr DO stmt_ends_op stmt_list END stmt_ends_op                                             { $$=create_while_stmt($2, $5); }
+while_stmt: WHILE new_lines_op expr stmt_ends stmt_list END stmt_ends_op                                             { $$=create_while_stmt($3, $5); }
+    | WHILE new_lines_op expr DO stmt_ends_op stmt_list END stmt_ends_op                                             { $$=create_while_stmt($3, $6); }
 	;
 
-until_stmt: UNTIL expr stmt_ends stmt_list END stmt_ends_op                                             { $$=create_until_stmt($2, $4); }
-    | UNTIL expr DO stmt_ends stmt_list END stmt_ends_op                                                { $$=create_until_stmt($2, $5); }
+until_stmt: UNTIL new_lines_op expr stmt_ends stmt_list END stmt_ends_op                                             { $$=create_until_stmt($3, $5); }
+    | UNTIL new_lines_op expr DO stmt_ends stmt_list END stmt_ends_op                                                { $$=create_until_stmt($3, $6); }
 	;
 
 method_param: VAR_OR_METHOD_NAME                                                                        { $$=create_method_param_struct($1, 0); }
@@ -325,7 +288,7 @@ method_params_list:                                                             
 	;
 
 method_params_list_not_empty: method_param                                                              { $$=create_method_param_list($1); }
-	| method_params_list_not_empty COMMA_SYMBOL method_param                                            { $$=add_to_method_param_list($1, $3); }
+	| method_params_list_not_empty COMMA_SYMBOL new_lines_op method_param                                            { $$=add_to_method_param_list($1, $4); }
 	;
 
 def_method_stmt: DEF VAR_OR_METHOD_NAME stmt_ends stmt_list END stmt_ends_op                                                        { $$=create_def_method_struct($2, 0, $4); }
@@ -341,7 +304,7 @@ expr_list_not_empty: expr new_lines_op                                          
 	;
 
 class_declaration: CLASS CLASS_NAME stmt_ends def_method_list END stmt_ends                             { $$=create_class_declaration_program_item($2, 0, $4); }
-    | CLASS CLASS_NAME LESS_OP CLASS_NAME stmt_ends def_method_list END stmt_ends                       { $$=create_class_declaration_program_item($2, $4, $6); }
+    | CLASS CLASS_NAME LESS_OP new_lines_op CLASS_NAME stmt_ends def_method_list END stmt_ends                       { $$=create_class_declaration_program_item($2, $5, $7); }
     ;
 
 def_method_list: def_method_stmt                                                                        { $$=create_def_method_list($1); }

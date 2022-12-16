@@ -54,93 +54,65 @@ extern int yydebug;
     YYEOF = 0,                     /* "end of file"  */
     YYerror = 256,                 /* error  */
     YYUNDEF = 257,                 /* "invalid token"  */
-    ALIAS = 258,                   /* ALIAS  */
-    AND = 259,                     /* AND  */
-    BEGIN = 260,                   /* BEGIN  */
-    BREAK = 261,                   /* BREAK  */
-    CASE = 262,                    /* CASE  */
-    CLASS = 263,                   /* CLASS  */
-    DEF = 264,                     /* DEF  */
-    DEFINED = 265,                 /* DEFINED  */
-    DO = 266,                      /* DO  */
-    IF = 267,                      /* IF  */
-    ELSE = 268,                    /* ELSE  */
-    ELSIF = 269,                   /* ELSIF  */
-    END = 270,                     /* END  */
-    ENSURE = 271,                  /* ENSURE  */
-    FALSE = 272,                   /* FALSE  */
-    FOR = 273,                     /* FOR  */
-    IN = 274,                      /* IN  */
-    MODULE = 275,                  /* MODULE  */
-    NEXT = 276,                    /* NEXT  */
-    NIL = 277,                     /* NIL  */
-    NOT = 278,                     /* NOT  */
-    OR = 279,                      /* OR  */
-    REDO = 280,                    /* REDO  */
-    RESCUE = 281,                  /* RESCUE  */
-    RETRY = 282,                   /* RETRY  */
-    RETURN = 283,                  /* RETURN  */
-    SELF = 284,                    /* SELF  */
-    SUPER = 285,                   /* SUPER  */
-    THEN = 286,                    /* THEN  */
-    TRUE = 287,                    /* TRUE  */
-    UNDEF = 288,                   /* UNDEF  */
-    UNLESS = 289,                  /* UNLESS  */
-    UNTIL = 290,                   /* UNTIL  */
-    WHEN = 291,                    /* WHEN  */
-    WHILE = 292,                   /* WHILE  */
-    YIELD = 293,                   /* YIELD  */
-    ARITHMETIC_PLUS_OP = 294,      /* ARITHMETIC_PLUS_OP  */
-    ARITHMETIC_MINUS_OP = 295,     /* ARITHMETIC_MINUS_OP  */
-    ARITHMETIC_MUL_OP = 296,       /* ARITHMETIC_MUL_OP  */
-    ARITHMETIC_DIV_OP = 297,       /* ARITHMETIC_DIV_OP  */
-    ARITHMETIC_MOD_OP = 298,       /* ARITHMETIC_MOD_OP  */
-    ARITHMETIC_POW_OP = 299,       /* ARITHMETIC_POW_OP  */
-    EQL_OP = 300,                  /* EQL_OP  */
-    NOT_EQL_OP = 301,              /* NOT_EQL_OP  */
-    GREATER_OP = 302,              /* GREATER_OP  */
-    LESS_OP = 303,                 /* LESS_OP  */
-    GREATER_OR_EQL_OP = 304,       /* GREATER_OR_EQL_OP  */
-    LESS_OR_EQL_OP = 305,          /* LESS_OR_EQL_OP  */
-    COMB_COMPRASION_OP = 306,      /* COMB_COMPRASION_OP  */
-    CASE_EQL_OP = 307,             /* CASE_EQL_OP  */
-    RECEIVER_EQL_OP = 308,         /* RECEIVER_EQL_OP  */
-    OBJ_ID_EQL_OP = 309,           /* OBJ_ID_EQL_OP  */
-    ASSIGN_OP = 310,               /* ASSIGN_OP  */
-    ADD_ASSIGN_OP = 311,           /* ADD_ASSIGN_OP  */
-    SUB_ASSIGN_OP = 312,           /* SUB_ASSIGN_OP  */
-    MUL_ASSIGN_OP = 313,           /* MUL_ASSIGN_OP  */
-    DIV_ASSIGN_OP = 314,           /* DIV_ASSIGN_OP  */
-    MOD_ASSIGN_OP = 315,           /* MOD_ASSIGN_OP  */
-    POW_ASSIGN_OP = 316,           /* POW_ASSIGN_OP  */
-    LOGICAL_AND_OP = 317,          /* LOGICAL_AND_OP  */
-    LOGICAL_OR_OP = 318,           /* LOGICAL_OR_OP  */
-    LOGICAL_NOT_OP = 319,          /* LOGICAL_NOT_OP  */
-    INCLUSIVE_RANGE_OP = 320,      /* INCLUSIVE_RANGE_OP  */
-    EXCLUSIVE_RANGE_OP = 321,      /* EXCLUSIVE_RANGE_OP  */
-    OPEN_ROUND_BRACKET = 322,      /* OPEN_ROUND_BRACKET  */
-    CLOSE_ROUND_BRACKET = 323,     /* CLOSE_ROUND_BRACKET  */
-    OPEN_CURLY_BRACKET = 324,      /* OPEN_CURLY_BRACKET  */
-    CLOSE_CURLY_BRACKET = 325,     /* CLOSE_CURLY_BRACKET  */
-    OPEN_SQUARE_BRACKET = 326,     /* OPEN_SQUARE_BRACKET  */
-    CLOSE_SQUARE_BRACKET = 327,    /* CLOSE_SQUARE_BRACKET  */
-    COMMERCIAL_AT = 328,           /* COMMERCIAL_AT  */
-    QUESTION_SYMBOL = 329,         /* QUESTION_SYMBOL  */
-    DOT_SYMBOL = 330,              /* DOT_SYMBOL  */
-    COMMA_SYMBOL = 331,            /* COMMA_SYMBOL  */
-    COLON_SYMBOL = 332,            /* COLON_SYMBOL  */
-    DOUBLE_COLON_SYMBOL = 333,     /* DOUBLE_COLON_SYMBOL  */
-    SEMICOLON_SYMBOL = 334,        /* SEMICOLON_SYMBOL  */
-    NEW_LINE_SYMBOL = 335,         /* NEW_LINE_SYMBOL  */
-    STRING = 336,                  /* STRING  */
-    INTEGER_NUMBER = 337,          /* INTEGER_NUMBER  */
-    FLOAT_NUMBER = 338,            /* FLOAT_NUMBER  */
-    VAR_OR_METHOD_NAME = 339,      /* VAR_OR_METHOD_NAME  */
-    INSTANCE_VAR_NAME = 340,       /* INSTANCE_VAR_NAME  */
-    CLASS_VAR_NAME = 341,          /* CLASS_VAR_NAME  */
-    CLASS_NAME = 342,              /* CLASS_NAME  */
-    UNARY_MINUS = 343,             /* UNARY_MINUS  */
-    UNARY_PLUS = 344               /* UNARY_PLUS  */
+    AND = 258,                     /* AND  */
+    BEGIN = 259,                   /* BEGIN  */
+    CLASS = 260,                   /* CLASS  */
+    DEF = 261,                     /* DEF  */
+    DEFINED = 262,                 /* DEFINED  */
+    DO = 263,                      /* DO  */
+    IF = 264,                      /* IF  */
+    ELSE = 265,                    /* ELSE  */
+    ELSIF = 266,                   /* ELSIF  */
+    END = 267,                     /* END  */
+    FALSE = 268,                   /* FALSE  */
+    FOR = 269,                     /* FOR  */
+    IN = 270,                      /* IN  */
+    NIL = 271,                     /* NIL  */
+    NOT = 272,                     /* NOT  */
+    OR = 273,                      /* OR  */
+    RETURN = 274,                  /* RETURN  */
+    SELF = 275,                    /* SELF  */
+    SUPER = 276,                   /* SUPER  */
+    THEN = 277,                    /* THEN  */
+    TRUE = 278,                    /* TRUE  */
+    UNTIL = 279,                   /* UNTIL  */
+    WHILE = 280,                   /* WHILE  */
+    ARITHMETIC_PLUS_OP = 281,      /* ARITHMETIC_PLUS_OP  */
+    ARITHMETIC_MINUS_OP = 282,     /* ARITHMETIC_MINUS_OP  */
+    ARITHMETIC_MUL_OP = 283,       /* ARITHMETIC_MUL_OP  */
+    ARITHMETIC_DIV_OP = 284,       /* ARITHMETIC_DIV_OP  */
+    ARITHMETIC_MOD_OP = 285,       /* ARITHMETIC_MOD_OP  */
+    ARITHMETIC_POW_OP = 286,       /* ARITHMETIC_POW_OP  */
+    EQL_OP = 287,                  /* EQL_OP  */
+    NOT_EQL_OP = 288,              /* NOT_EQL_OP  */
+    GREATER_OP = 289,              /* GREATER_OP  */
+    LESS_OP = 290,                 /* LESS_OP  */
+    GREATER_OR_EQL_OP = 291,       /* GREATER_OR_EQL_OP  */
+    LESS_OR_EQL_OP = 292,          /* LESS_OR_EQL_OP  */
+    COMB_COMPRASION_OP = 293,      /* COMB_COMPRASION_OP  */
+    CASE_EQL_OP = 294,             /* CASE_EQL_OP  */
+    ASSIGN_OP = 295,               /* ASSIGN_OP  */
+    LOGICAL_AND_OP = 296,          /* LOGICAL_AND_OP  */
+    LOGICAL_OR_OP = 297,           /* LOGICAL_OR_OP  */
+    LOGICAL_NOT_OP = 298,          /* LOGICAL_NOT_OP  */
+    INCLUSIVE_RANGE_OP = 299,      /* INCLUSIVE_RANGE_OP  */
+    EXCLUSIVE_RANGE_OP = 300,      /* EXCLUSIVE_RANGE_OP  */
+    OPEN_ROUND_BRACKET = 301,      /* OPEN_ROUND_BRACKET  */
+    CLOSE_ROUND_BRACKET = 302,     /* CLOSE_ROUND_BRACKET  */
+    OPEN_SQUARE_BRACKET = 303,     /* OPEN_SQUARE_BRACKET  */
+    CLOSE_SQUARE_BRACKET = 304,    /* CLOSE_SQUARE_BRACKET  */
+    DOT_SYMBOL = 305,              /* DOT_SYMBOL  */
+    COMMA_SYMBOL = 306,            /* COMMA_SYMBOL  */
+    SEMICOLON_SYMBOL = 307,        /* SEMICOLON_SYMBOL  */
+    NEW_LINE_SYMBOL = 308,         /* NEW_LINE_SYMBOL  */
+    STRING = 309,                  /* STRING  */
+    INTEGER_NUMBER = 310,          /* INTEGER_NUMBER  */
+    FLOAT_NUMBER = 311,            /* FLOAT_NUMBER  */
+    VAR_OR_METHOD_NAME = 312,      /* VAR_OR_METHOD_NAME  */
+    INSTANCE_VAR_NAME = 313,       /* INSTANCE_VAR_NAME  */
+    CLASS_NAME = 314,              /* CLASS_NAME  */
+    UNARY_MINUS = 315,             /* UNARY_MINUS  */
+    UNARY_PLUS = 316               /* UNARY_PLUS  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -149,7 +121,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 14 "parser.y"
+#line 12 "parser.y"
 
     int int_un;
     float float_un;
@@ -157,7 +129,6 @@ union YYSTYPE
     char * var_name_un;
     char * instance_var_name_un;
     char * class_name_un;
-    char * class_var_name_un;
     struct expr_struct * expr_un;
     struct stmt_struct * stmt_un;
     struct stmt_list_struct * stmt_list_un;
@@ -173,7 +144,7 @@ union YYSTYPE
     struct def_method_stmt_list_struct * def_method_list_un;
     struct def_method_stmt_struct * def_method_un; 
 
-#line 177 "parser.tab.h"
+#line 148 "parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

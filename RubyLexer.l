@@ -38,11 +38,8 @@ EXPONENT [eE][+-]?[1-9]{DIGIT_NUMBER}
     int concatenation = 0;
 %}
 
-alias           { return ALIAS; } 
 and             { return AND; }
 begin           { return BEGIN; }
-break           { return BREAK; }
-case            { return CASE; }
 class           { return CLASS; }
 def             { return DEF; }
 "defined?"	    { return DEFINED; }
@@ -51,29 +48,19 @@ if              { return IF; }
 else            { return ELSE; }
 elsif           { return ELSIF; }
 end             { return END; }
-ensure          { return ENSURE; }
 false           { return FALSE; }
 for             { return FOR; }
 in              { return IN; }
-module          { return MODULE; }
-next            { return NEXT; }
 nil             { return NIL; }
 not             { return NOT; }
 or              { return OR; }
-redo            { return REDO; }
-rescue          { return RESCUE; }
-retry           { return RETRY; }
 return          { return RETURN; }
 self            { return SELF; }
 super           { return SUPER; }
 then            { return THEN; }
 true            { return TRUE; }
-undef           { return UNDEF; }
-unless          { return UNLESS; }
 until           { return UNTIL; }
-when            { return WHEN; }
 while           { return WHILE; }
-yield           { return YIELD; }
 
 "+"         { return ARITHMETIC_PLUS_OP; }
 "-"         { return ARITHMETIC_MINUS_OP; }
