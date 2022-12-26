@@ -39,7 +39,6 @@ EXPONENT [eE][+-]?[1-9]{DIGIT_NUMBER}
 %}
 
 and             { return AND; }
-begin           { return BEGIN; }
 class           { return CLASS; }
 def             { return DEF; }
 "defined?"	    { return DEFINED; }
@@ -51,12 +50,10 @@ end             { return END; }
 false           { return FALSE; }
 for             { return FOR; }
 in              { return IN; }
-nil             { return NIL; }
 not             { return NOT; }
 or              { return OR; }
 return          { return RETURN; }
 self            { return SELF; }
-super           { return SUPER; }
 then            { return THEN; }
 true            { return TRUE; }
 until           { return UNTIL; }
@@ -77,8 +74,6 @@ while           { return WHILE; }
 "<="        { return LESS_OR_EQL_OP; }
 "<=>"       { return COMB_COMPRASION_OP; }
 "==="       { return CASE_EQL_OP; }
-"eql?"      { return RECEIVER_EQL_OP; }
-"equal?"    { return OBJ_ID_EQL_OP; }
 
 "="         { return ASSIGN_OP; }
 
@@ -92,8 +87,6 @@ while           { return WHILE; }
 "?"         { return QUESTION_SYMBOL; }
 "."         { return DOT_SYMBOL; }
 ","         { return COMMA_SYMBOL; }
-":"         { return COLON_SYMBOL; }
-"::"        { return DOUBLE_COLON_SYMBOL; }
 ";"         { return SEMICOLON_SYMBOL; }
 \n          { return NEW_LINE_SYMBOL;  }
 "("         { return OPEN_ROUND_BRACKET; }
