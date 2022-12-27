@@ -9,7 +9,6 @@
 *.ini
 win_bison.exe
 win_flex.exe
-REGEN.bat
 FlexLexer.h
 *.md
 *.css
