@@ -100,129 +100,7 @@ void yyerror(const char* s);
 #  endif
 # endif
 
-
-/* Debug traces.  */
-#ifndef YYDEBUG
-# define YYDEBUG 0
-#endif
-#if YYDEBUG
-extern int yydebug;
-#endif
-
-/* Token kinds.  */
-#ifndef YYTOKENTYPE
-# define YYTOKENTYPE
-  enum yytokentype
-  {
-    YYEMPTY = -2,
-    YYEOF = 0,                     /* "end of file"  */
-    YYerror = 256,                 /* error  */
-    YYUNDEF = 257,                 /* "invalid token"  */
-    AND = 258,                     /* AND  */
-    CLASS = 259,                   /* CLASS  */
-    DEF = 260,                     /* DEF  */
-    DEFINED = 261,                 /* DEFINED  */
-    DO = 262,                      /* DO  */
-    IF = 263,                      /* IF  */
-    ELSE = 264,                    /* ELSE  */
-    ELSIF = 265,                   /* ELSIF  */
-    END = 266,                     /* END  */
-    FALSE = 267,                   /* FALSE  */
-    FOR = 268,                     /* FOR  */
-    IN = 269,                      /* IN  */
-    NOT = 270,                     /* NOT  */
-    OR = 271,                      /* OR  */
-    RETURN = 272,                  /* RETURN  */
-    SELF = 273,                    /* SELF  */
-    THEN = 274,                    /* THEN  */
-    TRUE = 275,                    /* TRUE  */
-    UNTIL = 276,                   /* UNTIL  */
-    WHILE = 277,                   /* WHILE  */
-    ARITHMETIC_PLUS_OP = 278,      /* ARITHMETIC_PLUS_OP  */
-    ARITHMETIC_MINUS_OP = 279,     /* ARITHMETIC_MINUS_OP  */
-    ARITHMETIC_MUL_OP = 280,       /* ARITHMETIC_MUL_OP  */
-    ARITHMETIC_DIV_OP = 281,       /* ARITHMETIC_DIV_OP  */
-    ARITHMETIC_MOD_OP = 282,       /* ARITHMETIC_MOD_OP  */
-    ARITHMETIC_POW_OP = 283,       /* ARITHMETIC_POW_OP  */
-    EQL_OP = 284,                  /* EQL_OP  */
-    NOT_EQL_OP = 285,              /* NOT_EQL_OP  */
-    GREATER_OP = 286,              /* GREATER_OP  */
-    LESS_OP = 287,                 /* LESS_OP  */
-    GREATER_OR_EQL_OP = 288,       /* GREATER_OR_EQL_OP  */
-    LESS_OR_EQL_OP = 289,          /* LESS_OR_EQL_OP  */
-    COMB_COMPRASION_OP = 290,      /* COMB_COMPRASION_OP  */
-    CASE_EQL_OP = 291,             /* CASE_EQL_OP  */
-    ASSIGN_OP = 292,               /* ASSIGN_OP  */
-    LOGICAL_AND_OP = 293,          /* LOGICAL_AND_OP  */
-    LOGICAL_OR_OP = 294,           /* LOGICAL_OR_OP  */
-    LOGICAL_NOT_OP = 295,          /* LOGICAL_NOT_OP  */
-    INCLUSIVE_RANGE_OP = 296,      /* INCLUSIVE_RANGE_OP  */
-    EXCLUSIVE_RANGE_OP = 297,      /* EXCLUSIVE_RANGE_OP  */
-    OPEN_ROUND_BRACKET = 298,      /* OPEN_ROUND_BRACKET  */
-    CLOSE_ROUND_BRACKET = 299,     /* CLOSE_ROUND_BRACKET  */
-    OPEN_CURLY_BRACKET = 300,      /* OPEN_CURLY_BRACKET  */
-    CLOSE_CURLY_BRACKET = 301,     /* CLOSE_CURLY_BRACKET  */
-    OPEN_SQUARE_BRACKET = 302,     /* OPEN_SQUARE_BRACKET  */
-    CLOSE_SQUARE_BRACKET = 303,    /* CLOSE_SQUARE_BRACKET  */
-    DOT_SYMBOL = 304,              /* DOT_SYMBOL  */
-    COMMA_SYMBOL = 305,            /* COMMA_SYMBOL  */
-    SEMICOLON_SYMBOL = 306,        /* SEMICOLON_SYMBOL  */
-    NEW_LINE_SYMBOL = 307,         /* NEW_LINE_SYMBOL  */
-    STRING = 308,                  /* STRING  */
-    INTEGER_NUMBER = 309,          /* INTEGER_NUMBER  */
-    FLOAT_NUMBER = 310,            /* FLOAT_NUMBER  */
-    VAR_METHOD_NAME = 311,         /* VAR_METHOD_NAME  */
-    INSTANCE_VAR_NAME = 312,       /* INSTANCE_VAR_NAME  */
-    CLASS_NAME = 313,              /* CLASS_NAME  */
-    UNARY_MINUS = 314,             /* UNARY_MINUS  */
-    UNARY_PLUS = 315               /* UNARY_PLUS  */
-  };
-  typedef enum yytokentype yytoken_kind_t;
-#endif
-
-/* Value type.  */
-#if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-union YYSTYPE
-{
-#line 11 "parser.y"
-
-    int int_un;
-    float float_un;
-    char * string_un;
-    char * var_name_un;
-    char * instance_var_name_un;
-    char * class_name_un;
-    char * class_var_name_un;
-    struct expr_struct * expr_un; 
-    struct stmt_struct * stmt_un;
-    struct stmt_list_struct * stmt_list_un;
-    struct expr_list_struct * expr_list_un;
-    struct if_part_stmt_struct * if_part_un;
-    struct elsif_stmt_list * elsif_list_un;    
-    struct method_param_struct* method_param_un;
-    struct method_param_list* method_param_list_un;
-    struct program_struct * program_un;
-    struct program_item_struct * program_item_un;
-    struct program_item_list_struct * program_item_list_un;
-    struct def_method_stmt_list_struct * def_method_list_un;
-    struct def_method_stmt_struct * def_method_un;
-
-#line 211 "parser.tab.c"
-
-};
-typedef union YYSTYPE YYSTYPE;
-# define YYSTYPE_IS_TRIVIAL 1
-# define YYSTYPE_IS_DECLARED 1
-#endif
-
-
-extern YYSTYPE yylval;
-
-
-int yyparse (void);
-
-
-
+#include "parser.tab.h"
 /* Symbol kind.  */
 enum yysymbol_kind_t
 {
@@ -283,40 +161,41 @@ enum yysymbol_kind_t
   YYSYMBOL_STRING = 53,                    /* STRING  */
   YYSYMBOL_INTEGER_NUMBER = 54,            /* INTEGER_NUMBER  */
   YYSYMBOL_FLOAT_NUMBER = 55,              /* FLOAT_NUMBER  */
-  YYSYMBOL_VAR_METHOD_NAME = 56,           /* VAR_METHOD_NAME  */
+  YYSYMBOL_VAR_OR_METHOD_NAME = 56,        /* VAR_OR_METHOD_NAME  */
   YYSYMBOL_INSTANCE_VAR_NAME = 57,         /* INSTANCE_VAR_NAME  */
   YYSYMBOL_CLASS_NAME = 58,                /* CLASS_NAME  */
-  YYSYMBOL_UNARY_MINUS = 59,               /* UNARY_MINUS  */
-  YYSYMBOL_UNARY_PLUS = 60,                /* UNARY_PLUS  */
-  YYSYMBOL_YYACCEPT = 61,                  /* $accept  */
-  YYSYMBOL_program = 62,                   /* program  */
-  YYSYMBOL_program_item = 63,              /* program_item  */
-  YYSYMBOL_program_items_list_not_empty = 64, /* program_items_list_not_empty  */
-  YYSYMBOL_program_items_list = 65,        /* program_items_list  */
-  YYSYMBOL_expr = 66,                      /* expr  */
-  YYSYMBOL_stmt_ends = 67,                 /* stmt_ends  */
-  YYSYMBOL_new_lines_op = 68,              /* new_lines_op  */
-  YYSYMBOL_new_lines = 69,                 /* new_lines  */
-  YYSYMBOL_stmt_ends_op = 70,              /* stmt_ends_op  */
-  YYSYMBOL_stmt = 71,                      /* stmt  */
-  YYSYMBOL_stmt_list_not_empty = 72,       /* stmt_list_not_empty  */
-  YYSYMBOL_stmt_list = 73,                 /* stmt_list  */
-  YYSYMBOL_if_start_stmt = 74,             /* if_start_stmt  */
-  YYSYMBOL_elsif_stmt = 75,                /* elsif_stmt  */
-  YYSYMBOL_elsif_stmt_list = 76,           /* elsif_stmt_list  */
-  YYSYMBOL_if_stmt = 77,                   /* if_stmt  */
-  YYSYMBOL_for_stmt = 78,                  /* for_stmt  */
-  YYSYMBOL_while_stmt = 79,                /* while_stmt  */
-  YYSYMBOL_until_stmt = 80,                /* until_stmt  */
-  YYSYMBOL_method_param = 81,              /* method_param  */
-  YYSYMBOL_method_params_list = 82,        /* method_params_list  */
-  YYSYMBOL_method_params_list_not_empty = 83, /* method_params_list_not_empty  */
-  YYSYMBOL_def_method_stmt = 84,           /* def_method_stmt  */
-  YYSYMBOL_expr_list = 85,                 /* expr_list  */
-  YYSYMBOL_expr_list_not_empty = 86,       /* expr_list_not_empty  */
-  YYSYMBOL_class_declaration = 87,         /* class_declaration  */
-  YYSYMBOL_def_method_list_op = 88,        /* def_method_list_op  */
-  YYSYMBOL_def_method_list = 89            /* def_method_list  */
+  YYSYMBOL_CLASS_VAR_NAME = 59,            /* CLASS_VAR_NAME  */
+  YYSYMBOL_UNARY_MINUS = 60,               /* UNARY_MINUS  */
+  YYSYMBOL_UNARY_PLUS = 61,                /* UNARY_PLUS  */
+  YYSYMBOL_YYACCEPT = 62,                  /* $accept  */
+  YYSYMBOL_program = 63,                   /* program  */
+  YYSYMBOL_program_item = 64,              /* program_item  */
+  YYSYMBOL_program_items_list_not_empty = 65, /* program_items_list_not_empty  */
+  YYSYMBOL_program_items_list = 66,        /* program_items_list  */
+  YYSYMBOL_expr = 67,                      /* expr  */
+  YYSYMBOL_stmt_ends = 68,                 /* stmt_ends  */
+  YYSYMBOL_new_lines_op = 69,              /* new_lines_op  */
+  YYSYMBOL_new_lines = 70,                 /* new_lines  */
+  YYSYMBOL_stmt_ends_op = 71,              /* stmt_ends_op  */
+  YYSYMBOL_stmt = 72,                      /* stmt  */
+  YYSYMBOL_stmt_list_not_empty = 73,       /* stmt_list_not_empty  */
+  YYSYMBOL_stmt_list = 74,                 /* stmt_list  */
+  YYSYMBOL_if_start_stmt = 75,             /* if_start_stmt  */
+  YYSYMBOL_elsif_stmt = 76,                /* elsif_stmt  */
+  YYSYMBOL_elsif_stmt_list = 77,           /* elsif_stmt_list  */
+  YYSYMBOL_if_stmt = 78,                   /* if_stmt  */
+  YYSYMBOL_for_stmt = 79,                  /* for_stmt  */
+  YYSYMBOL_while_stmt = 80,                /* while_stmt  */
+  YYSYMBOL_until_stmt = 81,                /* until_stmt  */
+  YYSYMBOL_method_param = 82,              /* method_param  */
+  YYSYMBOL_method_params_list = 83,        /* method_params_list  */
+  YYSYMBOL_method_params_list_not_empty = 84, /* method_params_list_not_empty  */
+  YYSYMBOL_def_method_stmt = 85,           /* def_method_stmt  */
+  YYSYMBOL_expr_list = 86,                 /* expr_list  */
+  YYSYMBOL_expr_list_not_empty = 87,       /* expr_list_not_empty  */
+  YYSYMBOL_class_declaration = 88,         /* class_declaration  */
+  YYSYMBOL_def_method_list_op = 89,        /* def_method_list_op  */
+  YYSYMBOL_def_method_list = 90            /* def_method_list  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -647,7 +526,7 @@ union yyalloc
 #define YYLAST   952
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  61
+#define YYNTOKENS  62
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  29
 /* YYNRULES -- Number of rules.  */
@@ -656,7 +535,7 @@ union yyalloc
 #define YYNSTATES  286
 
 /* YYMAXUTOK -- Last valid token kind.  */
-#define YYMAXUTOK   315
+#define YYMAXUTOK   316
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -701,25 +580,25 @@ static const yytype_int8 yytranslate[] =
       25,    26,    27,    28,    29,    30,    31,    32,    33,    34,
       35,    36,    37,    38,    39,    40,    41,    42,    43,    44,
       45,    46,    47,    48,    49,    50,    51,    52,    53,    54,
-      55,    56,    57,    58,    59,    60
+      55,    56,    57,    58,    59,    60,    61
 };
 
 #if YYDEBUG
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   146,   146,   149,   150,   151,   154,   155,   158,   159,
-     162,   163,   164,   165,   166,   167,   168,   169,   170,   171,
-     172,   173,   174,   175,   176,   177,   178,   179,   180,   181,
-     182,   183,   184,   185,   186,   187,   188,   189,   190,   191,
-     192,   193,   194,   195,   196,   197,   198,   199,   200,   201,
-     202,   203,   204,   207,   208,   209,   210,   213,   214,   217,
-     218,   221,   222,   225,   226,   227,   228,   229,   230,   231,
-     234,   235,   238,   239,   242,   243,   244,   247,   248,   249,
-     252,   253,   256,   257,   258,   259,   262,   263,   264,   265,
-     268,   269,   272,   273,   276,   277,   280,   281,   284,   285,
-     288,   289,   292,   293,   296,   297,   300,   301,   305,   306,
-     309,   310
+       0,   147,   147,   150,   151,   152,   155,   156,   159,   160,
+     163,   164,   165,   166,   167,   168,   169,   170,   171,   172,
+     173,   174,   175,   176,   177,   178,   179,   180,   181,   182,
+     183,   184,   185,   186,   187,   188,   189,   190,   191,   192,
+     193,   194,   195,   196,   197,   198,   199,   200,   201,   202,
+     203,   204,   205,   208,   209,   210,   211,   214,   215,   218,
+     219,   222,   223,   226,   227,   228,   229,   230,   231,   232,
+     235,   236,   239,   240,   243,   244,   245,   248,   249,   250,
+     253,   254,   257,   258,   259,   260,   263,   264,   265,   266,
+     269,   270,   273,   274,   277,   278,   281,   282,   285,   286,
+     289,   290,   293,   294,   297,   298,   301,   302,   306,   307,
+     310,   311
 };
 #endif
 
@@ -747,10 +626,11 @@ static const char *const yytname[] =
   "CLOSE_ROUND_BRACKET", "OPEN_CURLY_BRACKET", "CLOSE_CURLY_BRACKET",
   "OPEN_SQUARE_BRACKET", "CLOSE_SQUARE_BRACKET", "DOT_SYMBOL",
   "COMMA_SYMBOL", "SEMICOLON_SYMBOL", "NEW_LINE_SYMBOL", "STRING",
-  "INTEGER_NUMBER", "FLOAT_NUMBER", "VAR_METHOD_NAME", "INSTANCE_VAR_NAME",
-  "CLASS_NAME", "UNARY_MINUS", "UNARY_PLUS", "$accept", "program",
-  "program_item", "program_items_list_not_empty", "program_items_list",
-  "expr", "stmt_ends", "new_lines_op", "new_lines", "stmt_ends_op", "stmt",
+  "INTEGER_NUMBER", "FLOAT_NUMBER", "VAR_OR_METHOD_NAME",
+  "INSTANCE_VAR_NAME", "CLASS_NAME", "CLASS_VAR_NAME", "UNARY_MINUS",
+  "UNARY_PLUS", "$accept", "program", "program_item",
+  "program_items_list_not_empty", "program_items_list", "expr",
+  "stmt_ends", "new_lines_op", "new_lines", "stmt_ends_op", "stmt",
   "stmt_list_not_empty", "stmt_list", "if_start_stmt", "elsif_stmt",
   "elsif_stmt_list", "if_stmt", "for_stmt", "while_stmt", "until_stmt",
   "method_param", "method_params_list", "method_params_list_not_empty",
@@ -1071,50 +951,50 @@ static const yytype_int8 yystos[] =
 {
        0,     4,     5,     6,     8,    12,    13,    15,    17,    18,
       20,    21,    22,    23,    24,    40,    43,    47,    53,    54,
-      55,    56,    57,    62,    63,    64,    65,    66,    71,    74,
-      77,    78,    79,    80,    84,    87,    58,    56,    52,    68,
-      69,    68,    68,    68,    51,    52,    66,    67,    49,    68,
-      68,    68,    68,    68,    68,    68,    43,     0,    63,     3,
+      55,    56,    57,    63,    64,    65,    66,    67,    72,    75,
+      78,    79,    80,    81,    85,    88,    58,    56,    52,    69,
+      70,    69,    69,    69,    51,    52,    67,    68,    49,    69,
+      69,    69,    69,    69,    69,    69,    43,     0,    64,     3,
       16,    21,    22,    23,    24,    25,    26,    27,    28,    29,
       30,    31,    32,    33,    34,    35,    36,    37,    38,    39,
-      41,    42,    47,    49,    67,     9,    10,    11,    75,    76,
-      67,    70,    70,    70,    70,    32,    67,    43,    67,    69,
-      66,    66,    56,    57,    66,    67,    67,    67,    68,    66,
-      66,    66,    66,    66,    66,    85,    86,    85,    68,    68,
-      68,    68,    68,    68,    68,    68,    68,    68,    68,    68,
-      68,    68,    68,    68,    68,    68,    68,    68,    68,    68,
-      68,    68,    68,    68,    70,    68,     9,    11,    75,    68,
-      84,    88,    89,    56,    81,    82,    83,    71,    72,    73,
-      51,    52,    67,    68,    14,    14,    56,     7,    67,     7,
-      67,    68,    44,    50,    48,    85,    66,    66,    66,    66,
-      66,    66,    66,    66,    66,    66,    66,    66,    66,    66,
-      66,    66,    66,    66,    66,    66,    66,    66,    66,    66,
-      56,    73,    66,    70,    58,    11,    84,    37,    44,    50,
-      71,    11,    68,    73,    19,    68,    68,    43,    70,    73,
-      70,    73,    68,    44,    48,    43,    11,    51,    67,    68,
-      73,    67,    67,    66,    70,    68,    70,    19,    70,    66,
-      66,    85,    73,    11,    73,    11,    66,    85,    68,    73,
-      19,    11,    88,    73,    81,    70,    73,     7,    67,     7,
-      67,    44,    11,    11,    68,    44,    19,    70,    11,    11,
-      73,    70,    73,    70,    73,    70,    73,    67,    70,    73,
-      11,    73,    11,    73,    11,    11
+      41,    42,    47,    49,    68,     9,    10,    11,    76,    77,
+      68,    71,    71,    71,    71,    32,    68,    43,    68,    70,
+      67,    67,    56,    57,    67,    68,    68,    68,    69,    67,
+      67,    67,    67,    67,    67,    86,    87,    86,    69,    69,
+      69,    69,    69,    69,    69,    69,    69,    69,    69,    69,
+      69,    69,    69,    69,    69,    69,    69,    69,    69,    69,
+      69,    69,    69,    69,    71,    69,     9,    11,    76,    69,
+      85,    89,    90,    56,    82,    83,    84,    72,    73,    74,
+      51,    52,    68,    69,    14,    14,    56,     7,    68,     7,
+      68,    69,    44,    50,    48,    86,    67,    67,    67,    67,
+      67,    67,    67,    67,    67,    67,    67,    67,    67,    67,
+      67,    67,    67,    67,    67,    67,    67,    67,    67,    67,
+      56,    74,    67,    71,    58,    11,    85,    37,    44,    50,
+      72,    11,    69,    74,    19,    69,    69,    43,    71,    74,
+      71,    74,    69,    44,    48,    43,    11,    51,    68,    69,
+      74,    68,    68,    67,    71,    69,    71,    19,    71,    67,
+      67,    86,    74,    11,    74,    11,    67,    86,    69,    74,
+      19,    11,    89,    74,    82,    71,    74,     7,    68,     7,
+      68,    44,    11,    11,    69,    44,    19,    71,    11,    11,
+      74,    71,    74,    71,    74,    71,    74,    68,    71,    74,
+      11,    74,    11,    74,    11,    11
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    61,    62,    63,    63,    63,    64,    64,    65,    65,
-      66,    66,    66,    66,    66,    66,    66,    66,    66,    66,
-      66,    66,    66,    66,    66,    66,    66,    66,    66,    66,
-      66,    66,    66,    66,    66,    66,    66,    66,    66,    66,
-      66,    66,    66,    66,    66,    66,    66,    66,    66,    66,
-      66,    66,    66,    67,    67,    67,    67,    68,    68,    69,
-      69,    70,    70,    71,    71,    71,    71,    71,    71,    71,
-      72,    72,    73,    73,    74,    74,    74,    75,    75,    75,
-      76,    76,    77,    77,    77,    77,    78,    78,    78,    78,
-      79,    79,    80,    80,    81,    81,    82,    82,    83,    83,
-      84,    84,    85,    85,    86,    86,    87,    87,    88,    88,
-      89,    89
+       0,    62,    63,    64,    64,    64,    65,    65,    66,    66,
+      67,    67,    67,    67,    67,    67,    67,    67,    67,    67,
+      67,    67,    67,    67,    67,    67,    67,    67,    67,    67,
+      67,    67,    67,    67,    67,    67,    67,    67,    67,    67,
+      67,    67,    67,    67,    67,    67,    67,    67,    67,    67,
+      67,    67,    67,    68,    68,    68,    68,    69,    69,    70,
+      70,    71,    71,    72,    72,    72,    72,    72,    72,    72,
+      73,    73,    74,    74,    75,    75,    75,    76,    76,    76,
+      77,    77,    78,    78,    78,    78,    79,    79,    79,    79,
+      80,    80,    81,    81,    82,    82,    83,    83,    84,    84,
+      85,    85,    86,    86,    87,    87,    88,    88,    89,    89,
+      90,    90
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
@@ -1595,607 +1475,607 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* program: program_items_list  */
-#line 146 "parser.y"
+#line 147 "parser.y"
                                                                         { root=create_program_struct((yyvsp[0].program_item_list_un)); }
-#line 1601 "parser.tab.c"
+#line 1481 "parser.tab.c"
     break;
 
   case 3: /* program_item: stmt  */
-#line 149 "parser.y"
+#line 150 "parser.y"
                                                                         { (yyval.program_item_un)=create_stmt_program_item((yyvsp[0].stmt_un)); }
-#line 1607 "parser.tab.c"
+#line 1487 "parser.tab.c"
     break;
 
   case 4: /* program_item: def_method_stmt  */
-#line 150 "parser.y"
+#line 151 "parser.y"
                                                                         { (yyval.program_item_un)=create_def_method_program_item((yyvsp[0].def_method_un)); }
-#line 1613 "parser.tab.c"
+#line 1493 "parser.tab.c"
     break;
 
   case 5: /* program_item: class_declaration  */
-#line 151 "parser.y"
+#line 152 "parser.y"
                                                                         { (yyval.program_item_un)=(yyvsp[0].program_item_un); }
-#line 1619 "parser.tab.c"
+#line 1499 "parser.tab.c"
     break;
 
   case 6: /* program_items_list_not_empty: program_item  */
-#line 154 "parser.y"
+#line 155 "parser.y"
                                                                         { (yyval.program_item_list_un)=create_program_item_list((yyvsp[0].program_item_un)); }
-#line 1625 "parser.tab.c"
+#line 1505 "parser.tab.c"
     break;
 
   case 7: /* program_items_list_not_empty: program_items_list_not_empty program_item  */
-#line 155 "parser.y"
+#line 156 "parser.y"
                                                                         { (yyval.program_item_list_un)=add_to_program_item_list((yyvsp[-1].program_item_list_un), (yyvsp[0].program_item_un)); }
-#line 1631 "parser.tab.c"
+#line 1511 "parser.tab.c"
     break;
 
   case 8: /* program_items_list: %empty  */
-#line 158 "parser.y"
+#line 159 "parser.y"
                                                                         { (yyval.program_item_list_un)=0; }
-#line 1637 "parser.tab.c"
+#line 1517 "parser.tab.c"
     break;
 
   case 9: /* program_items_list: program_items_list_not_empty  */
-#line 159 "parser.y"
+#line 160 "parser.y"
                                                                         { (yyval.program_item_list_un)=(yyvsp[0].program_item_list_un); }
-#line 1643 "parser.tab.c"
+#line 1523 "parser.tab.c"
     break;
 
   case 10: /* expr: INTEGER_NUMBER  */
-#line 162 "parser.y"
+#line 163 "parser.y"
                                                                                                      { (yyval.expr_un)=create_const_integer_expr(Integer, (yyvsp[0].int_un)); }
-#line 1649 "parser.tab.c"
+#line 1529 "parser.tab.c"
     break;
 
   case 11: /* expr: FLOAT_NUMBER  */
-#line 163 "parser.y"
+#line 164 "parser.y"
                                                                                                      { (yyval.expr_un)=create_const_float_expr((yyvsp[0].float_un)); }
-#line 1655 "parser.tab.c"
+#line 1535 "parser.tab.c"
     break;
 
   case 12: /* expr: STRING  */
-#line 164 "parser.y"
+#line 165 "parser.y"
                                                                                                      { (yyval.expr_un)=create_const_string_expr(String, (yyvsp[0].string_un)); }
-#line 1661 "parser.tab.c"
+#line 1541 "parser.tab.c"
     break;
 
   case 13: /* expr: TRUE  */
-#line 165 "parser.y"
+#line 166 "parser.y"
                                                                                                      { (yyval.expr_un)=create_const_integer_expr(Boolean, 1); }
-#line 1667 "parser.tab.c"
+#line 1547 "parser.tab.c"
     break;
 
   case 14: /* expr: FALSE  */
-#line 166 "parser.y"
+#line 167 "parser.y"
                                                                                                      { (yyval.expr_un)=create_const_integer_expr(Boolean, 0); }
-#line 1673 "parser.tab.c"
+#line 1553 "parser.tab.c"
     break;
 
   case 15: /* expr: LOGICAL_NOT_OP new_lines_op expr  */
-#line 167 "parser.y"
+#line 168 "parser.y"
                                                                                                      { (yyval.expr_un)=create_op_expr(logical_not, (yyvsp[0].expr_un), 0); }
-#line 1679 "parser.tab.c"
+#line 1559 "parser.tab.c"
     break;
 
   case 16: /* expr: ARITHMETIC_PLUS_OP new_lines_op expr  */
-#line 168 "parser.y"
+#line 169 "parser.y"
                                                                                                      { (yyval.expr_un)=create_op_expr(unary_plus, (yyvsp[0].expr_un), 0); }
-#line 1685 "parser.tab.c"
+#line 1565 "parser.tab.c"
     break;
 
   case 17: /* expr: expr ARITHMETIC_POW_OP new_lines_op expr  */
-#line 169 "parser.y"
+#line 170 "parser.y"
                                                                                                      { (yyval.expr_un)=create_op_expr(pow_, (yyvsp[-3].expr_un), (yyvsp[0].expr_un)); }
-#line 1691 "parser.tab.c"
+#line 1571 "parser.tab.c"
     break;
 
   case 18: /* expr: ARITHMETIC_MINUS_OP new_lines_op expr  */
-#line 170 "parser.y"
+#line 171 "parser.y"
                                                                                                      { (yyval.expr_un)=create_op_expr(unary_minus, (yyvsp[0].expr_un), 0); }
-#line 1697 "parser.tab.c"
+#line 1577 "parser.tab.c"
     break;
 
   case 19: /* expr: expr ARITHMETIC_MUL_OP new_lines_op expr  */
-#line 171 "parser.y"
+#line 172 "parser.y"
                                                                                                      { (yyval.expr_un)=create_op_expr(mul, (yyvsp[-3].expr_un), (yyvsp[0].expr_un)); }
-#line 1703 "parser.tab.c"
+#line 1583 "parser.tab.c"
     break;
 
   case 20: /* expr: expr ARITHMETIC_DIV_OP new_lines_op expr  */
-#line 172 "parser.y"
+#line 173 "parser.y"
                                                                                                      { (yyval.expr_un)=create_op_expr(div_, (yyvsp[-3].expr_un), (yyvsp[0].expr_un)); }
-#line 1709 "parser.tab.c"
+#line 1589 "parser.tab.c"
     break;
 
   case 21: /* expr: expr ARITHMETIC_MOD_OP new_lines_op expr  */
-#line 173 "parser.y"
+#line 174 "parser.y"
                                                                                                      { (yyval.expr_un)=create_op_expr(mod, (yyvsp[-3].expr_un), (yyvsp[0].expr_un)); }
-#line 1715 "parser.tab.c"
+#line 1595 "parser.tab.c"
     break;
 
   case 22: /* expr: expr ARITHMETIC_PLUS_OP new_lines_op expr  */
-#line 174 "parser.y"
+#line 175 "parser.y"
                                                                                                      { (yyval.expr_un)=create_op_expr(plus, (yyvsp[-3].expr_un), (yyvsp[0].expr_un)); }
-#line 1721 "parser.tab.c"
+#line 1601 "parser.tab.c"
     break;
 
   case 23: /* expr: expr ARITHMETIC_MINUS_OP new_lines_op expr  */
-#line 175 "parser.y"
+#line 176 "parser.y"
                                                                                                      { (yyval.expr_un)=create_op_expr(minus, (yyvsp[-3].expr_un), (yyvsp[0].expr_un)); }
-#line 1727 "parser.tab.c"
+#line 1607 "parser.tab.c"
     break;
 
   case 24: /* expr: expr GREATER_OP new_lines_op expr  */
-#line 176 "parser.y"
+#line 177 "parser.y"
                                                                                                      { (yyval.expr_un)=create_op_expr(greater, (yyvsp[-3].expr_un), (yyvsp[0].expr_un)); }
-#line 1733 "parser.tab.c"
+#line 1613 "parser.tab.c"
     break;
 
   case 25: /* expr: expr LESS_OP new_lines_op expr  */
-#line 177 "parser.y"
+#line 178 "parser.y"
                                                                                                      { (yyval.expr_un)=create_op_expr(less, (yyvsp[-3].expr_un), (yyvsp[0].expr_un)); }
-#line 1739 "parser.tab.c"
+#line 1619 "parser.tab.c"
     break;
 
   case 26: /* expr: expr GREATER_OR_EQL_OP new_lines_op expr  */
-#line 178 "parser.y"
+#line 179 "parser.y"
                                                                                                      { (yyval.expr_un)=create_op_expr(greater_eql, (yyvsp[-3].expr_un), (yyvsp[0].expr_un)); }
-#line 1745 "parser.tab.c"
+#line 1625 "parser.tab.c"
     break;
 
   case 27: /* expr: expr LESS_OR_EQL_OP new_lines_op expr  */
-#line 179 "parser.y"
+#line 180 "parser.y"
                                                                                                      { (yyval.expr_un)=create_op_expr(less_eql, (yyvsp[-3].expr_un), (yyvsp[0].expr_un)); }
-#line 1751 "parser.tab.c"
+#line 1631 "parser.tab.c"
     break;
 
   case 28: /* expr: expr COMB_COMPRASION_OP new_lines_op expr  */
-#line 180 "parser.y"
+#line 181 "parser.y"
                                                                                                      { (yyval.expr_un)=create_op_expr(comb_comprassion, (yyvsp[-3].expr_un), (yyvsp[0].expr_un)); }
-#line 1757 "parser.tab.c"
+#line 1637 "parser.tab.c"
     break;
 
   case 29: /* expr: expr EQL_OP new_lines_op expr  */
-#line 181 "parser.y"
+#line 182 "parser.y"
                                                                                                      { (yyval.expr_un)=create_op_expr(equal, (yyvsp[-3].expr_un), (yyvsp[0].expr_un)); }
-#line 1763 "parser.tab.c"
+#line 1643 "parser.tab.c"
     break;
 
   case 30: /* expr: expr CASE_EQL_OP new_lines_op expr  */
-#line 182 "parser.y"
+#line 183 "parser.y"
                                                                                                      { (yyval.expr_un)=create_op_expr(case_equal, (yyvsp[-3].expr_un), (yyvsp[0].expr_un)); }
-#line 1769 "parser.tab.c"
+#line 1649 "parser.tab.c"
     break;
 
   case 31: /* expr: expr NOT_EQL_OP new_lines_op expr  */
-#line 183 "parser.y"
+#line 184 "parser.y"
                                                                                                      { (yyval.expr_un)=create_op_expr(not_equal, (yyvsp[-3].expr_un), (yyvsp[0].expr_un)); }
-#line 1775 "parser.tab.c"
+#line 1655 "parser.tab.c"
     break;
 
   case 32: /* expr: expr LOGICAL_AND_OP new_lines_op expr  */
-#line 184 "parser.y"
+#line 185 "parser.y"
                                                                                                      { (yyval.expr_un)=create_op_expr(logical_and, (yyvsp[-3].expr_un), (yyvsp[0].expr_un)); }
-#line 1781 "parser.tab.c"
+#line 1661 "parser.tab.c"
     break;
 
   case 33: /* expr: expr LOGICAL_OR_OP new_lines_op expr  */
-#line 185 "parser.y"
+#line 186 "parser.y"
                                                                                                      { (yyval.expr_un)=create_op_expr(logical_or, (yyvsp[-3].expr_un), (yyvsp[0].expr_un)); }
-#line 1787 "parser.tab.c"
+#line 1667 "parser.tab.c"
     break;
 
   case 34: /* expr: expr INCLUSIVE_RANGE_OP new_lines_op expr  */
-#line 186 "parser.y"
+#line 187 "parser.y"
                                                                                                      { (yyval.expr_un)=create_op_expr(inclusive_range, (yyvsp[-3].expr_un), (yyvsp[0].expr_un)); }
-#line 1793 "parser.tab.c"
+#line 1673 "parser.tab.c"
     break;
 
   case 35: /* expr: expr EXCLUSIVE_RANGE_OP new_lines_op expr  */
-#line 187 "parser.y"
+#line 188 "parser.y"
                                                                                                      { (yyval.expr_un)=create_op_expr(exclusive_range, (yyvsp[-3].expr_un), (yyvsp[0].expr_un)); }
-#line 1799 "parser.tab.c"
+#line 1679 "parser.tab.c"
     break;
 
   case 36: /* expr: expr ASSIGN_OP new_lines_op expr  */
-#line 188 "parser.y"
+#line 189 "parser.y"
                                                                                                      { (yyval.expr_un)=create_op_expr(assign, (yyvsp[-3].expr_un), (yyvsp[0].expr_un)); }
-#line 1805 "parser.tab.c"
+#line 1685 "parser.tab.c"
     break;
 
   case 37: /* expr: expr UNTIL new_lines_op expr  */
-#line 189 "parser.y"
+#line 190 "parser.y"
                                                                                                      { (yyval.expr_un)=create_op_expr(until_op, (yyvsp[-3].expr_un), (yyvsp[0].expr_un)); }
-#line 1811 "parser.tab.c"
+#line 1691 "parser.tab.c"
     break;
 
   case 38: /* expr: expr WHILE new_lines_op expr  */
-#line 190 "parser.y"
+#line 191 "parser.y"
                                                                                                      { (yyval.expr_un)=create_op_expr(while_op, (yyvsp[-3].expr_un), (yyvsp[0].expr_un)); }
-#line 1817 "parser.tab.c"
+#line 1697 "parser.tab.c"
     break;
 
   case 39: /* expr: DEFINED new_lines_op expr  */
-#line 191 "parser.y"
+#line 192 "parser.y"
                                                                                                      { (yyval.expr_un)=create_op_expr(defined, (yyvsp[0].expr_un), 0); }
-#line 1823 "parser.tab.c"
+#line 1703 "parser.tab.c"
     break;
 
   case 40: /* expr: NOT new_lines_op expr  */
-#line 192 "parser.y"
+#line 193 "parser.y"
                                                                                                      { (yyval.expr_un)=create_op_expr(not, (yyvsp[0].expr_un), 0); }
-#line 1829 "parser.tab.c"
+#line 1709 "parser.tab.c"
     break;
 
   case 41: /* expr: expr AND new_lines_op expr  */
-#line 193 "parser.y"
+#line 194 "parser.y"
                                                                                                      { (yyval.expr_un)=create_op_expr(and, (yyvsp[-3].expr_un), (yyvsp[0].expr_un)); }
-#line 1835 "parser.tab.c"
+#line 1715 "parser.tab.c"
     break;
 
   case 42: /* expr: expr OR new_lines_op expr  */
-#line 194 "parser.y"
+#line 195 "parser.y"
                                                                                                      { (yyval.expr_un)=create_op_expr(or, (yyvsp[-3].expr_un), (yyvsp[0].expr_un)); }
-#line 1841 "parser.tab.c"
+#line 1721 "parser.tab.c"
     break;
 
   case 43: /* expr: OPEN_ROUND_BRACKET new_lines_op expr_list CLOSE_ROUND_BRACKET  */
-#line 195 "parser.y"
+#line 196 "parser.y"
                                                                                                      { (yyval.expr_un)=(yyvsp[-1].expr_list_un); }
-#line 1847 "parser.tab.c"
+#line 1727 "parser.tab.c"
     break;
 
   case 44: /* expr: expr OPEN_SQUARE_BRACKET new_lines_op expr CLOSE_SQUARE_BRACKET  */
-#line 196 "parser.y"
+#line 197 "parser.y"
                                                                                                          { (yyval.expr_un)=create_op_expr(member_access, (yyvsp[-4].expr_un), (yyvsp[-1].expr_un)); }
-#line 1853 "parser.tab.c"
+#line 1733 "parser.tab.c"
     break;
 
   case 45: /* expr: OPEN_SQUARE_BRACKET new_lines_op expr_list CLOSE_SQUARE_BRACKET  */
-#line 197 "parser.y"
-                                                                                                     { (yyval.expr_un)=create_array_struct((yyvsp[-1].expr_list_un)); }
-#line 1859 "parser.tab.c"
-    break;
-
-  case 46: /* expr: VAR_METHOD_NAME OPEN_ROUND_BRACKET new_lines_op expr_list CLOSE_ROUND_BRACKET  */
 #line 198 "parser.y"
-                                                                                                     { (yyval.expr_un)=create_method_call_expr((yyvsp[-4].var_name_un), (yyvsp[-1].expr_list_un)); }
-#line 1865 "parser.tab.c"
+                                                                                                     { (yyval.expr_un)=create_array_struct((yyvsp[-1].expr_list_un)); }
+#line 1739 "parser.tab.c"
     break;
 
-  case 47: /* expr: VAR_METHOD_NAME  */
+  case 46: /* expr: VAR_OR_METHOD_NAME OPEN_ROUND_BRACKET new_lines_op expr_list CLOSE_ROUND_BRACKET  */
 #line 199 "parser.y"
-                                                                                                     { (yyval.expr_un)=create_const_string_expr(var_or_method, (yyvsp[0].var_name_un)); }
-#line 1871 "parser.tab.c"
+                                                                                                        { (yyval.expr_un)=create_method_call_expr((yyvsp[-4].var_name_un), (yyvsp[-1].expr_list_un)); }
+#line 1745 "parser.tab.c"
+    break;
+
+  case 47: /* expr: VAR_OR_METHOD_NAME  */
+#line 200 "parser.y"
+                                                                                                        { (yyval.expr_un)=create_const_string_expr(var_or_method, (yyvsp[0].var_name_un)); }
+#line 1751 "parser.tab.c"
     break;
 
   case 48: /* expr: INSTANCE_VAR_NAME  */
-#line 200 "parser.y"
-                                                                                                     { (yyval.expr_un)=create_const_string_expr(instance_var, (yyvsp[0].instance_var_name_un)); }
-#line 1877 "parser.tab.c"
-    break;
-
-  case 49: /* expr: expr DOT_SYMBOL new_lines_op VAR_METHOD_NAME  */
 #line 201 "parser.y"
-                                                                                                     { (yyval.expr_un)=create_field_call_expr((yyvsp[-3].expr_un), (yyvsp[0].var_name_un)); }
-#line 1883 "parser.tab.c"
+                                                                                                     { (yyval.expr_un)=create_const_string_expr(instance_var, (yyvsp[0].instance_var_name_un)); }
+#line 1757 "parser.tab.c"
     break;
 
-  case 50: /* expr: expr DOT_SYMBOL new_lines_op VAR_METHOD_NAME OPEN_ROUND_BRACKET expr_list CLOSE_ROUND_BRACKET  */
+  case 49: /* expr: expr DOT_SYMBOL new_lines_op VAR_OR_METHOD_NAME  */
 #line 202 "parser.y"
-                                                                                                     { (yyval.expr_un)=create_object_method_call_expr((yyvsp[-6].expr_un), (yyvsp[-3].var_name_un), (yyvsp[-1].expr_list_un)); }
-#line 1889 "parser.tab.c"
+                                                                                                        { (yyval.expr_un)=create_field_call_expr((yyvsp[-3].expr_un), (yyvsp[0].var_name_un)); }
+#line 1763 "parser.tab.c"
     break;
 
-  case 51: /* expr: SELF DOT_SYMBOL new_lines_op VAR_METHOD_NAME  */
+  case 50: /* expr: expr DOT_SYMBOL new_lines_op VAR_OR_METHOD_NAME OPEN_ROUND_BRACKET expr_list CLOSE_ROUND_BRACKET  */
 #line 203 "parser.y"
-                                                                                                     { (yyval.expr_un)=create_self_field_call_expr((yyvsp[0].var_name_un)); }
-#line 1895 "parser.tab.c"
+                                                                                                        { (yyval.expr_un)=create_object_method_call_expr((yyvsp[-6].expr_un), (yyvsp[-3].var_name_un), (yyvsp[-1].expr_list_un)); }
+#line 1769 "parser.tab.c"
     break;
 
-  case 52: /* expr: SELF DOT_SYMBOL new_lines_op VAR_METHOD_NAME OPEN_ROUND_BRACKET expr_list CLOSE_ROUND_BRACKET  */
+  case 51: /* expr: SELF DOT_SYMBOL new_lines_op VAR_OR_METHOD_NAME  */
 #line 204 "parser.y"
-                                                                                                     { (yyval.expr_un)=create_self_method_call_expr((yyvsp[-3].var_name_un), (yyvsp[-1].expr_list_un)); }
-#line 1901 "parser.tab.c"
+                                                                                                        { (yyval.expr_un)=create_self_field_call_expr((yyvsp[0].var_name_un)); }
+#line 1775 "parser.tab.c"
+    break;
+
+  case 52: /* expr: SELF DOT_SYMBOL new_lines_op VAR_OR_METHOD_NAME OPEN_ROUND_BRACKET expr_list CLOSE_ROUND_BRACKET  */
+#line 205 "parser.y"
+                                                                                                        { (yyval.expr_un)=create_self_method_call_expr((yyvsp[-3].var_name_un), (yyvsp[-1].expr_list_un)); }
+#line 1781 "parser.tab.c"
     break;
 
   case 63: /* stmt: expr stmt_ends  */
-#line 225 "parser.y"
+#line 226 "parser.y"
                                     { (yyval.stmt_un)=create_expr_stmt((yyvsp[-1].expr_un)); }
-#line 1907 "parser.tab.c"
+#line 1787 "parser.tab.c"
     break;
 
   case 64: /* stmt: if_stmt stmt_ends_op  */
-#line 226 "parser.y"
+#line 227 "parser.y"
                                     { (yyval.stmt_un)=(yyvsp[-1].stmt_un); }
-#line 1913 "parser.tab.c"
+#line 1793 "parser.tab.c"
     break;
 
   case 65: /* stmt: for_stmt stmt_ends_op  */
-#line 227 "parser.y"
+#line 228 "parser.y"
                                     { (yyval.stmt_un)=(yyvsp[-1].stmt_un); }
-#line 1919 "parser.tab.c"
+#line 1799 "parser.tab.c"
     break;
 
   case 66: /* stmt: while_stmt stmt_ends_op  */
-#line 228 "parser.y"
+#line 229 "parser.y"
                                     { (yyval.stmt_un)=(yyvsp[-1].stmt_un); }
-#line 1925 "parser.tab.c"
+#line 1805 "parser.tab.c"
     break;
 
   case 67: /* stmt: until_stmt stmt_ends_op  */
-#line 229 "parser.y"
+#line 230 "parser.y"
                                     { (yyval.stmt_un)=(yyvsp[-1].stmt_un); }
-#line 1931 "parser.tab.c"
+#line 1811 "parser.tab.c"
     break;
 
   case 68: /* stmt: RETURN expr stmt_ends  */
-#line 230 "parser.y"
+#line 231 "parser.y"
                                     { (yyval.stmt_un)=create_return_stmt((yyvsp[-1].expr_un)); }
-#line 1937 "parser.tab.c"
+#line 1817 "parser.tab.c"
     break;
 
   case 69: /* stmt: RETURN stmt_ends  */
-#line 231 "parser.y"
+#line 232 "parser.y"
                                     { (yyval.stmt_un)=create_return_stmt(0); }
-#line 1943 "parser.tab.c"
+#line 1823 "parser.tab.c"
     break;
 
   case 70: /* stmt_list_not_empty: stmt  */
-#line 234 "parser.y"
+#line 235 "parser.y"
                                     { (yyval.stmt_list_un)=create_stmt_list((yyvsp[0].stmt_un)); }
-#line 1949 "parser.tab.c"
+#line 1829 "parser.tab.c"
     break;
 
   case 71: /* stmt_list_not_empty: stmt_list_not_empty stmt  */
-#line 235 "parser.y"
+#line 236 "parser.y"
                                     { (yyval.stmt_list_un)=add_to_stmt_list((yyvsp[-1].stmt_list_un), (yyvsp[0].stmt_un)); }
-#line 1955 "parser.tab.c"
+#line 1835 "parser.tab.c"
     break;
 
   case 72: /* stmt_list: %empty  */
-#line 238 "parser.y"
+#line 239 "parser.y"
                                     { (yyval.stmt_list_un)=0; }
-#line 1961 "parser.tab.c"
+#line 1841 "parser.tab.c"
     break;
 
   case 73: /* stmt_list: stmt_list_not_empty  */
-#line 239 "parser.y"
+#line 240 "parser.y"
                                     { (yyval.stmt_list_un)=(yyvsp[0].stmt_list_un); }
-#line 1967 "parser.tab.c"
+#line 1847 "parser.tab.c"
     break;
 
   case 74: /* if_start_stmt: IF new_lines_op expr stmt_ends stmt_list  */
-#line 242 "parser.y"
+#line 243 "parser.y"
                                                                                             { (yyval.if_part_un)=create_if_part_struct((yyvsp[-2].expr_un), (yyvsp[0].stmt_list_un)); }
-#line 1973 "parser.tab.c"
+#line 1853 "parser.tab.c"
     break;
 
   case 75: /* if_start_stmt: IF new_lines_op expr SEMICOLON_SYMBOL new_lines_op THEN stmt_ends_op stmt_list  */
-#line 243 "parser.y"
+#line 244 "parser.y"
                                                                                             { (yyval.if_part_un)=create_if_part_struct((yyvsp[-5].expr_un), (yyvsp[0].stmt_list_un)); }
-#line 1979 "parser.tab.c"
+#line 1859 "parser.tab.c"
     break;
 
   case 76: /* if_start_stmt: IF new_lines_op expr new_lines_op THEN stmt_ends_op stmt_list  */
-#line 244 "parser.y"
+#line 245 "parser.y"
                                                                                             { (yyval.if_part_un)=create_if_part_struct((yyvsp[-4].expr_un), (yyvsp[0].stmt_list_un)); }
-#line 1985 "parser.tab.c"
+#line 1865 "parser.tab.c"
     break;
 
   case 77: /* elsif_stmt: ELSIF new_lines_op expr stmt_ends stmt_list  */
-#line 247 "parser.y"
+#line 248 "parser.y"
                                                                                             { (yyval.if_part_un)=create_if_part_struct((yyvsp[-2].expr_un), (yyvsp[0].stmt_list_un)); }
-#line 1991 "parser.tab.c"
+#line 1871 "parser.tab.c"
     break;
 
   case 78: /* elsif_stmt: ELSIF new_lines_op expr new_lines_op THEN stmt_ends_op stmt_list  */
-#line 248 "parser.y"
+#line 249 "parser.y"
                                                                                             { (yyval.if_part_un)=create_if_part_struct((yyvsp[-4].expr_un), (yyvsp[0].stmt_list_un)); }
-#line 1997 "parser.tab.c"
+#line 1877 "parser.tab.c"
     break;
 
   case 79: /* elsif_stmt: ELSIF new_lines_op expr SEMICOLON_SYMBOL new_lines_op THEN stmt_ends_op stmt_list  */
-#line 249 "parser.y"
+#line 250 "parser.y"
                                                                                             { (yyval.if_part_un)=create_if_part_struct((yyvsp[-5].expr_un), (yyvsp[0].stmt_list_un)); }
-#line 2003 "parser.tab.c"
+#line 1883 "parser.tab.c"
     break;
 
   case 80: /* elsif_stmt_list: elsif_stmt  */
-#line 252 "parser.y"
+#line 253 "parser.y"
                                                                                             { (yyval.elsif_list_un)=create_elsif_stmt_list((yyvsp[0].if_part_un)); }
-#line 2009 "parser.tab.c"
+#line 1889 "parser.tab.c"
     break;
 
   case 81: /* elsif_stmt_list: elsif_stmt_list elsif_stmt  */
-#line 253 "parser.y"
+#line 254 "parser.y"
                                                                                             { (yyval.elsif_list_un)=add_to_elsif_stmt_list((yyvsp[-1].elsif_list_un), (yyvsp[0].if_part_un)); }
-#line 2015 "parser.tab.c"
+#line 1895 "parser.tab.c"
     break;
 
   case 82: /* if_stmt: if_start_stmt END  */
-#line 256 "parser.y"
+#line 257 "parser.y"
                                                                                             { (yyval.stmt_un)=create_if_stmt((yyvsp[-1].if_part_un), 0, 0); }
-#line 2021 "parser.tab.c"
+#line 1901 "parser.tab.c"
     break;
 
   case 83: /* if_stmt: if_start_stmt ELSE stmt_ends_op stmt_list END  */
-#line 257 "parser.y"
+#line 258 "parser.y"
                                                                                             { (yyval.stmt_un)=create_if_stmt((yyvsp[-4].if_part_un), 0, (yyvsp[-1].stmt_list_un)); }
-#line 2027 "parser.tab.c"
+#line 1907 "parser.tab.c"
     break;
 
   case 84: /* if_stmt: if_start_stmt elsif_stmt_list END  */
-#line 258 "parser.y"
+#line 259 "parser.y"
                                                                                             { (yyval.stmt_un)=create_if_stmt((yyvsp[-2].if_part_un), (yyvsp[-1].elsif_list_un), 0); }
-#line 2033 "parser.tab.c"
+#line 1913 "parser.tab.c"
     break;
 
   case 85: /* if_stmt: if_start_stmt elsif_stmt_list ELSE stmt_ends_op stmt_list END  */
-#line 259 "parser.y"
+#line 260 "parser.y"
                                                                                             { (yyval.stmt_un)=create_if_stmt((yyvsp[-5].if_part_un), (yyvsp[-4].elsif_list_un), (yyvsp[-1].stmt_list_un)); }
-#line 2039 "parser.tab.c"
+#line 1919 "parser.tab.c"
     break;
 
-  case 86: /* for_stmt: FOR new_lines_op VAR_METHOD_NAME IN new_lines_op expr stmt_ends stmt_list END  */
-#line 262 "parser.y"
-                                                                                            { (yyval.stmt_un)=create_for_stmt((yyvsp[-6].var_name_un), (yyvsp[-3].expr_un), (yyvsp[-1].stmt_list_un)); }
-#line 2045 "parser.tab.c"
+  case 86: /* for_stmt: FOR new_lines_op VAR_OR_METHOD_NAME IN new_lines_op expr stmt_ends stmt_list END  */
+#line 263 "parser.y"
+                                                                                               { (yyval.stmt_un)=create_for_stmt((yyvsp[-6].var_name_un), (yyvsp[-3].expr_un), (yyvsp[-1].stmt_list_un)); }
+#line 1925 "parser.tab.c"
     break;
 
   case 87: /* for_stmt: FOR new_lines_op INSTANCE_VAR_NAME IN new_lines_op expr stmt_ends stmt_list END  */
-#line 263 "parser.y"
+#line 264 "parser.y"
                                                                                             { (yyval.stmt_un)=create_for_stmt((yyvsp[-6].instance_var_name_un), (yyvsp[-3].expr_un), (yyvsp[-1].stmt_list_un)); }
-#line 2051 "parser.tab.c"
+#line 1931 "parser.tab.c"
     break;
 
-  case 88: /* for_stmt: FOR new_lines_op VAR_METHOD_NAME IN new_lines_op expr DO stmt_ends_op stmt_list END  */
-#line 264 "parser.y"
-                                                                                                { (yyval.stmt_un)=create_for_stmt((yyvsp[-7].var_name_un), (yyvsp[-4].expr_un), (yyvsp[-1].stmt_list_un)); }
-#line 2057 "parser.tab.c"
+  case 88: /* for_stmt: FOR new_lines_op VAR_OR_METHOD_NAME IN new_lines_op expr DO stmt_ends_op stmt_list END  */
+#line 265 "parser.y"
+                                                                                                   { (yyval.stmt_un)=create_for_stmt((yyvsp[-7].var_name_un), (yyvsp[-4].expr_un), (yyvsp[-1].stmt_list_un)); }
+#line 1937 "parser.tab.c"
     break;
 
   case 89: /* for_stmt: FOR new_lines_op INSTANCE_VAR_NAME IN new_lines_op expr DO stmt_ends_op stmt_list END  */
-#line 265 "parser.y"
+#line 266 "parser.y"
                                                                                             { (yyval.stmt_un)=create_for_stmt((yyvsp[-7].instance_var_name_un), (yyvsp[-4].expr_un), (yyvsp[-1].stmt_list_un)); }
-#line 2063 "parser.tab.c"
+#line 1943 "parser.tab.c"
     break;
 
   case 90: /* while_stmt: WHILE new_lines_op expr stmt_ends stmt_list END  */
-#line 268 "parser.y"
+#line 269 "parser.y"
                                                                                             { (yyval.stmt_un)=create_while_stmt((yyvsp[-3].expr_un), (yyvsp[-1].stmt_list_un)); }
-#line 2069 "parser.tab.c"
+#line 1949 "parser.tab.c"
     break;
 
   case 91: /* while_stmt: WHILE new_lines_op expr DO stmt_ends_op stmt_list END  */
-#line 269 "parser.y"
+#line 270 "parser.y"
                                                                                                 { (yyval.stmt_un)=create_while_stmt((yyvsp[-4].expr_un), (yyvsp[-1].stmt_list_un)); }
-#line 2075 "parser.tab.c"
+#line 1955 "parser.tab.c"
     break;
 
   case 92: /* until_stmt: UNTIL new_lines_op expr stmt_ends stmt_list END  */
-#line 272 "parser.y"
+#line 273 "parser.y"
                                                                                             { (yyval.stmt_un)=create_until_stmt((yyvsp[-3].expr_un), (yyvsp[-1].stmt_list_un)); }
-#line 2081 "parser.tab.c"
+#line 1961 "parser.tab.c"
     break;
 
   case 93: /* until_stmt: UNTIL new_lines_op expr DO stmt_ends_op stmt_list END  */
-#line 273 "parser.y"
+#line 274 "parser.y"
                                                                                                 { (yyval.stmt_un)=create_until_stmt((yyvsp[-4].expr_un), (yyvsp[-1].stmt_list_un)); }
-#line 2087 "parser.tab.c"
+#line 1967 "parser.tab.c"
     break;
 
-  case 94: /* method_param: VAR_METHOD_NAME  */
-#line 276 "parser.y"
-                                                                                            { (yyval.method_param_un)=create_method_param_struct((yyvsp[0].var_name_un), 0); }
-#line 2093 "parser.tab.c"
-    break;
-
-  case 95: /* method_param: VAR_METHOD_NAME ASSIGN_OP expr  */
+  case 94: /* method_param: VAR_OR_METHOD_NAME  */
 #line 277 "parser.y"
-                                                                                                { (yyval.method_param_un)=create_method_param_struct((yyvsp[-2].var_name_un), (yyvsp[0].expr_un)); }
-#line 2099 "parser.tab.c"
+                                                                                               { (yyval.method_param_un)=create_method_param_struct((yyvsp[0].var_name_un), 0); }
+#line 1973 "parser.tab.c"
+    break;
+
+  case 95: /* method_param: VAR_OR_METHOD_NAME ASSIGN_OP expr  */
+#line 278 "parser.y"
+                                                                                                   { (yyval.method_param_un)=create_method_param_struct((yyvsp[-2].var_name_un), (yyvsp[0].expr_un)); }
+#line 1979 "parser.tab.c"
     break;
 
   case 96: /* method_params_list: %empty  */
-#line 280 "parser.y"
+#line 281 "parser.y"
                                                                                             { (yyval.method_param_list_un)=0; }
-#line 2105 "parser.tab.c"
+#line 1985 "parser.tab.c"
     break;
 
   case 97: /* method_params_list: method_params_list_not_empty  */
-#line 281 "parser.y"
+#line 282 "parser.y"
                                                                                                 { (yyval.method_param_list_un)=(yyvsp[0].method_param_list_un); }
-#line 2111 "parser.tab.c"
+#line 1991 "parser.tab.c"
     break;
 
   case 98: /* method_params_list_not_empty: method_param  */
-#line 284 "parser.y"
+#line 285 "parser.y"
                                                                                             { (yyval.method_param_list_un)=create_method_param_list((yyvsp[0].method_param_un)); }
-#line 2117 "parser.tab.c"
+#line 1997 "parser.tab.c"
     break;
 
   case 99: /* method_params_list_not_empty: method_params_list_not_empty COMMA_SYMBOL new_lines_op method_param  */
-#line 285 "parser.y"
+#line 286 "parser.y"
                                                                                                 { (yyval.method_param_list_un)=add_to_method_param_list((yyvsp[-3].method_param_list_un), (yyvsp[0].method_param_un)); }
-#line 2123 "parser.tab.c"
+#line 2003 "parser.tab.c"
     break;
 
-  case 100: /* def_method_stmt: DEF VAR_METHOD_NAME stmt_ends stmt_list END stmt_ends_op  */
-#line 288 "parser.y"
-                                                                                                                                { (yyval.def_method_un)=create_def_method_struct((yyvsp[-4].var_name_un), 0, (yyvsp[-2].stmt_list_un)); }
-#line 2129 "parser.tab.c"
-    break;
-
-  case 101: /* def_method_stmt: DEF VAR_METHOD_NAME OPEN_ROUND_BRACKET method_params_list CLOSE_ROUND_BRACKET stmt_ends_op stmt_list END stmt_ends_op  */
+  case 100: /* def_method_stmt: DEF VAR_OR_METHOD_NAME stmt_ends stmt_list END stmt_ends_op  */
 #line 289 "parser.y"
-                                                                                                                                { (yyval.def_method_un)=create_def_method_struct((yyvsp[-7].var_name_un), (yyvsp[-5].method_param_list_un), (yyvsp[-2].stmt_list_un)); }
-#line 2135 "parser.tab.c"
+                                                                                                                                   { (yyval.def_method_un)=create_def_method_struct((yyvsp[-4].var_name_un), 0, (yyvsp[-2].stmt_list_un)); }
+#line 2009 "parser.tab.c"
+    break;
+
+  case 101: /* def_method_stmt: DEF VAR_OR_METHOD_NAME OPEN_ROUND_BRACKET method_params_list CLOSE_ROUND_BRACKET stmt_ends_op stmt_list END stmt_ends_op  */
+#line 290 "parser.y"
+                                                                                                                                   { (yyval.def_method_un)=create_def_method_struct((yyvsp[-7].var_name_un), (yyvsp[-5].method_param_list_un), (yyvsp[-2].stmt_list_un)); }
+#line 2015 "parser.tab.c"
     break;
 
   case 102: /* expr_list: %empty  */
-#line 292 "parser.y"
+#line 293 "parser.y"
                                                                                                     { (yyval.expr_list_un)=0; }
-#line 2141 "parser.tab.c"
+#line 2021 "parser.tab.c"
     break;
 
   case 103: /* expr_list: expr_list_not_empty  */
-#line 293 "parser.y"
+#line 294 "parser.y"
                                                                                                         {(yyval.expr_list_un)=(yyvsp[0].expr_list_un); }
-#line 2147 "parser.tab.c"
+#line 2027 "parser.tab.c"
     break;
 
   case 104: /* expr_list_not_empty: expr new_lines_op  */
-#line 296 "parser.y"
+#line 297 "parser.y"
                                                                                                     { (yyval.expr_list_un)=create_expr_list((yyvsp[-1].expr_un)); }
-#line 2153 "parser.tab.c"
+#line 2033 "parser.tab.c"
     break;
 
   case 105: /* expr_list_not_empty: expr_list_not_empty COMMA_SYMBOL new_lines_op expr new_lines_op  */
-#line 297 "parser.y"
+#line 298 "parser.y"
                                                                                                         { (yyval.expr_list_un)=add_to_expr_list((yyvsp[-4].expr_list_un), (yyvsp[-1].expr_un)); }
-#line 2159 "parser.tab.c"
+#line 2039 "parser.tab.c"
     break;
 
   case 106: /* class_declaration: CLASS CLASS_NAME stmt_ends def_method_list_op END stmt_ends  */
-#line 300 "parser.y"
+#line 301 "parser.y"
                                                                                                     { (yyval.program_item_un)=create_class_declaration_program_item((yyvsp[-4].class_name_un), 0, (yyvsp[-2].def_method_list_un)); puts("class declaration"); }
-#line 2165 "parser.tab.c"
+#line 2045 "parser.tab.c"
     break;
 
   case 107: /* class_declaration: CLASS CLASS_NAME LESS_OP new_lines_op CLASS_NAME stmt_ends def_method_list_op END stmt_ends  */
-#line 301 "parser.y"
+#line 302 "parser.y"
                                                                                                     { (yyval.program_item_un)=create_class_declaration_program_item((yyvsp[-7].class_name_un), (yyvsp[-4].class_name_un), (yyvsp[-2].def_method_list_un)); puts("class declaration"); }
-#line 2171 "parser.tab.c"
+#line 2051 "parser.tab.c"
     break;
 
   case 108: /* def_method_list_op: %empty  */
-#line 305 "parser.y"
+#line 306 "parser.y"
                                                                                                     { (yyval.def_method_list_un)=0; }
-#line 2177 "parser.tab.c"
+#line 2057 "parser.tab.c"
     break;
 
   case 109: /* def_method_list_op: def_method_list  */
-#line 306 "parser.y"
+#line 307 "parser.y"
                                                                                                     { (yyval.def_method_list_un)=(yyvsp[0].def_method_list_un); }
-#line 2183 "parser.tab.c"
+#line 2063 "parser.tab.c"
     break;
 
   case 110: /* def_method_list: def_method_stmt  */
-#line 309 "parser.y"
+#line 310 "parser.y"
                                                                                                     { (yyval.def_method_list_un)=create_def_method_list((yyvsp[0].def_method_un)); }
-#line 2189 "parser.tab.c"
+#line 2069 "parser.tab.c"
     break;
 
   case 111: /* def_method_list: def_method_list def_method_stmt  */
-#line 310 "parser.y"
+#line 311 "parser.y"
                                                                                                     { (yyval.def_method_list_un)=add_to_def_method_list((yyvsp[-1].def_method_list_un), (yyvsp[0].def_method_un)); }
-#line 2195 "parser.tab.c"
+#line 2075 "parser.tab.c"
     break;
 
 
-#line 2199 "parser.tab.c"
+#line 2079 "parser.tab.c"
 
       default: break;
     }
@@ -2388,10 +2268,14 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 313 "parser.y"
+#line 314 "parser.y"
 
 
-void yyerror(const char* s) {
-	fprintf(stderr, "Parse error: %s\n", s);
-	exit(1);
+// void yyerror(const char* s) {
+// 	fprintf(stderr, "Parse error: %s\n", s);
+// 	exit(1);
+// }
+
+void yyerror(const char* message) {
+    fprintf(stderr, message);
 }

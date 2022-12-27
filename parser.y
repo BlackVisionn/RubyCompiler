@@ -118,9 +118,10 @@ void yyerror(const char* s);
 %token <int_un> INTEGER_NUMBER
 %token <float_un> FLOAT_NUMBER
 
-%token <var_name_un> VAR_METHOD_NAME
+%token <var_name_un> VAR_OR_METHOD_NAME
 %token <instance_var_name_un> INSTANCE_VAR_NAME
 %token <class_name_un> CLASS_NAME
+%token <class_var_name_un> CLASS_VAR_NAME
 
 
 %start program
@@ -195,13 +196,13 @@ expr: INTEGER_NUMBER                                                            
     | OPEN_ROUND_BRACKET new_lines_op expr_list CLOSE_ROUND_BRACKET                                  { $$=$3; }
 	| expr OPEN_SQUARE_BRACKET new_lines_op expr CLOSE_SQUARE_BRACKET                                { $$=create_op_expr(member_access, $1, $4); }
     | OPEN_SQUARE_BRACKET new_lines_op expr_list CLOSE_SQUARE_BRACKET                                { $$=create_array_struct($3); }
-    | VAR_METHOD_NAME OPEN_ROUND_BRACKET new_lines_op expr_list CLOSE_ROUND_BRACKET                  { $$=create_method_call_expr($1, $4); }
-    | VAR_METHOD_NAME                                                                                { $$=create_const_string_expr(var_or_method, $1); }     
+    | VAR_OR_METHOD_NAME OPEN_ROUND_BRACKET new_lines_op expr_list CLOSE_ROUND_BRACKET                  { $$=create_method_call_expr($1, $4); }
+    | VAR_OR_METHOD_NAME                                                                                { $$=create_const_string_expr(var_or_method, $1); }     
     | INSTANCE_VAR_NAME                                                                              { $$=create_const_string_expr(instance_var, $1); }
-    | expr DOT_SYMBOL new_lines_op VAR_METHOD_NAME                                                   { $$=create_field_call_expr($1, $4); }
-    | expr DOT_SYMBOL new_lines_op VAR_METHOD_NAME OPEN_ROUND_BRACKET expr_list CLOSE_ROUND_BRACKET  { $$=create_object_method_call_expr($1, $4, $6); }
-    | SELF DOT_SYMBOL new_lines_op VAR_METHOD_NAME                                                   { $$=create_self_field_call_expr($4); }
-    | SELF DOT_SYMBOL new_lines_op VAR_METHOD_NAME OPEN_ROUND_BRACKET expr_list CLOSE_ROUND_BRACKET  { $$=create_self_method_call_expr($4, $6); }
+    | expr DOT_SYMBOL new_lines_op VAR_OR_METHOD_NAME                                                   { $$=create_field_call_expr($1, $4); }
+    | expr DOT_SYMBOL new_lines_op VAR_OR_METHOD_NAME OPEN_ROUND_BRACKET expr_list CLOSE_ROUND_BRACKET  { $$=create_object_method_call_expr($1, $4, $6); }
+    | SELF DOT_SYMBOL new_lines_op VAR_OR_METHOD_NAME                                                   { $$=create_self_field_call_expr($4); }
+    | SELF DOT_SYMBOL new_lines_op VAR_OR_METHOD_NAME OPEN_ROUND_BRACKET expr_list CLOSE_ROUND_BRACKET  { $$=create_self_method_call_expr($4, $6); }
     ;
 
 stmt_ends: SEMICOLON_SYMBOL
@@ -259,9 +260,9 @@ if_stmt: if_start_stmt END                                                      
     | if_start_stmt elsif_stmt_list ELSE stmt_ends_op stmt_list END                         { $$=create_if_stmt($1, $2, $5); }
     ;
 
-for_stmt: FOR new_lines_op VAR_METHOD_NAME IN new_lines_op expr stmt_ends stmt_list END     { $$=create_for_stmt($3, $6, $8); } 
+for_stmt: FOR new_lines_op VAR_OR_METHOD_NAME IN new_lines_op expr stmt_ends stmt_list END     { $$=create_for_stmt($3, $6, $8); } 
     | FOR new_lines_op INSTANCE_VAR_NAME IN new_lines_op expr stmt_ends stmt_list END       { $$=create_for_stmt($3, $6, $8); } 
-	| FOR new_lines_op VAR_METHOD_NAME IN new_lines_op expr DO stmt_ends_op stmt_list END   { $$=create_for_stmt($3, $6, $9); } 
+	| FOR new_lines_op VAR_OR_METHOD_NAME IN new_lines_op expr DO stmt_ends_op stmt_list END   { $$=create_for_stmt($3, $6, $9); } 
     | FOR new_lines_op INSTANCE_VAR_NAME IN new_lines_op expr DO stmt_ends_op stmt_list END { $$=create_for_stmt($3, $6, $9); }
 	;
 
@@ -273,8 +274,8 @@ until_stmt: UNTIL new_lines_op expr stmt_ends stmt_list END                     
 	| UNTIL new_lines_op expr DO stmt_ends_op stmt_list END                                 { $$=create_until_stmt($3, $6); }
 	;
 
-method_param: VAR_METHOD_NAME                                                               { $$=create_method_param_struct($1, 0); }
-	| VAR_METHOD_NAME ASSIGN_OP expr                                                        { $$=create_method_param_struct($1, $3); }
+method_param: VAR_OR_METHOD_NAME                                                               { $$=create_method_param_struct($1, 0); }
+	| VAR_OR_METHOD_NAME ASSIGN_OP expr                                                        { $$=create_method_param_struct($1, $3); }
 	;
 
 method_params_list: /* empty */                                                             { $$=0; }
@@ -285,8 +286,8 @@ method_params_list_not_empty: method_param                                      
 	| method_params_list_not_empty COMMA_SYMBOL new_lines_op method_param                   { $$=add_to_method_param_list($1, $4); }
 	;
 
-def_method_stmt: DEF VAR_METHOD_NAME stmt_ends stmt_list END stmt_ends_op                                                       { $$=create_def_method_struct($2, 0, $4); }
-    | DEF VAR_METHOD_NAME OPEN_ROUND_BRACKET method_params_list CLOSE_ROUND_BRACKET stmt_ends_op stmt_list END stmt_ends_op     { $$=create_def_method_struct($2, $4, $7); }
+def_method_stmt: DEF VAR_OR_METHOD_NAME stmt_ends stmt_list END stmt_ends_op                                                       { $$=create_def_method_struct($2, 0, $4); }
+    | DEF VAR_OR_METHOD_NAME OPEN_ROUND_BRACKET method_params_list CLOSE_ROUND_BRACKET stmt_ends_op stmt_list END stmt_ends_op     { $$=create_def_method_struct($2, $4, $7); }
     ;
 
 expr_list: /* empty */                                                                              { $$=0; }
@@ -312,7 +313,11 @@ def_method_list: def_method_stmt                                                
 
 %%
 
-void yyerror(const char* s) {
-	fprintf(stderr, "Parse error: %s\n", s);
-	exit(1);
+// void yyerror(const char* s) {
+// 	fprintf(stderr, "Parse error: %s\n", s);
+// 	exit(1);
+// }
+
+void yyerror(const char* message) {
+    fprintf(stderr, message);
 }

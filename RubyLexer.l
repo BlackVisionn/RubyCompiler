@@ -84,7 +84,6 @@ while           { return WHILE; }
 ".."        { return INCLUSIVE_RANGE_OP; }
 "..."       { return EXCLUSIVE_RANGE_OP; }
 
-"?"         { return QUESTION_SYMBOL; }
 "."         { return DOT_SYMBOL; }
 ","         { return COMMA_SYMBOL; }
 ";"         { return SEMICOLON_SYMBOL; }
