@@ -1,5 +1,6 @@
 Terminals unused in grammar
 
+    SUPER
     OPEN_CURLY_BRACKET
     CLOSE_CURLY_BRACKET
     COMMERCIAL_AT
@@ -24,7 +25,7 @@ Grammar
 
     9 expr: INTEGER_NUMBER
    10     | FLOAT_NUMBER
-   11     | STRING
+   11     | STR
    12     | TRUE
    13     | FALSE
    14     | LOGICAL_NOT_OP new_lines_op expr
@@ -173,141 +174,142 @@ Terminals, with rules where they appear
     OR (272) 41
     RETURN (273) 68 69
     SELF (274) 50 51
-    THEN (275) 76 77 79 80
-    TRUE (276) 12
-    UNTIL (277) 36 93 94
-    WHILE (278) 37 91 92
-    ARITHMETIC_PLUS_OP (279) 15 21
-    ARITHMETIC_MINUS_OP (280) 17 22
-    ARITHMETIC_MUL_OP (281) 18
-    ARITHMETIC_DIV_OP (282) 19
-    ARITHMETIC_MOD_OP (283) 20
-    ARITHMETIC_POW_OP (284) 16
-    EQL_OP (285) 28
-    NOT_EQL_OP (286) 30
-    GREATER_OP (287) 23
-    LESS_OP (288) 24 108
-    GREATER_OR_EQL_OP (289) 25
-    LESS_OR_EQL_OP (290) 26
-    COMB_COMPRASION_OP (291) 27
-    CASE_EQL_OP (292) 29
-    ASSIGN_OP (293) 35 96
-    LOGICAL_AND_OP (294) 31
-    LOGICAL_OR_OP (295) 32
-    LOGICAL_NOT_OP (296) 14
-    INCLUSIVE_RANGE_OP (297) 33
-    EXCLUSIVE_RANGE_OP (298) 34
-    OPEN_ROUND_BRACKET (299) 42 45 49 51 102
-    CLOSE_ROUND_BRACKET (300) 42 45 49 51 102
-    OPEN_CURLY_BRACKET (301)
-    CLOSE_CURLY_BRACKET (302)
-    OPEN_SQUARE_BRACKET (303) 43 44
-    CLOSE_SQUARE_BRACKET (304) 43 44
-    COMMERCIAL_AT (305)
-    DOT_SYMBOL (306) 48 49 50 51
-    COMMA_SYMBOL (307) 100 106
-    SEMICOLON_SYMBOL (308) 52 54 76 80
-    NEW_LINE_SYMBOL (309) 53 55 58 59
-    STRING <string_un> (310) 11
-    INTEGER_NUMBER <int_un> (311) 9
-    FLOAT_NUMBER <float_un> (312) 10
-    VAR_OR_METHOD_NAME <var_name_un> (313) 45 46 48 49 50 51 87 89 95 96 101 102
-    INSTANCE_VAR_NAME <instance_var_name_un> (314) 47 88 90
-    CLASS_NAME <class_name_un> (315) 107 108
-    CLASS_VAR_NAME <class_var_name_un> (316)
-    UNARY_MINUS (317)
-    UNARY_PLUS (318)
+    SUPER (275)
+    THEN (276) 76 77 79 80
+    TRUE (277) 12
+    UNTIL (278) 36 93 94
+    WHILE (279) 37 91 92
+    ARITHMETIC_PLUS_OP (280) 15 21
+    ARITHMETIC_MINUS_OP (281) 17 22
+    ARITHMETIC_MUL_OP (282) 18
+    ARITHMETIC_DIV_OP (283) 19
+    ARITHMETIC_MOD_OP (284) 20
+    ARITHMETIC_POW_OP (285) 16
+    EQL_OP (286) 28
+    NOT_EQL_OP (287) 30
+    GREATER_OP (288) 23
+    LESS_OP (289) 24 108
+    GREATER_OR_EQL_OP (290) 25
+    LESS_OR_EQL_OP (291) 26
+    COMB_COMPRASION_OP (292) 27
+    CASE_EQL_OP (293) 29
+    ASSIGN_OP (294) 35 96
+    LOGICAL_AND_OP (295) 31
+    LOGICAL_OR_OP (296) 32
+    LOGICAL_NOT_OP (297) 14
+    INCLUSIVE_RANGE_OP (298) 33
+    EXCLUSIVE_RANGE_OP (299) 34
+    OPEN_ROUND_BRACKET (300) 42 45 49 51 102
+    CLOSE_ROUND_BRACKET (301) 42 45 49 51 102
+    OPEN_CURLY_BRACKET (302)
+    CLOSE_CURLY_BRACKET (303)
+    OPEN_SQUARE_BRACKET (304) 43 44
+    CLOSE_SQUARE_BRACKET (305) 43 44
+    COMMERCIAL_AT (306)
+    DOT_SYMBOL (307) 48 49 50 51
+    COMMA_SYMBOL (308) 100 106
+    SEMICOLON_SYMBOL (309) 52 54 76 80
+    NEW_LINE_SYMBOL (310) 53 55 58 59
+    STR <string_un> (311) 11
+    INTEGER_NUMBER <int_un> (312) 9
+    FLOAT_NUMBER <float_un> (313) 10
+    VAR_OR_METHOD_NAME <var_name_un> (314) 45 46 48 49 50 51 87 89 95 96 101 102
+    INSTANCE_VAR_NAME <instance_var_name_un> (315) 47 88 90
+    CLASS_NAME <class_name_un> (316) 107 108
+    CLASS_VAR_NAME <class_var_name_un> (317)
+    UNARY_MINUS (318)
+    UNARY_PLUS (319)
 
 
 Nonterminals, with rules where they appear
 
-    $accept (64)
+    $accept (65)
         on left: 0
-    program <program_un> (65)
+    program <program_un> (66)
         on left: 1
         on right: 0
-    program_item <program_item_un> (66)
+    program_item <program_item_un> (67)
         on left: 2 3 4
         on right: 5 6
-    program_items_list_not_empty <program_item_list_un> (67)
+    program_items_list_not_empty <program_item_list_un> (68)
         on left: 5 6
         on right: 6 8
-    program_items_list <program_item_list_un> (68)
+    program_items_list <program_item_list_un> (69)
         on left: 7 8
         on right: 1
-    expr <expr_un> (69)
+    expr <expr_un> (70)
         on left: 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51
         on right: 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 43 48 49 62 68 75 76 77 78 79 80 87 88 89 90 91 92 93 94 96 105 106
-    stmt_ends (70)
+    stmt_ends (71)
         on left: 52 53 54 55
         on right: 54 55 61 62 68 69 75 78 87 88 91 93 101 107 108
-    new_lines_op (71)
+    new_lines_op (72)
         on left: 56 57
         on right: 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 48 49 50 51 75 76 77 78 79 80 87 88 89 90 91 92 93 94 100 105 106 108
-    new_lines (72)
+    new_lines (73)
         on left: 58 59
         on right: 57 59
-    stmt_ends_op (73)
+    stmt_ends_op (74)
         on left: 60 61
         on right: 63 64 65 66 67 74 76 77 79 80 84 86 89 90 92 94 101 102
-    stmt <stmt_un> (74)
+    stmt <stmt_un> (75)
         on left: 62 63 64 65 66 67 68 69
         on right: 2 70 71
-    stmt_list_not_empty <stmt_list_un> (75)
+    stmt_list_not_empty <stmt_list_un> (76)
         on left: 70 71
         on right: 71 73
-    stmt_list <stmt_list_un> (76)
+    stmt_list <stmt_list_un> (77)
         on left: 72 73
         on right: 74 75 76 77 78 79 80 84 86 87 88 89 90 91 92 93 94 101 102
-    stmt_block <block_un> (77)
+    stmt_block <block_un> (78)
         on left: 74
         on right: 63
-    if_start_stmt <if_part_un> (78)
+    if_start_stmt <if_part_un> (79)
         on left: 75 76 77
         on right: 83 84 85 86
-    elsif_stmt <if_part_un> (79)
+    elsif_stmt <if_part_un> (80)
         on left: 78 79 80
         on right: 81 82
-    elsif_stmt_list <elsif_list_un> (80)
+    elsif_stmt_list <elsif_list_un> (81)
         on left: 81 82
         on right: 82 85 86
-    if_stmt <stmt_un> (81)
+    if_stmt <stmt_un> (82)
         on left: 83 84 85 86
         on right: 64
-    for_stmt <stmt_un> (82)
+    for_stmt <stmt_un> (83)
         on left: 87 88 89 90
         on right: 65
-    while_stmt <stmt_un> (83)
+    while_stmt <stmt_un> (84)
         on left: 91 92
         on right: 66
-    until_stmt <stmt_un> (84)
+    until_stmt <stmt_un> (85)
         on left: 93 94
         on right: 67
-    method_param <method_param_un> (85)
+    method_param <method_param_un> (86)
         on left: 95 96
         on right: 99 100
-    method_params_list <method_param_list_un> (86)
+    method_params_list <method_param_list_un> (87)
         on left: 97 98
         on right: 102
-    method_params_list_not_empty <method_param_list_un> (87)
+    method_params_list_not_empty <method_param_list_un> (88)
         on left: 99 100
         on right: 98 100
-    def_method_stmt <def_method_un> (88)
+    def_method_stmt <def_method_un> (89)
         on left: 101 102
         on right: 3 111 112
-    expr_list <expr_list_un> (89)
+    expr_list <expr_list_un> (90)
         on left: 103 104
         on right: 42 44 45 49 51
-    expr_list_not_empty <expr_list_un> (90)
+    expr_list_not_empty <expr_list_un> (91)
         on left: 105 106
         on right: 104 106
-    class_declaration <program_item_un> (91)
+    class_declaration <program_item_un> (92)
         on left: 107 108
         on right: 4
-    def_method_list_op <def_method_list_un> (92)
+    def_method_list_op <def_method_list_un> (93)
         on left: 109 110
         on right: 107 108
-    def_method_list <def_method_list_un> (93)
+    def_method_list <def_method_list_un> (94)
         on left: 111 112
         on right: 110 112
 
@@ -334,7 +336,7 @@ State 0
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -464,7 +466,7 @@ State 9
     OPEN_SQUARE_BRACKET  shift, and go to state 18
     SEMICOLON_SYMBOL     shift, and go to state 38
     NEW_LINE_SYMBOL      shift, and go to state 39
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -577,7 +579,7 @@ State 18
 
 State 19
 
-   11 expr: STRING .
+   11 expr: STR .
 
     $default  reduce using rule 11 (expr)
 
@@ -650,7 +652,7 @@ State 26
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -893,7 +895,7 @@ State 41
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -963,7 +965,7 @@ State 45
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -995,7 +997,7 @@ State 47
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -1029,7 +1031,7 @@ State 49
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -1134,7 +1136,7 @@ State 53
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -1158,7 +1160,7 @@ State 54
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -1181,7 +1183,7 @@ State 55
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -1204,7 +1206,7 @@ State 56
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -1227,7 +1229,7 @@ State 57
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -1250,7 +1252,7 @@ State 58
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -1277,7 +1279,7 @@ State 59
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -1755,7 +1757,7 @@ State 102
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -1838,7 +1840,7 @@ State 107
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -2411,7 +2413,7 @@ State 125
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -2438,7 +2440,7 @@ State 126
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -2461,7 +2463,7 @@ State 127
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -2484,7 +2486,7 @@ State 128
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -2507,7 +2509,7 @@ State 129
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -2530,7 +2532,7 @@ State 130
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -2553,7 +2555,7 @@ State 131
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -2576,7 +2578,7 @@ State 132
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -2599,7 +2601,7 @@ State 133
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -2622,7 +2624,7 @@ State 134
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -2645,7 +2647,7 @@ State 135
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -2668,7 +2670,7 @@ State 136
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -2691,7 +2693,7 @@ State 137
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -2714,7 +2716,7 @@ State 138
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -2737,7 +2739,7 @@ State 139
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -2760,7 +2762,7 @@ State 140
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -2783,7 +2785,7 @@ State 141
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -2806,7 +2808,7 @@ State 142
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -2829,7 +2831,7 @@ State 143
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -2852,7 +2854,7 @@ State 144
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -2875,7 +2877,7 @@ State 145
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -2898,7 +2900,7 @@ State 146
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -2921,7 +2923,7 @@ State 147
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -2944,7 +2946,7 @@ State 148
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -2967,7 +2969,7 @@ State 149
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -3004,7 +3006,7 @@ State 151
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -3040,7 +3042,7 @@ State 152
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -3218,7 +3220,7 @@ State 169
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -3314,7 +3316,7 @@ State 175
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -3367,7 +3369,7 @@ State 177
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -4679,7 +4681,7 @@ State 210
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -4740,7 +4742,7 @@ State 214
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -4829,7 +4831,7 @@ State 221
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -4853,7 +4855,7 @@ State 222
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -4876,7 +4878,7 @@ State 223
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -4909,7 +4911,7 @@ State 224
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -4956,7 +4958,7 @@ State 226
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -4997,7 +4999,7 @@ State 228
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -5034,7 +5036,7 @@ State 231
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -5091,7 +5093,7 @@ State 234
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -5224,7 +5226,7 @@ State 240
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -5293,7 +5295,7 @@ State 244
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -5619,7 +5621,7 @@ State 261
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -5679,7 +5681,7 @@ State 264
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -5732,7 +5734,7 @@ State 266
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -5820,7 +5822,7 @@ State 273
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -5890,7 +5892,7 @@ State 277
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -5937,7 +5939,7 @@ State 279
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22
@@ -5984,7 +5986,7 @@ State 281
     LOGICAL_NOT_OP       shift, and go to state 16
     OPEN_ROUND_BRACKET   shift, and go to state 17
     OPEN_SQUARE_BRACKET  shift, and go to state 18
-    STRING               shift, and go to state 19
+    STR                  shift, and go to state 19
     INTEGER_NUMBER       shift, and go to state 20
     FLOAT_NUMBER         shift, and go to state 21
     VAR_OR_METHOD_NAME   shift, and go to state 22

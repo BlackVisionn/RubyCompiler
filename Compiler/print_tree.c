@@ -305,41 +305,6 @@ void PrintExpr(struct expr_struct* expr, FILE* file) {
             fprintf(file, "Id%p->Id%p\n", expr, expr->left);
             fprintf(file, "Id%p->Id%p\n", expr, expr->right);
             break;
-        case bin_left_shift:
-            fprintf(file, "Id%p [label=\"<<\"]\n", expr);
-            PrintExpr(expr->left, file);
-            PrintExpr(expr->right, file);
-            fprintf(file, "Id%p->Id%p\n", expr, expr->left);
-            fprintf(file, "Id%p->Id%p\n", expr, expr->right);
-            break;
-        case bin_right_shift:
-            fprintf(file, "Id%p [label=\">>\"]\n", expr);
-            PrintExpr(expr->left, file);
-            PrintExpr(expr->right, file);
-            fprintf(file, "Id%p->Id%p\n", expr, expr->left);
-            fprintf(file, "Id%p->Id%p\n", expr, expr->right);
-            break;
-        case bin_and_op:
-            fprintf(file, "Id%p [label=\"&\"]\n", expr);
-            PrintExpr(expr->left, file);
-            PrintExpr(expr->right, file);
-            fprintf(file, "Id%p->Id%p\n", expr, expr->left);
-            fprintf(file, "Id%p->Id%p\n", expr, expr->right);
-            break;
-        case bin_or_op:
-            fprintf(file, "Id%p [label=\"|\"]\n", expr);
-            PrintExpr(expr->left, file);
-            PrintExpr(expr->right, file);
-            fprintf(file, "Id%p->Id%p\n", expr, expr->left);
-            fprintf(file, "Id%p->Id%p\n", expr, expr->right);
-            break;
-        case bin_xor_op:
-            fprintf(file, "Id%p [label=\"^\"]\n", expr);
-            PrintExpr(expr->left, file);
-            PrintExpr(expr->right, file);
-            fprintf(file, "Id%p->Id%p\n", expr, expr->left);
-            fprintf(file, "Id%p->Id%p\n", expr, expr->right);
-            break;
         case greater:
             fprintf(file, "Id%p [label=\">\"]\n", expr);
             PrintExpr(expr->left, file);

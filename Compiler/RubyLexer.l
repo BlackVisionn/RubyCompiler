@@ -55,6 +55,7 @@ not             { return NOT; }
 or              { return OR; }
 return          { return RETURN; }
 self            { return SELF; }
+self            { return SUPER; }
 then            { return THEN; }
 true            { return TRUE; }
 until           { return UNTIL; }
@@ -148,7 +149,7 @@ while           { return WHILE; }
                 yylval.string_un=(char *)malloc(strlen(string)+1);
                 strcpy(yylval.string_un, string);
                 BEGIN(INITIAL);
-                return STRING;
+                return STR;
             }
 
 #.*                         { printf("Single-line comment: %s\n", yytext + 1); }

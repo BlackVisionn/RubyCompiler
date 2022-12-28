@@ -373,8 +373,8 @@ static void yynoreturn yy_fatal_error ( const char* msg  );
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
-#define YY_NUM_RULES 93
-#define YY_END_OF_BUFFER 94
+#define YY_NUM_RULES 94
+#define YY_END_OF_BUFFER 95
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -384,36 +384,36 @@ struct yy_trans_info
 	};
 static const flex_int16_t yy_accept[278] =
     {   0,
-        0,    0,   75,   75,    0,    0,   94,   93,   45,   39,
-       53,   72,   26,   93,   46,   47,   24,   22,   43,   23,
-       42,   25,   76,   76,   44,   31,   36,   30,   52,   92,
-       50,   51,   89,   89,   89,   89,   89,   89,   89,   89,
-       89,   89,   89,   89,   89,   89,   89,   89,   48,   93,
-       49,   36,   75,   75,   55,   71,   56,   93,   56,   29,
-       72,   37,   27,   40,   87,    0,    0,   80,    0,    0,
-        0,    0,    0,    0,    0,   76,   76,   88,   77,   33,
-       28,   32,    0,   90,   92,    0,   89,   89,   89,   89,
-       89,   89,    6,   89,   89,   89,   89,    7,   13,   89,
+        0,    0,   76,   76,    0,    0,   95,   94,   46,   40,
+       54,   73,   27,   94,   47,   48,   25,   23,   44,   24,
+       43,   26,   77,   77,   45,   32,   37,   31,   53,   93,
+       51,   52,   90,   90,   90,   90,   90,   90,   90,   90,
+       90,   90,   90,   90,   90,   90,   90,   90,   49,   94,
+       50,   37,   76,   76,   56,   72,   57,   94,   57,   30,
+       73,   38,   28,   41,   88,    0,    0,   81,    0,    0,
+        0,    0,    0,    0,    0,   77,   77,   89,   78,   34,
+       29,   33,    0,   91,   93,    0,   90,   90,   90,   90,
+       90,   90,    6,   90,   90,   90,   90,    7,   13,   90,
 
-       15,   89,   89,   89,   89,   89,   89,   38,    0,   75,
-       75,   55,   54,   67,   68,   66,   58,   59,   64,   62,
-       57,   63,   65,   60,   61,   70,   41,   87,   87,   87,
-       86,   80,   81,   84,    0,   78,    0,    0,   86,    0,
-       82,    0,   81,    0,    0,    0,    0,    0,   86,   88,
-        0,    0,   77,   88,   88,   86,    0,   76,   77,   34,
-       35,   91,   90,    0,    1,   89,   89,    4,   89,   10,
-       89,   12,   14,   89,   89,   89,   89,   89,   89,    0,
-       75,   68,   70,   69,    0,   87,    0,   80,   81,   84,
-       85,   85,   78,   79,   79,   86,    0,   82,   83,   83,
+       15,   90,   90,   90,   90,   90,   90,   39,    0,   76,
+       76,   56,   55,   68,   69,   67,   59,   60,   65,   63,
+       58,   64,   66,   61,   62,   71,   42,   88,   88,   88,
+       87,   81,   82,   85,    0,   79,    0,    0,   87,    0,
+       83,    0,   82,    0,    0,    0,    0,    0,   87,   89,
+        0,    0,   78,   89,   89,   87,    0,   77,   78,   35,
+       36,   92,   91,    0,    1,   90,   90,    4,   90,   10,
+       90,   12,   14,   90,   90,   90,   90,   90,   90,    0,
+       76,   69,   71,   70,    0,   88,    0,   81,   82,   85,
+       86,   86,   79,   80,   80,   87,    0,   83,   84,   84,
 
-       81,    0,    0,    0,   86,   86,   87,   88,   87,   86,
-       77,   88,   86,   86,   88,   77,   91,    0,   89,   89,
-       89,    8,   89,   89,   89,   17,   18,   19,   89,   89,
-        0,   74,   68,   69,    0,   87,   86,   84,   85,   85,
-       78,   79,   79,   86,   82,   83,   83,    0,   86,   87,
-       88,   88,   87,   87,    0,   86,   86,    2,    3,   89,
-        9,   11,   89,   20,   21,    0,    0,   87,   87,   86,
-       89,   16,   73,   87,   89,    5,    0
+       82,    0,    0,    0,   87,   87,   88,   89,   88,   87,
+       78,   89,   87,   87,   89,   78,   92,    0,   90,   90,
+       90,    8,   90,   90,   90,   17,   19,   20,   90,   90,
+        0,   75,   69,   70,    0,   88,   87,   85,   86,   86,
+       79,   80,   80,   87,   83,   84,   84,    0,   87,   88,
+       89,   89,   88,   88,    0,   87,   87,    2,    3,   90,
+        9,   11,   90,   21,   22,    0,    0,   88,   88,   87,
+       90,   16,   74,   88,   90,    5,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -823,13 +823,13 @@ static const flex_int16_t yy_chk[1286] =
     } ;
 
 /* Table of booleans, true if rule could match eol. */
-static const flex_int32_t yy_rule_can_match_eol[94] =
+static const flex_int32_t yy_rule_can_match_eol[95] =
     {   0,
 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-    0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+    0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,     };
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,     };
 
 static yy_state_type yy_last_accepting_state;
 static char *yy_last_accepting_cpos;
@@ -1243,162 +1243,167 @@ YY_RULE_SETUP
 case 18:
 YY_RULE_SETUP
 #line 59 "RubyLexer.l"
-{ return THEN; }
+{ return SUPER; }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
 #line 60 "RubyLexer.l"
-{ return TRUE; }
+{ return THEN; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
 #line 61 "RubyLexer.l"
-{ return UNTIL; }
+{ return TRUE; }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
 #line 62 "RubyLexer.l"
-{ return WHILE; }
+{ return UNTIL; }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 64 "RubyLexer.l"
-{ return ARITHMETIC_PLUS_OP; }
+#line 63 "RubyLexer.l"
+{ return WHILE; }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
 #line 65 "RubyLexer.l"
-{ return ARITHMETIC_MINUS_OP; }
+{ return ARITHMETIC_PLUS_OP; }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
 #line 66 "RubyLexer.l"
-{ return ARITHMETIC_MUL_OP; }
+{ return ARITHMETIC_MINUS_OP; }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
 #line 67 "RubyLexer.l"
-{ return ARITHMETIC_DIV_OP; }
+{ return ARITHMETIC_MUL_OP; }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
 #line 68 "RubyLexer.l"
-{ return ARITHMETIC_MOD_OP; }
+{ return ARITHMETIC_DIV_OP; }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
 #line 69 "RubyLexer.l"
-{ return ARITHMETIC_POW_OP; }
+{ return ARITHMETIC_MOD_OP; }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 71 "RubyLexer.l"
-{ return EQL_OP; }
+#line 70 "RubyLexer.l"
+{ return ARITHMETIC_POW_OP; }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
 #line 72 "RubyLexer.l"
-{ return NOT_EQL_OP; }
+{ return EQL_OP; }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
 #line 73 "RubyLexer.l"
-{ return GREATER_OP; }
+{ return NOT_EQL_OP; }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
 #line 74 "RubyLexer.l"
-{ return LESS_OP; }
+{ return GREATER_OP; }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
 #line 75 "RubyLexer.l"
-{ return GREATER_OR_EQL_OP; }
+{ return LESS_OP; }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
 #line 76 "RubyLexer.l"
-{ return LESS_OR_EQL_OP; }
+{ return GREATER_OR_EQL_OP; }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
 #line 77 "RubyLexer.l"
-{ return COMB_COMPRASION_OP; }
+{ return LESS_OR_EQL_OP; }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
 #line 78 "RubyLexer.l"
-{ return CASE_EQL_OP; }
+{ return COMB_COMPRASION_OP; }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 80 "RubyLexer.l"
-{ return ASSIGN_OP; }
+#line 79 "RubyLexer.l"
+{ return CASE_EQL_OP; }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 82 "RubyLexer.l"
-{ return LOGICAL_AND_OP; }
+#line 81 "RubyLexer.l"
+{ return ASSIGN_OP; }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
 #line 83 "RubyLexer.l"
-{ return LOGICAL_OR_OP; }
+{ return LOGICAL_AND_OP; }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
 #line 84 "RubyLexer.l"
-{ return LOGICAL_NOT_OP; }
+{ return LOGICAL_OR_OP; }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 86 "RubyLexer.l"
-{ return INCLUSIVE_RANGE_OP; }
+#line 85 "RubyLexer.l"
+{ return LOGICAL_NOT_OP; }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
 #line 87 "RubyLexer.l"
-{ return EXCLUSIVE_RANGE_OP; }
+{ return INCLUSIVE_RANGE_OP; }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 89 "RubyLexer.l"
-{ return DOT_SYMBOL; }
+#line 88 "RubyLexer.l"
+{ return EXCLUSIVE_RANGE_OP; }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
 #line 90 "RubyLexer.l"
-{ return COMMA_SYMBOL; }
+{ return DOT_SYMBOL; }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
 #line 91 "RubyLexer.l"
-{ return SEMICOLON_SYMBOL; }
+{ return COMMA_SYMBOL; }
 	YY_BREAK
 case 45:
-/* rule 45 can match eol */
 YY_RULE_SETUP
 #line 92 "RubyLexer.l"
-{ return NEW_LINE_SYMBOL;  }
+{ return SEMICOLON_SYMBOL; }
 	YY_BREAK
 case 46:
+/* rule 46 can match eol */
 YY_RULE_SETUP
 #line 93 "RubyLexer.l"
-{ return OPEN_ROUND_BRACKET; }
+{ return NEW_LINE_SYMBOL;  }
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
 #line 94 "RubyLexer.l"
-{ return CLOSE_ROUND_BRACKET; }
+{ return OPEN_ROUND_BRACKET; }
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
 #line 95 "RubyLexer.l"
-{ return OPEN_CURLY_BRACKET; }
+{ return CLOSE_ROUND_BRACKET; }
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
 #line 96 "RubyLexer.l"
+{ return OPEN_CURLY_BRACKET; }
+	YY_BREAK
+case 50:
+YY_RULE_SETUP
+#line 97 "RubyLexer.l"
 {
                 if(concatenation == 0) {
                     return CLOSE_CURLY_BRACKET;
@@ -1410,41 +1415,36 @@ YY_RULE_SETUP
                 }
             }
 	YY_BREAK
-case 50:
-YY_RULE_SETUP
-#line 106 "RubyLexer.l"
-{ return OPEN_SQUARE_BRACKET; }
-	YY_BREAK
 case 51:
 YY_RULE_SETUP
 #line 107 "RubyLexer.l"
-{ return CLOSE_SQUARE_BRACKET; }
+{ return OPEN_SQUARE_BRACKET; }
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
 #line 108 "RubyLexer.l"
-{ return COMMERCIAL_AT; }
+{ return CLOSE_SQUARE_BRACKET; }
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 110 "RubyLexer.l"
+#line 109 "RubyLexer.l"
+{ return COMMERCIAL_AT; }
+	YY_BREAK
+case 54:
+YY_RULE_SETUP
+#line 111 "RubyLexer.l"
 { 
                 string[0] = 0; 
                 BEGIN(STRING);    
             }
 	YY_BREAK
-case 54:
+case 55:
 YY_RULE_SETUP
-#line 115 "RubyLexer.l"
+#line 116 "RubyLexer.l"
 {                         
                         concatenation++;
                         BEGIN(INITIAL);
                     }            
-	YY_BREAK
-case 55:
-YY_RULE_SETUP
-#line 120 "RubyLexer.l"
-{ strcat(string, yytext); }
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
@@ -1454,61 +1454,66 @@ YY_RULE_SETUP
 case 57:
 YY_RULE_SETUP
 #line 122 "RubyLexer.l"
-{ strcat(string, "\n"); }
+{ strcat(string, yytext); }
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
 #line 123 "RubyLexer.l"
-{ strcat(string, "\a"); }
+{ strcat(string, "\n"); }
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
 #line 124 "RubyLexer.l"
-{ strcat(string, "\b"); }
+{ strcat(string, "\a"); }
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
 #line 125 "RubyLexer.l"
-{ strcat(string, "\t"); }
+{ strcat(string, "\b"); }
 	YY_BREAK
 case 61:
 YY_RULE_SETUP
 #line 126 "RubyLexer.l"
-{ strcat(string, "\v"); }
+{ strcat(string, "\t"); }
 	YY_BREAK
 case 62:
 YY_RULE_SETUP
 #line 127 "RubyLexer.l"
-{ strcat(string, "\f"); }
+{ strcat(string, "\v"); }
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
 #line 128 "RubyLexer.l"
-{ strcat(string, "\r"); }
+{ strcat(string, "\f"); }
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
 #line 129 "RubyLexer.l"
-{ strcat(string, "\e"); }
+{ strcat(string, "\r"); }
 	YY_BREAK
 case 65:
 YY_RULE_SETUP
 #line 130 "RubyLexer.l"
-{ strcat(string, " "); }
+{ strcat(string, "\e"); }
 	YY_BREAK
 case 66:
 YY_RULE_SETUP
 #line 131 "RubyLexer.l"
-{ strcat(string, "\\"); }
+{ strcat(string, " "); }
 	YY_BREAK
 case 67:
 YY_RULE_SETUP
 #line 132 "RubyLexer.l"
-{ strcat(string, "\""); }
+{ strcat(string, "\\"); }
 	YY_BREAK
 case 68:
 YY_RULE_SETUP
 #line 133 "RubyLexer.l"
+{ strcat(string, "\""); }
+	YY_BREAK
+case 69:
+YY_RULE_SETUP
+#line 134 "RubyLexer.l"
 { 
                                 sscanf(yytext + 1, "%o", &num);
                                 temp1[0] = (char) num;
@@ -1516,9 +1521,9 @@ YY_RULE_SETUP
                                 strcat(string, temp1);
                             }
 	YY_BREAK
-case 69:
+case 70:
 YY_RULE_SETUP
-#line 140 "RubyLexer.l"
+#line 141 "RubyLexer.l"
 { 
                                 sscanf(yytext + 2, "%x", &num);
                                 temp1[0] = (char) num;
@@ -1526,91 +1531,91 @@ YY_RULE_SETUP
                                 strcat(string, temp1);
                             }
 	YY_BREAK
-case 70:
+case 71:
 YY_RULE_SETUP
-#line 146 "RubyLexer.l"
+#line 147 "RubyLexer.l"
 { printf("ERROR: invalid hex escape \n"); } 
 	YY_BREAK
 case YY_STATE_EOF(STRING):
-#line 147 "RubyLexer.l"
+#line 148 "RubyLexer.l"
 { printf("ERROR: expected \" \n");}
 	YY_BREAK
-case 71:
+case 72:
 YY_RULE_SETUP
-#line 148 "RubyLexer.l"
+#line 149 "RubyLexer.l"
 { 
                 yylval.string_un=(char *)malloc(strlen(string)+1);
                 strcpy(yylval.string_un, string);
                 BEGIN(INITIAL);
-                return STRING;
+                return STR;
             }
-	YY_BREAK
-case 72:
-YY_RULE_SETUP
-#line 155 "RubyLexer.l"
-{ printf("Single-line comment: %s\n", yytext + 1); }
 	YY_BREAK
 case 73:
 YY_RULE_SETUP
-#line 157 "RubyLexer.l"
+#line 156 "RubyLexer.l"
+{ printf("Single-line comment: %s\n", yytext + 1); }
+	YY_BREAK
+case 74:
+YY_RULE_SETUP
+#line 158 "RubyLexer.l"
 {                                     
                             comment[0] = 0; 
                             BEGIN(ML_COMMENT);
                         }
 	YY_BREAK
-case 74:
+case 75:
 YY_RULE_SETUP
-#line 162 "RubyLexer.l"
+#line 163 "RubyLexer.l"
 {
                             strcat(comment, yytext + 5);
                             printf("Multi-line comment: %s\n", comment);
                             BEGIN(INITIAL);
                         }
 	YY_BREAK
-case 75:
+case 76:
 YY_RULE_SETUP
-#line 168 "RubyLexer.l"
+#line 169 "RubyLexer.l"
 { 
                             strcat(comment, yytext); 
                         }
 	YY_BREAK
 case YY_STATE_EOF(ML_COMMENT):
-#line 172 "RubyLexer.l"
+#line 173 "RubyLexer.l"
 { 
                             printf("expected =end"); BEGIN(INITIAL); 
                         }
 	YY_BREAK
-case 76:
+case 77:
 YY_RULE_SETUP
-#line 176 "RubyLexer.l"
+#line 177 "RubyLexer.l"
 { 
                                 removeCharacterFromString(yytext,temp1,'_');
                                 yylval.int_un = atoi(temp1);
                                 return INTEGER_NUMBER;
                             }
 	YY_BREAK
-case 77:
-YY_RULE_SETUP
-#line 182 "RubyLexer.l"
-{ printf("ERROR: invalid decimal number: %s\n", yytext); }
-	YY_BREAK
 case 78:
 YY_RULE_SETUP
-#line 184 "RubyLexer.l"
+#line 183 "RubyLexer.l"
+{ printf("ERROR: invalid decimal number: %s\n", yytext); }
+	YY_BREAK
+case 79:
+YY_RULE_SETUP
+#line 185 "RubyLexer.l"
 {
                                 removeCharacterFromString(yytext+2,temp1,'_');
                                 yylval.int_un = atoi(temp1);
                                 return INTEGER_NUMBER;              
                             }
 	YY_BREAK
-case 79:
-YY_RULE_SETUP
-#line 190 "RubyLexer.l"
-{ printf("ERROR: invalid decimal number with dD: %s\n", yytext); }
-	YY_BREAK
 case 80:
 YY_RULE_SETUP
-#line 192 "RubyLexer.l"
+#line 191 "RubyLexer.l"
+{ printf("ERROR: invalid decimal number with dD: %s\n", yytext); }
+	YY_BREAK
+case 81:
+YY_RULE_SETUP
+#line 193 "RubyLexer.l"
 {
                                 removeCharacterFromString(yytext,temp1,'_');
                                 removeCharacterFromString(temp1,temp2,'o');
@@ -1619,42 +1624,42 @@ YY_RULE_SETUP
                                 return INTEGER_NUMBER;
                             }
 	YY_BREAK
-case 81:
-YY_RULE_SETUP
-#line 200 "RubyLexer.l"
-{ printf("ERROR: invalid octal number: %s\n", yytext); }
-	YY_BREAK
 case 82:
 YY_RULE_SETUP
-#line 202 "RubyLexer.l"
+#line 201 "RubyLexer.l"
+{ printf("ERROR: invalid octal number: %s\n", yytext); }
+	YY_BREAK
+case 83:
+YY_RULE_SETUP
+#line 203 "RubyLexer.l"
 {
                                 removeCharacterFromString(yytext + 2,temp1,'_');
                                 yylval.int_un = num;
                                 return INTEGER_NUMBER;
                             }
 	YY_BREAK
-case 83:
-YY_RULE_SETUP
-#line 208 "RubyLexer.l"
-{ printf("ERROR: invalid hexadecimal number: %s\n", yytext); }
-	YY_BREAK
 case 84:
 YY_RULE_SETUP
-#line 210 "RubyLexer.l"
+#line 209 "RubyLexer.l"
+{ printf("ERROR: invalid hexadecimal number: %s\n", yytext); }
+	YY_BREAK
+case 85:
+YY_RULE_SETUP
+#line 211 "RubyLexer.l"
 {
                                 removeCharacterFromString(yytext + 2,temp1,'_');
                                 yylval.int_un = num;
                                 return INTEGER_NUMBER; 
                             }
 	YY_BREAK
-case 85:
-YY_RULE_SETUP
-#line 216 "RubyLexer.l"
-{ printf("ERROR: invalid binary number: %s\n", yytext); }
-	YY_BREAK
 case 86:
 YY_RULE_SETUP
-#line 219 "RubyLexer.l"
+#line 217 "RubyLexer.l"
+{ printf("ERROR: invalid binary number: %s\n", yytext); }
+	YY_BREAK
+case 87:
+YY_RULE_SETUP
+#line 220 "RubyLexer.l"
 {
                                                                 removeCharacterFromString(yytext,temp1,'_');                                                                  
                                                                 real_num = (float) atof(temp1);
@@ -1662,58 +1667,58 @@ YY_RULE_SETUP
                                                                 return FLOAT_NUMBER;
                                                             }
 	YY_BREAK
-case 87:
-YY_RULE_SETUP
-#line 225 "RubyLexer.l"
-{ printf("ERROR: invalid float number: %s\n", yytext); }
-	YY_BREAK
 case 88:
 YY_RULE_SETUP
 #line 226 "RubyLexer.l"
-{ printf("ERROR: invalid float number with eE: %s\n", yytext); }
+{ printf("ERROR: invalid float number: %s\n", yytext); }
 	YY_BREAK
 case 89:
 YY_RULE_SETUP
-#line 228 "RubyLexer.l"
+#line 227 "RubyLexer.l"
+{ printf("ERROR: invalid float number with eE: %s\n", yytext); }
+	YY_BREAK
+case 90:
+YY_RULE_SETUP
+#line 229 "RubyLexer.l"
 {
                                                 yylval.string_un=(char *)malloc(strlen(yytext)+1);
                                                 strcpy(yylval.string_un, yytext); 
                                                 return VAR_OR_METHOD_NAME;
                                             }
 	YY_BREAK
-case 90:
+case 91:
 YY_RULE_SETUP
-#line 234 "RubyLexer.l"
+#line 235 "RubyLexer.l"
 {
                                                 yylval.string_un=(char *)malloc(strlen(yytext)+1);
                                                 strcpy(yylval.string_un, yytext); 
                                                 return INSTANCE_VAR_NAME;
                                             }
 	YY_BREAK
-case 91:
+case 92:
 YY_RULE_SETUP
-#line 240 "RubyLexer.l"
+#line 241 "RubyLexer.l"
 {
                                                 yylval.string_un=(char *)malloc(strlen(yytext)+1);
                                                 strcpy(yylval.string_un, yytext); 
                                                 return CLASS_VAR_NAME;
                                             }
 	YY_BREAK
-case 92:
+case 93:
 YY_RULE_SETUP
-#line 246 "RubyLexer.l"
+#line 247 "RubyLexer.l"
 {
                                                 yylval.string_un=(char *)malloc(strlen(yytext)+1);
                                                 strcpy(yylval.string_un, yytext); 
                                                 return CLASS_NAME;
                                             }
 	YY_BREAK
-case 93:
+case 94:
 YY_RULE_SETUP
-#line 252 "RubyLexer.l"
+#line 253 "RubyLexer.l"
 ECHO;
 	YY_BREAK
-#line 1716 "lex.yy.c"
+#line 1721 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2733,7 +2738,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 252 "RubyLexer.l"
+#line 253 "RubyLexer.l"
 
 
 void removeCharacterFromString(const char * str, char * dest, char deleted_char) {
