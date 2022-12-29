@@ -40,12 +40,14 @@ void yyerror(const char* s);
 %type <stmt_un> until_stmt
 %type <stmt_un> if_stmt 
 %type <def_method_un> def_method_stmt
+%type <def_method_un> super_method_stmt
 %type <program_item_un> program_item 
 %type <program_item_un> class_declaration
 %type <def_method_list_un> def_method_list_op
 %type <def_method_list_un> def_method_list
 %type <stmt_list_un> stmt_list
 %type <stmt_list_un> stmt_list_not_empty
+%type <stmt_list_un> stmt_list_with_super
 %type <expr_list_un> expr_list_not_empty
 %type <expr_list_un> expr_list
 %type <if_part_un> if_start_stmt 
@@ -203,8 +205,9 @@ expr: INTEGER_NUMBER                                                            
 	| expr OPEN_SQUARE_BRACKET new_lines_op expr CLOSE_SQUARE_BRACKET                                   { $$=create_op_expr(member_access, $1, $4); }
     | OPEN_SQUARE_BRACKET new_lines_op expr_list CLOSE_SQUARE_BRACKET                                   { $$=create_array_struct($3); }
     | VAR_OR_METHOD_NAME OPEN_ROUND_BRACKET new_lines_op expr_list CLOSE_ROUND_BRACKET                  { $$=create_method_call_expr($1, $4); }
-    | VAR_OR_METHOD_NAME                                                                                { $$=create_const_string_expr(var_or_method, $1); }     
+    | VAR_OR_METHOD_NAME                                                                                { $$=create_const_string_expr(var_or_method, $1); } 
     | INSTANCE_VAR_NAME                                                                                 { $$=create_const_string_expr(instance_var, $1); }
+    | CLASS_NAME                                                                                        { $$=create_const_string_expr(class_name, $1); }
     | expr DOT_SYMBOL new_lines_op VAR_OR_METHOD_NAME                                                   { $$=create_field_call_expr($1, $4); }
     | expr DOT_SYMBOL new_lines_op VAR_OR_METHOD_NAME OPEN_ROUND_BRACKET expr_list CLOSE_ROUND_BRACKET  { $$=create_object_method_call_expr($1, $4, $6); }
     | SELF DOT_SYMBOL new_lines_op VAR_OR_METHOD_NAME                                                   { $$=create_self_field_call_expr($4); }
@@ -243,11 +246,16 @@ stmt_list_not_empty: stmt           { $$=create_stmt_list($1); }
     | stmt_list_not_empty stmt      { $$=add_to_stmt_list($1, $2); }
     ;
 
+stmt_list_with_super:  /* empty */  { $$=0; }
+    | stmt_list_not_empty           { $$=$1; }
+    | super_method_stmt             { $$=create_stmt_list($1); }        
+    ;
+
 stmt_list: /* empty */              { $$=0; }
     | stmt_list_not_empty           { $$=$1; }
     ;
 
-stmt_block: BEGIN_KEYWORD stmt_ends_op stmt_list END  { $$=create_stmt_block_struct($3); }
+stmt_block: BEGIN_KEYWORD stmt_ends_op stmt_list END                                        { $$=create_stmt_block_struct($3); }
     ;
 
 if_start_stmt: IF new_lines_op expr stmt_ends stmt_list                                     { $$=create_if_part_struct($3, $5); }
@@ -296,12 +304,16 @@ method_params_list_not_empty: method_param                                      
 	| method_params_list_not_empty COMMA_SYMBOL new_lines_op method_param                       { $$=add_to_method_param_list($1, $4); }
 	;
 
-def_method_stmt: DEF VAR_OR_METHOD_NAME stmt_ends stmt_list END stmt_ends_op                                                       { $$=create_def_method_struct($2, 0, $4); }
-    | DEF VAR_OR_METHOD_NAME OPEN_ROUND_BRACKET method_params_list CLOSE_ROUND_BRACKET stmt_ends_op stmt_list END stmt_ends_op     { $$=create_def_method_struct($2, $4, $7); }
+def_method_stmt: DEF VAR_OR_METHOD_NAME stmt_ends stmt_list_with_super END stmt_ends_op                                                                     { $$=create_def_method_struct($2, 0, $4); }
+    | DEF VAR_OR_METHOD_NAME OPEN_ROUND_BRACKET new_lines_op method_params_list CLOSE_ROUND_BRACKET stmt_ends_op stmt_list_with_super END stmt_ends_op      { $$=create_def_method_struct($2, $5, $8); }
+    ;
+
+super_method_stmt: SUPER method_params_list new_lines_op                                            { $$=create_super_struct($2); }
+    | SUPER OPEN_ROUND_BRACKET new_lines_op method_params_list CLOSE_ROUND_BRACKET new_lines_op                  { $$=create_super_struct($4); }
     ;
 
 expr_list: /* empty */                                                                              { $$=0; }
-	| expr_list_not_empty                                                                           {$$=$1; }
+	| expr_list_not_empty                                                                           { $$=$1; }
 	;
 
 expr_list_not_empty: expr new_lines_op                                                              { $$=create_expr_list($1); }

@@ -132,6 +132,13 @@ struct expr_struct* create_self_field_call_expr(char* right) {
     return result;
 }
 
+struct expr_struct* create_new_field_call_expr(char* left) {
+    struct expr_struct* result = (struct expr_struct*)malloc(sizeof(struct expr_struct));
+    result->type = new_field_call;
+    result->str_val = left;
+    return result;
+}
+
 struct expr_struct* create_self_method_call_expr(char* method_name, struct expr_list_struct* params) {
     struct expr_struct* result = (struct expr_struct*)malloc(sizeof(struct expr_struct));
     struct expr_struct* method_call = create_method_call_expr(method_name, params);
@@ -293,4 +300,10 @@ struct def_method_stmt_struct* create_def_method_struct(char* name, struct metho
     method_def_s->params = params;
     method_def_s->body = body;
     return method_def_s;
+}
+
+struct def_method_stmt_struct* create_super_struct(struct method_param_list* params) {
+    struct def_method_stmt_struct* super_def_s = (struct def_method_stmt_struct*)malloc(sizeof(struct def_method_stmt_struct));
+    super_def_s->params = params;
+    return super_def_s;
 }

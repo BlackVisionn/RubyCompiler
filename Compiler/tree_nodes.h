@@ -35,9 +35,10 @@ enum expr_type {
     mul_assign,
     pow_assign,
     defined,
-    not,
+    not,    
     and,
     or,
+    class_name,
     var_or_method,
     instance_var,
     until_op,
@@ -48,7 +49,8 @@ enum expr_type {
     field_call,
     object_method_call,
     self_field_call,
-    self_method_call
+    self_method_call,
+    new_field_call
 };
 
 struct expr_struct {

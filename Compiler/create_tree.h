@@ -11,6 +11,7 @@ struct expr_struct* create_method_call_expr(char* method_name, struct expr_list_
 struct expr_struct* create_field_call_expr(struct expr_struct* left, char* right);
 struct expr_struct* create_object_method_call_expr(struct expr_struct* left, char* method_name, struct expr_list_struct* params);
 struct expr_struct* create_self_field_call_expr(char* right);
+struct expr_struct* create_new_field_call_expr(char* left);
 struct expr_struct* create_self_method_call_expr(char* method_name, struct expr_list_struct* params);
 struct stmt_struct* create_expr_stmt(struct expr_struct* val);
 struct stmt_struct* create_for_stmt(char* iterable_var, struct expr_struct* condition, struct stmt_list_struct* body);
@@ -40,3 +41,4 @@ struct program_item_struct* create_class_declaration_program_item(char * name, c
 struct program_item_list_struct* create_program_item_list(struct program_item_struct* val);
 struct program_item_list_struct* add_to_program_item_list(struct program_item_list_struct* list,  struct program_item_struct* val);
 struct def_method_stmt_struct* create_def_method_struct(char* name, struct method_param_list* params, struct stmt_list_struct* body);
+struct def_method_stmt_struct* create_super_struct(struct method_param_list* params);
