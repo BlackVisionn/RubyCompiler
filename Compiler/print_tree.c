@@ -247,7 +247,7 @@ void PrintExpr(struct expr_struct* expr, FILE* file) {
             fprintf(file, "Id%p [label=\"!\"]\n", expr);
             PrintExpr(expr->left, file);
             fprintf(file, "Id%p->Id%p\n", expr, expr->left);
-            break; 
+            break;
         case bin_ones_complement:
             fprintf(file, "Id%p [label=\"unary ~\"]\n", expr);
             PrintExpr(expr->left, file);
@@ -447,7 +447,7 @@ void PrintExpr(struct expr_struct* expr, FILE* file) {
             fprintf(file, "Id%p [label=\"not\"]\n", expr);
             PrintExpr(expr->left, file);
             fprintf(file, "Id%p->Id%p\n", expr, expr->left);
-            break;   
+            break;
         case and:
             fprintf(file, "Id%p [label=\"and\"]\n", expr);
             PrintExpr(expr->left, file);
@@ -469,11 +469,6 @@ void PrintExpr(struct expr_struct* expr, FILE* file) {
             break;
         case instance_var:
             fprintf(file, "Id%p [label=\"instance var\"]\n", expr);
-            fprintf(file, "IdVal%p [label=\"%s\"]\n", expr, expr->str_val);
-            fprintf(file, "Id%p->IdVal%p\n", expr, expr);
-            break;
-        case class_name:
-            fprintf(file, "Id%p [label=\"class name\"]\n", expr);
             fprintf(file, "IdVal%p [label=\"%s\"]\n", expr, expr->str_val);
             fprintf(file, "Id%p->IdVal%p\n", expr, expr);
             break;
@@ -505,6 +500,22 @@ void PrintExpr(struct expr_struct* expr, FILE* file) {
                     current = current->next;
                 }
             }
+            break;
+        case super:
+            fprintf(file, "Id%p [label=\"super_call\"]\n", expr);
+            if (expr->list != 0) {
+                fprintf(file, "Id%p [label=\"params\"]\n", expr->list);
+                fprintf(file, "Id%p->Id%p\n", expr, expr->list);
+                struct expr_struct* current = expr->list->first;
+                while (current != 0) {
+                    PrintExpr(current, file);
+                    fprintf(file, "Id%p->Id%p\n", expr->list, current);
+                    current = current->next;
+                }
+            }
+            break;
+        case class_name:
+            fprintf(file, "Id%p [label = \"%s\"]\n", expr, expr->str_val);
             break;
         case array:
             fprintf(file, "Id%p [label = \"array\"]\n", expr);
@@ -540,11 +551,6 @@ void PrintExpr(struct expr_struct* expr, FILE* file) {
             break;
         case self_field_call:
             fprintf(file, "Id%p [label=\"self.\"]\n", expr);
-            fprintf(file, "Id%p [label = \"%s\"]\n", expr->str_val, expr->str_val);
-            fprintf(file, "Id%p->Id%p [label = \"field\"]\n", expr, expr->str_val);
-            break;
-        case new_field_call:
-            fprintf(file, "Id%p [label=\"new.\"]\n", expr);
             fprintf(file, "Id%p [label = \"%s\"]\n", expr->str_val, expr->str_val);
             fprintf(file, "Id%p->Id%p [label = \"field\"]\n", expr, expr->str_val);
             break;

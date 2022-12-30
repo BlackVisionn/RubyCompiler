@@ -41,6 +41,7 @@ EXPONENT [eE][+-]?[1-9]{DIGIT_NUMBER}
 and             { return AND; }
 begin		    { return BEGIN_KEYWORD; }
 class           { return CLASS; }
+new             { return NEW; }
 def             { return DEF; }
 "defined?"	    { return DEFINED; }
 do              { return DO; }
@@ -55,7 +56,7 @@ not             { return NOT; }
 or              { return OR; }
 return          { return RETURN; }
 self            { return SELF; }
-self            { return SUPER; }
+super           { return SUPER; }
 then            { return THEN; }
 true            { return TRUE; }
 until           { return UNTIL; }
