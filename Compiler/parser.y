@@ -198,10 +198,10 @@ expr: INTEGER_NUMBER                                                            
     | expr UNTIL new_lines_op expr                                                                      { $$=create_op_expr(until_op, $1, $4); }  
     | expr WHILE new_lines_op expr                                                                      { $$=create_op_expr(while_op, $1, $4); }  
     | DEFINED new_lines_op expr                                                                         { $$=create_op_expr(defined, $3, 0); }
-    | NOT new_lines_op expr                                                                             { $$=create_op_expr(not, $3, 0); }
-    | expr AND new_lines_op expr                                                                        { $$=create_op_expr(and, $1, $4); }
-    | expr OR new_lines_op expr                                                                         { $$=create_op_expr(or, $1, $4); }
-    | OPEN_ROUND_BRACKET new_lines_op expr_list CLOSE_ROUND_BRACKET                                     { $$=$3; }
+    | NOT new_lines_op expr                                                                             { $$=create_op_expr(not_, $3, 0); }
+    | expr AND new_lines_op expr                                                                        { $$=create_op_expr(and_, $1, $4); }
+    | expr OR new_lines_op expr                                                                         { $$=create_op_expr(or_, $1, $4); }
+    | OPEN_ROUND_BRACKET new_lines_op expr CLOSE_ROUND_BRACKET                                          { $$=$3; }
 	| expr OPEN_SQUARE_BRACKET new_lines_op expr CLOSE_SQUARE_BRACKET                                   { $$=create_op_expr(member_access, $1, $4); }
     | OPEN_SQUARE_BRACKET new_lines_op expr_list CLOSE_SQUARE_BRACKET                                   { $$=create_array_struct($3); }
     | VAR_OR_METHOD_NAME OPEN_ROUND_BRACKET new_lines_op expr_list CLOSE_ROUND_BRACKET                  { $$=create_method_call_expr($1, $4); }
@@ -305,7 +305,7 @@ def_method_stmt: DEF VAR_OR_METHOD_NAME stmt_ends stmt_list END stmt_ends_op    
     ;
 
 expr_list: /* empty */                                                                              { $$=0; }
-	| expr_list_not_empty                                                                           {$$=$1; }
+	| expr_list_not_empty                                                                           { $$=$1; }
 	;
 
 expr_list_not_empty: expr new_lines_op                                                              { $$=create_expr_list($1); }

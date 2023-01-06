@@ -9,8 +9,6 @@ class Geeks_2 < Geeks_1
 
     def display (a, b)
 
-        super
-
         print ("Hey! This is subclass method")
 
         super (a)

@@ -37,9 +37,9 @@ enum expr_type {
     mul_assign,
     pow_assign,
     defined,
-    not,
-    and,
-    or,
+    not_,
+    and_,
+    or_,
     var_or_method,
     instance_var,
     until_op,
@@ -47,6 +47,7 @@ enum expr_type {
     method_call,
     array,
     member_access,
+    member_access_and_assign,
     field_call,
     object_method_call,
     self_field_call,
@@ -55,13 +56,19 @@ enum expr_type {
 
 struct expr_struct {
     enum expr_type type;
-    char * str_val; /* For var names and string literal */
-    int int_val; /* For integer and boolean values */
+    char * str_val; /* Для имен и строчных литералов */
+    int int_val; /* для целых и bool значений */
     float float_val;
     struct expr_list_struct* list;
     struct expr_struct * left;
     struct expr_struct * right;
     struct expr_struct * next;
+	struct expr_struct* index;
+
+	// семантика
+	int id;
+	int value_id;
+	int local_var_num;
 };
 
 enum stmt_type {
@@ -125,6 +132,9 @@ struct for_stmt_struct {
     char * iterable_var;
     struct expr_struct * condition;
     struct stmt_list_struct* body;
+
+    // семантика
+	int iterable_var_local_num;
 };
 
 struct while_stmt_struct {
@@ -162,6 +172,9 @@ struct method_param_struct {
     char * name;
     struct expr_struct * default_value;
     struct method_param_struct * next;
+
+    // семантика
+	int local_var_num;
 };
 
 struct def_method_stmt_struct {
@@ -169,6 +182,9 @@ struct def_method_stmt_struct {
     struct method_param_list* params;
     struct stmt_list_struct* body;
     struct def_method_stmt_struct* next;
+
+    // семантика
+	int id;
 };
 
 struct def_method_stmt_list_struct {

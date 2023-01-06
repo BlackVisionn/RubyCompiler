@@ -265,7 +265,7 @@ void removeCharacterFromString(const char * str, char * dest, char deleted_char)
 }
 
 int binstrToDec(const char * str) {
-    unsigned char *p = str;
+    const unsigned char *p = reinterpret_cast<const unsigned char *> (str);
     unsigned int   r = 0;
 
     while (p && *p ) {

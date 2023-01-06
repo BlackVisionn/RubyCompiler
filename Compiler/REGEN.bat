@@ -1,7 +1,10 @@
 del lex.yy.c
 del parser.tab.h
 del parser.tab.c
+del tree.dot
+del tree.dot.svg
+del res.exe
 win_flex.exe RubyLexer.l
 win_bison.exe -d parser.y --verbose
-gcc main.c print_tree.c dot.c -o res
+g++ main.c -o res
 res.exe 3.txt

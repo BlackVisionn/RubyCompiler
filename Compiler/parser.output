@@ -56,7 +56,7 @@ Grammar
    40     | NOT new_lines_op expr
    41     | expr AND new_lines_op expr
    42     | expr OR new_lines_op expr
-   43     | OPEN_ROUND_BRACKET new_lines_op expr_list CLOSE_ROUND_BRACKET
+   43     | OPEN_ROUND_BRACKET new_lines_op expr CLOSE_ROUND_BRACKET
    44     | expr OPEN_SQUARE_BRACKET new_lines_op expr CLOSE_SQUARE_BRACKET
    45     | OPEN_SQUARE_BRACKET new_lines_op expr_list CLOSE_SQUARE_BRACKET
    46     | VAR_OR_METHOD_NAME OPEN_ROUND_BRACKET new_lines_op expr_list CLOSE_ROUND_BRACKET
@@ -242,7 +242,7 @@ Nonterminals, with rules where they appear
         on right: 1
     expr <expr_un> (71)
         on left: 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54
-        on right: 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 44 51 52 65 71 78 79 80 81 82 83 90 91 92 93 94 95 96 97 99 108 109
+        on right: 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 51 52 65 71 78 79 80 81 82 83 90 91 92 93 94 95 96 97 99 108 109
     stmt_ends (72)
         on left: 55 56 57 58
         on right: 57 58 64 65 71 72 78 81 90 91 94 96 104 110 111
@@ -302,7 +302,7 @@ Nonterminals, with rules where they appear
         on right: 3 114 115
     expr_list <expr_list_un> (91)
         on left: 106 107
-        on right: 43 45 46 47 52 54
+        on right: 45 46 47 52 54
     expr_list_not_empty <expr_list_un> (92)
         on left: 108 109
         on right: 107 109
@@ -572,7 +572,7 @@ State 17
 
 State 18
 
-   43 expr: OPEN_ROUND_BRACKET . new_lines_op expr_list CLOSE_ROUND_BRACKET
+   43 expr: OPEN_ROUND_BRACKET . new_lines_op expr CLOSE_ROUND_BRACKET
 
     NEW_LINE_SYMBOL  shift, and go to state 46
 
@@ -1296,7 +1296,7 @@ State 60
 
 State 61
 
-   43 expr: OPEN_ROUND_BRACKET new_lines_op . expr_list CLOSE_ROUND_BRACKET
+   43 expr: OPEN_ROUND_BRACKET new_lines_op . expr CLOSE_ROUND_BRACKET
 
     DEFINED              shift, and go to state 4
     FALSE                shift, and go to state 6
@@ -1316,11 +1316,7 @@ State 61
     INSTANCE_VAR_NAME    shift, and go to state 24
     CLASS_NAME           shift, and go to state 25
 
-    $default  reduce using rule 106 (expr_list)
-
-    expr                 go to state 126
-    expr_list            go to state 127
-    expr_list_not_empty  go to state 128
+    expr  go to state 126
 
 
 State 62
@@ -1347,9 +1343,9 @@ State 62
 
     $default  reduce using rule 106 (expr_list)
 
-    expr                 go to state 126
-    expr_list            go to state 129
-    expr_list_not_empty  go to state 128
+    expr                 go to state 127
+    expr_list            go to state 128
+    expr_list_not_empty  go to state 129
 
 
 State 63
@@ -2175,9 +2171,9 @@ State 120
 
     $default  reduce using rule 106 (expr_list)
 
-    expr                 go to state 126
+    expr                 go to state 127
     expr_list            go to state 180
-    expr_list_not_empty  go to state 128
+    expr_list_not_empty  go to state 129
 
 
 State 121
@@ -2442,6 +2438,64 @@ State 126
    38     | expr . WHILE new_lines_op expr
    41     | expr . AND new_lines_op expr
    42     | expr . OR new_lines_op expr
+   43     | OPEN_ROUND_BRACKET new_lines_op expr . CLOSE_ROUND_BRACKET
+   44     | expr . OPEN_SQUARE_BRACKET new_lines_op expr CLOSE_SQUARE_BRACKET
+   51     | expr . DOT_SYMBOL new_lines_op VAR_OR_METHOD_NAME
+   52     | expr . DOT_SYMBOL new_lines_op VAR_OR_METHOD_NAME OPEN_ROUND_BRACKET expr_list CLOSE_ROUND_BRACKET
+
+    AND                  shift, and go to state 67
+    OR                   shift, and go to state 68
+    UNTIL                shift, and go to state 69
+    WHILE                shift, and go to state 70
+    ARITHMETIC_PLUS_OP   shift, and go to state 71
+    ARITHMETIC_MINUS_OP  shift, and go to state 72
+    ARITHMETIC_MUL_OP    shift, and go to state 73
+    ARITHMETIC_DIV_OP    shift, and go to state 74
+    ARITHMETIC_MOD_OP    shift, and go to state 75
+    ARITHMETIC_POW_OP    shift, and go to state 76
+    EQL_OP               shift, and go to state 77
+    NOT_EQL_OP           shift, and go to state 78
+    GREATER_OP           shift, and go to state 79
+    LESS_OP              shift, and go to state 80
+    GREATER_OR_EQL_OP    shift, and go to state 81
+    LESS_OR_EQL_OP       shift, and go to state 82
+    COMB_COMPRASION_OP   shift, and go to state 83
+    CASE_EQL_OP          shift, and go to state 84
+    ASSIGN_OP            shift, and go to state 85
+    LOGICAL_AND_OP       shift, and go to state 86
+    LOGICAL_OR_OP        shift, and go to state 87
+    INCLUSIVE_RANGE_OP   shift, and go to state 88
+    EXCLUSIVE_RANGE_OP   shift, and go to state 89
+    CLOSE_ROUND_BRACKET  shift, and go to state 185
+    OPEN_SQUARE_BRACKET  shift, and go to state 90
+    DOT_SYMBOL           shift, and go to state 91
+
+
+State 127
+
+   17 expr: expr . ARITHMETIC_POW_OP new_lines_op expr
+   19     | expr . ARITHMETIC_MUL_OP new_lines_op expr
+   20     | expr . ARITHMETIC_DIV_OP new_lines_op expr
+   21     | expr . ARITHMETIC_MOD_OP new_lines_op expr
+   22     | expr . ARITHMETIC_PLUS_OP new_lines_op expr
+   23     | expr . ARITHMETIC_MINUS_OP new_lines_op expr
+   24     | expr . GREATER_OP new_lines_op expr
+   25     | expr . LESS_OP new_lines_op expr
+   26     | expr . GREATER_OR_EQL_OP new_lines_op expr
+   27     | expr . LESS_OR_EQL_OP new_lines_op expr
+   28     | expr . COMB_COMPRASION_OP new_lines_op expr
+   29     | expr . EQL_OP new_lines_op expr
+   30     | expr . CASE_EQL_OP new_lines_op expr
+   31     | expr . NOT_EQL_OP new_lines_op expr
+   32     | expr . LOGICAL_AND_OP new_lines_op expr
+   33     | expr . LOGICAL_OR_OP new_lines_op expr
+   34     | expr . INCLUSIVE_RANGE_OP new_lines_op expr
+   35     | expr . EXCLUSIVE_RANGE_OP new_lines_op expr
+   36     | expr . ASSIGN_OP new_lines_op expr
+   37     | expr . UNTIL new_lines_op expr
+   38     | expr . WHILE new_lines_op expr
+   41     | expr . AND new_lines_op expr
+   42     | expr . OR new_lines_op expr
    44     | expr . OPEN_SQUARE_BRACKET new_lines_op expr CLOSE_SQUARE_BRACKET
    51     | expr . DOT_SYMBOL new_lines_op VAR_OR_METHOD_NAME
    52     | expr . DOT_SYMBOL new_lines_op VAR_OR_METHOD_NAME OPEN_ROUND_BRACKET expr_list CLOSE_ROUND_BRACKET
@@ -2476,32 +2530,25 @@ State 126
 
     $default  reduce using rule 59 (new_lines_op)
 
-    new_lines_op  go to state 185
+    new_lines_op  go to state 186
     new_lines     go to state 48
-
-
-State 127
-
-   43 expr: OPEN_ROUND_BRACKET new_lines_op expr_list . CLOSE_ROUND_BRACKET
-
-    CLOSE_ROUND_BRACKET  shift, and go to state 186
 
 
 State 128
 
-  107 expr_list: expr_list_not_empty .
-  109 expr_list_not_empty: expr_list_not_empty . COMMA_SYMBOL new_lines_op expr new_lines_op
+   45 expr: OPEN_SQUARE_BRACKET new_lines_op expr_list . CLOSE_SQUARE_BRACKET
 
-    COMMA_SYMBOL  shift, and go to state 187
-
-    $default  reduce using rule 107 (expr_list)
+    CLOSE_SQUARE_BRACKET  shift, and go to state 187
 
 
 State 129
 
-   45 expr: OPEN_SQUARE_BRACKET new_lines_op expr_list . CLOSE_SQUARE_BRACKET
+  107 expr_list: expr_list_not_empty .
+  109 expr_list_not_empty: expr_list_not_empty . COMMA_SYMBOL new_lines_op expr new_lines_op
 
-    CLOSE_SQUARE_BRACKET  shift, and go to state 188
+    COMMA_SYMBOL  shift, and go to state 188
+
+    $default  reduce using rule 107 (expr_list)
 
 
 State 130
@@ -2528,9 +2575,9 @@ State 130
 
     $default  reduce using rule 106 (expr_list)
 
-    expr                 go to state 126
+    expr                 go to state 127
     expr_list            go to state 189
-    expr_list_not_empty  go to state 128
+    expr_list_not_empty  go to state 129
 
 
 State 131
@@ -3570,19 +3617,26 @@ State 184
 
 State 185
 
+   43 expr: OPEN_ROUND_BRACKET new_lines_op expr CLOSE_ROUND_BRACKET .
+
+    $default  reduce using rule 43 (expr)
+
+
+State 186
+
   108 expr_list_not_empty: expr new_lines_op .
 
     $default  reduce using rule 108 (expr_list_not_empty)
 
 
-State 186
-
-   43 expr: OPEN_ROUND_BRACKET new_lines_op expr_list CLOSE_ROUND_BRACKET .
-
-    $default  reduce using rule 43 (expr)
-
-
 State 187
+
+   45 expr: OPEN_SQUARE_BRACKET new_lines_op expr_list CLOSE_SQUARE_BRACKET .
+
+    $default  reduce using rule 45 (expr)
+
+
+State 188
 
   109 expr_list_not_empty: expr_list_not_empty COMMA_SYMBOL . new_lines_op expr new_lines_op
 
@@ -3592,13 +3646,6 @@ State 187
 
     new_lines_op  go to state 237
     new_lines     go to state 48
-
-
-State 188
-
-   45 expr: OPEN_SQUARE_BRACKET new_lines_op expr_list CLOSE_SQUARE_BRACKET .
-
-    $default  reduce using rule 45 (expr)
 
 
 State 189
@@ -5082,9 +5129,9 @@ State 231
 
     $default  reduce using rule 106 (expr_list)
 
-    expr                 go to state 126
+    expr                 go to state 127
     expr_list            go to state 256
-    expr_list_not_empty  go to state 128
+    expr_list_not_empty  go to state 129
 
 
 State 232
@@ -5255,9 +5302,9 @@ State 240
 
     $default  reduce using rule 106 (expr_list)
 
-    expr                 go to state 126
+    expr                 go to state 127
     expr_list            go to state 262
-    expr_list_not_empty  go to state 128
+    expr_list_not_empty  go to state 129
 
 
 State 241
