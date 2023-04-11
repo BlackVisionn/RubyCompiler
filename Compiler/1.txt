@@ -1,0 +1,18 @@
+def free()
+    a = 2
+    if a == 0
+        s = 1
+    elsif a == 1
+        print(1)
+    elsif a == 2
+        b = 12
+    else 
+        c = 10
+    end
+end
+
+a = [1, 2, 3, 4]
+b = [[1,2],[1,2]]
+c = []
+a[1]
+a[2][0]

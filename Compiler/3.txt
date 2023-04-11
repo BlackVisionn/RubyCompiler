@@ -1,0 +1,32 @@
+class Geeks_1
+
+    def display (a, b)
+	print (a, b)
+    end
+end
+
+class Geeks_2 < Geeks_1
+
+    def display (a, b)
+
+        print ("Hey! This is subclass method")
+
+        super (a)
+
+        print ("Hey! This is subclass method")
+
+        super (a, b)
+
+        print ("Hey! This is subclass method")
+
+        super()
+
+        print ("Hey! This is subclass method")
+
+        obj = super()
+
+        print ("Hey! This is subclass method")
+    end
+end
+
+
